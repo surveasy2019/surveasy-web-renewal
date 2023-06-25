@@ -1,30 +1,54 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+<div id="app">
+  <div class="main-container">
+    <HeaderVue />
+    <NavBarVue />
+    <router-view/>
+    <FooterVue />
+  </div>
+</div>
 </template>
+
+
+<script> 
+/* eslint-disable */
+import { initializeApp } from "firebase/app"
+import firebaseConfig from "./config/firebaseConfig"
+import NavBarVue from './components/NavBar.vue'
+import FooterVue from './components/Footer.vue'
+import HeaderVue from './components/Header.vue'
+
+export default {
+  name: 'App',
+  components: {
+    HeaderVue,
+    NavBarVue,
+    FooterVue
+  },
+  
+  data() {
+    return {
+      
+    }
+  },
+
+  mounted() {
+    const firebaseApp = initializeApp(firebaseConfig)
+  }
+}
+
+</script>
+
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Noto Sans KR', sans-serif;
   text-align: center;
-  color: #2c3e50;
+  color: #000000;
 }
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+.main-container {
+  width: 30%;
+  margin: auto;
+  border: solid 1px #dadada;
 }
 </style>
