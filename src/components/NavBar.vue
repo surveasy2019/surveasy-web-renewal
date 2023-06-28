@@ -1,10 +1,10 @@
 <template>
   <div class="navbar-container">
     <nav>
-      <router-link to="/">Home</router-link> 
-      <router-link to="/service">설문 주문</router-link> 
-      <router-link to="/list">설문 리스트</router-link> 
-      <router-link to="/contact">문의</router-link> 
+      <router-link to="/">홈</router-link>
+      <router-link to="/service">서비스</router-link>
+      <router-link to="/list">리스트</router-link>
+      <router-link to="/contact">문의</router-link>
       <router-link to="/mypage">MY</router-link>
     </nav>
   </div>
@@ -20,7 +20,9 @@ export default {
 
 <style>
 nav {
-  padding: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  padding-left: 10px;
 }
 nav a {
   font-weight: bold;
@@ -36,6 +38,6 @@ nav a.router-link-exact-active {
   display: flex;
   flex-direction: row;
   width: 100%;
-  justify-content: space-around;
+  justify-content: left;
 }
 </style>

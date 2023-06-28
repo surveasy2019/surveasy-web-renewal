@@ -10,7 +10,7 @@ import ContactFAQVue from '@/components/Contact/ContactFAQ.vue'
 import ContactChannelVue from '@/components/Contact/ContactChannel.vue'
 
 export default {
-  name: 'Contact',
+  name: 'ContactContainer',
   components: {
     ContactFAQVue,
     ContactChannelVue
