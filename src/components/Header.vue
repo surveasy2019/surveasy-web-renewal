@@ -7,19 +7,22 @@
     </div>
 
     <div>
-      <span id="header-text">안녕하세요 OO님</span>
+      <router-link to="/login" id="header-text" v-if="!isLoggedIn">로그인 / 회원가입</router-link>
+      <router-link to="/mypage" id="header-text" v-else>마이페이지</router-link>
     </div>
     
-
-    <!-- <router-link to="/login">로그인</router-link>
-    <router-link to="/register">회원가입</router-link>
-    <router-link to="/logout">로그아웃</router-link> -->
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HeaderContainer'
+  name: 'HeaderContainer',
+
+  data() {
+    return {
+      isLoggedIn: false
+    }
+  }
 }
 </script>
 
