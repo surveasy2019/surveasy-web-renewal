@@ -47,10 +47,12 @@ export default {
 #app {
   font-family: 'Noto Sans KR', sans-serif;
   text-align: center;
+    max-height: 100vh;
+
   color: #000000;
 }
 .main-container {
-  width: 30%;
+  width: 510px;
   margin: auto;
   border: solid 1px #dadada;
 }
