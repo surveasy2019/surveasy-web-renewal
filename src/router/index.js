@@ -9,7 +9,7 @@ import Service from '../views/Service/Service'
 import ServiceInputForm from '../views/Service/ServiceInputForm'
 import ServicePayDone from '../views/Service/ServicePayDone'
 import List from '../views/List/List'
-import Contact from '../views/Contact/Contact'
+import KnowHow from '../views/KnowHow/KnowHow'
 import MyPage from '../views/MyPage/MyPage'
 import MyPageOrder from '../views/MyPage/MyPageMyInfo'
 import MyPageMyInfo from '../views/MyPage/MyPageOrder'
@@ -66,9 +66,9 @@ const routes = [
     component: List,
   },
   {
-    path: '/contact',
-    name: 'Contact',
-    component: Contact,
+    path: '/knowhow',
+    name: 'KnowHow',
+    component: KnowHow,
   },
   {
     path: '/mypage',
