@@ -3,7 +3,7 @@
   <div class="main-container">
     <HeaderVue />
     <router-view/>
-    <FooterVue />
+    <FooterVue class="footer" />
   </div>
   <div class="bottom-bar-container">
     <BottomBarVue />
@@ -62,7 +62,6 @@ export default {
   padding-bottom: 40px; /* bottom-bar-container 높이만큼 여백 추가 */
   box-sizing: border-box; /* padding이 너비에 포함되도록 설정 */
 }
-
 .bottom-bar-container {
   position: fixed;
   width: 510px;
