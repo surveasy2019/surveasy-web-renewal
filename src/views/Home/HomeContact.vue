@@ -1,28 +1,26 @@
 <template>
-    <div class="home-story-container">
+    <div class="home-contact-container">
         <HomeNavBar />
-        <HomeBannerVue/>
         
+
     </div>
 </template>
 
 <script>
 import HomeNavBar from '@/components/Home/HomeNavBar.vue'
-import HomeBannerVue from '@/components/Home/HomeBanner.vue'
-
 
 export default {
-    name: 'HomeStory',
+    name: 'HomeContact',
     components: {
         HomeNavBar,
-        HomeBannerVue
         
+
     }
 }
 </script>
 
 <style>
-.home-story-container {
+.home-contact-container {
     display: flex;
     flex-direction: column;
 }

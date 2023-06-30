@@ -1,6 +1,6 @@
 <template>
   <div class="home-banner-container">
-    HomeBanner
+    <img src="@/assets/bannertest.jpg"/>
   </div>
 </template>
 

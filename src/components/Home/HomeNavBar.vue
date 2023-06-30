@@ -2,8 +2,8 @@
     <div class="navbar-container">
         <nav>
             <router-link to="/">서베이지 홈</router-link>
-            <router-link to="/">About 서베이지</router-link>
-            <router-link to="/">문의하기</router-link>
+            <router-link to="/home/brandstory">About 서베이지</router-link>
+            <router-link to="/home/contact">문의하기</router-link>
         </nav>
     </div>
 </template>
