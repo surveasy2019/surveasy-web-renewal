@@ -3,6 +3,8 @@ import Home from '../views/Home/Home'
 import HomeBrandStory from '../views/Home/HomeBrandStory'
 import HomeContact from '../views/Home/HomeContact'
 import Login from '../views/Login/Login'
+import Join from '../views/Join/Join'
+import JoinDone from '../views/Join/JoinDone'
 import Service from '../views/Service/Service'
 import ServiceInputForm from '../views/Service/ServiceInputForm'
 import ServicePayDone from '../views/Service/ServicePayDone'
@@ -32,6 +34,16 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/join',
+    name: 'Join',
+    component: Join
+  },
+  {
+    path: '/join/done',
+    name: 'JoinDone',
+    component: JoinDone
   },
   {
     path: '/service',
