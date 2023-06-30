@@ -54,12 +54,13 @@ export default {
   color: #000000;
 }
 .main-container {
+  padding-top: 30px;
   position: relative;
   width: 510px;
   min-height: 100vh; /* 컨테이너를 화면 높이에 맞게 설정 */
   margin: 0 auto;
   border: solid 1px #dadada;
-  padding-bottom: 40px; /* bottom-bar-container 높이만큼 여백 추가 */
+  padding-bottom: 70px; /* bottom-bar-container 높이만큼 여백 추가 */
   box-sizing: border-box; /* padding이 너비에 포함되도록 설정 */
 }
 .bottom-bar-container {
