@@ -4,9 +4,12 @@
     <HeaderVue />
     <router-view/>
     <FooterVue />
-    <span class="bottom-bar-container"><BottomBarVue/></span>
-    
   </div>
+  <div class="bottom-bar-container">
+    <BottomBarVue />
+  </div>
+    
+  
 </div>
 </template>
 
@@ -47,17 +50,27 @@ export default {
 #app {
   font-family: 'Noto Sans KR', sans-serif;
   text-align: center;
-    max-height: 100vh;
-
+  height: 100vh;
   color: #000000;
 }
 .main-container {
+  position: relative;
   width: 510px;
-  margin: auto;
+  min-height: 100vh; /* 컨테이너를 화면 높이에 맞게 설정 */
+  margin: 0 auto;
   border: solid 1px #dadada;
+  padding-bottom: 40px; /* bottom-bar-container 높이만큼 여백 추가 */
+  box-sizing: border-box; /* padding이 너비에 포함되도록 설정 */
 }
 
-.main-container .bottom-bar-container {
-    z-index: 9999;
+.bottom-bar-container {
+  position: fixed;
+  width: 510px;
+  height: 40px; /* 탭바 높이 조정 가능 */
+  bottom: 0;
+  background-color: #ccc; /* 원하는 색상으로 변경 */
+  z-index: 999;
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>

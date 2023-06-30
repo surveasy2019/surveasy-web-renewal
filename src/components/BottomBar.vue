@@ -34,6 +34,5 @@ export default {
     padding-top: 10px;
     padding-bottom: 10px;
     flex-direction: row;
-    width: 100%;
     justify-content: space-around;
 }</style>
