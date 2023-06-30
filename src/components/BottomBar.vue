@@ -3,8 +3,7 @@
         <router-link to="/">홈</router-link>
         <router-link to="/service">서비스</router-link>
         <router-link to="/list">리스트</router-link>
-        <router-link to="/contact">문의</router-link>
-        <router-link to="/mypage">MY</router-link>
+        <router-link to="/knowhow">리서치노하우</router-link>
     </div>
 </template>
 
