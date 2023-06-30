@@ -1,21 +1,20 @@
 <template>
     <div class="home-story-container">
         <HomeNavBar />
-        <HomeBannerVue/>
+        <HomeBrandStory />
         
     </div>
 </template>
 
 <script>
 import HomeNavBar from '@/components/Home/HomeNavBar.vue'
-import HomeBannerVue from '@/components/Home/HomeBanner.vue'
-
+import HomeBrandStory from '@/components/Home/HomeStoryContent.vue'
 
 export default {
     name: 'HomeStory',
     components: {
         HomeNavBar,
-        HomeBannerVue
+        HomeBrandStory
         
     }
 }
