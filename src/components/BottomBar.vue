@@ -1,28 +1,34 @@
 <template>
     <div class="bottom-bar-container">
-        <div class="bar-item-container">
+        <router-link to="/"><div class="bar-item-container">
             <div><img class="bar-img" src="@/assets/barIcon/home_icon.png" alt="home"></div>
-            <div><router-link to="/">홈</router-link></div>
-        </div>
-        <div class="bar-item-container">
+            <div>홈</div>
+        </div></router-link>
+        <router-link to="/service"><div class="bar-item-container">
             <div><img class="bar-img" src="@/assets/barIcon/service_icon.png" alt="home"></div>
-            <div><router-link to="/service">서비스</router-link></div>
-        </div>
-        <div class="bar-item-container">
+            <div>서비스</div>
+        </div></router-link>
+        <router-link to="/list"><div class="bar-item-container">
             <div><img class="bar-img" src="@/assets/barIcon/list_icon.png" alt="home"></div>
-            <div><router-link to="/list">리스트</router-link></div>
-        </div>
-        <div class="bar-item-container">
+            <div>리스트</div>
+        </div></router-link>
+        <router-link to="/knowhow"><div class="bar-item-container">
             <div><img class="bar-img" src="@/assets/barIcon/knowhow_icon.png" alt="home"></div>
-            <div><router-link to="/knowhow">리서치노하우</router-link></div>
-        </div>
+            <div>리서치노하우</div>
+        </div></router-link>
     </div>
 </template>
 
 
 <script>
 export default {
-    name: 'BottomBar'
+    name: 'BottomBar',
+    data(){
+        return{
+            isActive : false
+        }
+    }
+    
 }
 </script>
 
@@ -34,7 +40,7 @@ export default {
     color: #a4a4a4;
     text-decoration: none;
     font-size: 15px;
-    margin-top: 10px;
+    margin-top: 0;
 }
 
 .bottom-bar-container a.router-link-exact-active {
@@ -43,6 +49,7 @@ export default {
 
 .bar-img{
     width: 20%;
+    opacity: 0.3;
 }
 .bar-item-container{
     display: flex;
@@ -56,7 +63,7 @@ export default {
     padding-top: 10px;
     padding-bottom: 10px;
     flex-direction: row;
-    height: 50px;
+    height: 55px;
     justify-content: space-around;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
