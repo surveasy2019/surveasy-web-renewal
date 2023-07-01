@@ -33,11 +33,6 @@
           <option :value=2>남성</option>
           <option :value=3>여성</option>
         </select>
-        <p class="option-title">영어설문</p>
-        <div id="checkbox-item-eng"> 
-          <input class="form-check-input" v-model="addENTarget" @click="EngOptionCal" type="checkbox" name="Eng" id="Eng">
-          <label id="checkbox-text-eng" for="Eng">영어설문</label>
-        </div>
       </div>
 
       <div class="option-right-content">
@@ -51,11 +46,11 @@
           <option :value=6>16-20분</option>
           <option :value=5>11-15분</option>
         </select>
-        <p></p>
+        <p class="option-title" id="none1">a</p>
         <div class="timedate-option-select">
           <input type="time" class="input-time"> 
         </div>
-        <p></p>
+        <p class="option-title" id="none2">a</p>
         <select class="option-select" id="target_age" >
           <option :value=0 selected disabled hidden>대상 연령</option>
           <option :value=1>연령 무관</option>
@@ -63,6 +58,79 @@
         </select>
       </div>     
     </div>
+    <div class="option-content-center">
+      <div class="center-top">
+        <div class="age-content">
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" value="20-24세"> 
+          <div id="checkbox-text">20-24세</div>
+        </div>
+        <div class="age-content">
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" value="25-29세"> 
+          <div id="checkbox-text">25-29세</div>
+        </div>
+        <div class="age-content">
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" value="30-34세"> 
+          <div id="checkbox-text">30-34세</div>
+        </div>
+        <div class="age-content">
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" value="35-39세"> 
+          <div id="checkbox-text">35-39세</div>
+        </div>
+      </div>
+      <div class="center-bottom">
+        <div class="age-content">
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" value="40-44세"> 
+          <div id="checkbox-text">40-44세</div>
+        </div>
+        <div class="age-content">
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" value="45-49세"> 
+          <div id="checkbox-text">45-49세</div>
+        </div>
+        <div class="age-content">
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" value="50대"> 
+          <div id="checkbox-text">50대</div>
+        </div>
+        <div class="age-content">
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" value="60대"> 
+          <div id="checkbox-text">60대</div>
+        </div>
+      </div>
+    </div>
+    <div class="option-content-left">
+      <p class="option-title">영어설문</p>
+      <div id="checkbox-item-eng"> 
+        <input class="form-check-input" v-model="addENTarget" @click="EngOptionCal" type="checkbox" name="Eng" id="Eng">
+        <label id="checkbox-text-eng" for="Eng">영어설문</label>
+      </div>
+    </div>
+    <div class="option-content-right">
+      <div class="option-title">주문 금액</div>
+      <div class="option-title-bold">9,000 원</div>
+    </div>
+    <div class="option-border"></div>
+
+    <div class="option-content-left">
+      <p class="option-title">대학생 / 대학원생 할인 여부</p>
+      <select class="option-select" id="identity">
+        <option :value=0 selected disabled hidden>대학생 / 대학원생 할인 여부</option>
+        <option :value=1>중/고등학생입니다.</option>
+        <option :value=2>대학생입니다.</option>
+        <option :value=3>대학원생입니다.</option>
+        <option :value=4>할인대상이 아닙니다.</option>
+      </select>
+    </div>
+    <div class="option-border"></div>
+    <div class="option-content-right">
+      <div class="option-title">할인 금액</div>
+      <div class="option-title-bold">9,000 원</div>
+    </div>
+    <div class="option-border"></div>
+    <div class="option-content-right">
+      <div class="option-title">결제 금액</div>
+      <div class="option-title-green">9,000 원</div>
+    </div>
+
+    <button class="goServicePay-btn">설문 정보 입력하러 가기</button>
   </div>
 </template>
 
@@ -78,10 +146,8 @@ export default {
   flex-direction: column;
   padding: 10px;
   width: 90%;
-  justify-content: space-around;
-  margin: auto;
   margin-top: 30px;
-  height: 450px;
+  margin: auto;
   border-radius: 10px;
   background-color: #ecefeb;
   border-radius: 10px;
@@ -94,10 +160,36 @@ export default {
 .option-left-content{
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 .option-right-content{
   display: flex;
   flex-direction: column;
+  text-align: left;
+}
+.option-content-left{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.option-content-center .center-top, .center-bottom{
+  display: flex;
+  flex-direction: row;
+}
+.option-content-center{
+  margin: auto;
+  border: solid 0.5px gray;
+  padding: 10px;
+  border-radius: 10px;
+}
+.option-content-right{
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+}
+.age-content{
+  display: flex;
+  flex-direction: row;
 }
 .selectbox {
   font-family: 'Noto Sans KR', sans-serif;
@@ -137,11 +229,32 @@ export default {
 
 .option-title{
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 0;
   font-size: 13px;
   font-weight: 600;
   font-family: 'Noto Sans KR', sans-serif;
   color: #000000;
+}
+
+.option-title-bold{
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 900;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #000000;
+}
+
+.option-title-green{
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 900;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #458144;
+}
+
+.option-border{
+  border-top: solid 0.5px black;
+  margin-top: 10px;
 }
 
 .warn-msg{
@@ -179,5 +292,23 @@ export default {
 .content-row .input-time:focus{
   outline: none;
   border: 1.5px solid #0AAB00;
+}
+.goServicePay-btn {
+  padding: 5px 70px;
+  margin-top: 20px;
+  color:#0CAE02;
+  background-color: #EEEEEE;
+  border: 1.5px solid #0CAE02;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.goServicePay-btn:hover{
+  color: white;
+  background: #0AAB00;
+}
+#none1, #none2 {
+  color: transparent;
 }
 </style>
