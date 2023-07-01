@@ -46,7 +46,7 @@ export default {
   flex-direction: row;
   justify-content: space-around;
 }
-.home-title{
+.home-service-container .home-title{
   margin-top: 30px;
   margin-bottom: 20px;
   font-size: 15px;
@@ -55,7 +55,7 @@ export default {
   margin-left: 15px;
 }
 
-.item-title{
+.home-service-container .item-title{
   text-align: center;
   font-size: 12px;
   margin-top: 10px;

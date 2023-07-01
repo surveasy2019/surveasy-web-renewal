@@ -48,7 +48,7 @@ export default {
   flex-direction: column;
   justify-content: center;
 }
-.home-title{
+.home-statics-container .home-title{
   margin-top: 30px;
   margin-bottom: 20px;
   font-size: 15px;

@@ -36,7 +36,7 @@ export default {
   flex-direction: row;
   justify-content: space-around;
 }
-.home-title{
+.home-review-container .home-title{
   margin-top: 30px;
   margin-bottom: 20px;
   font-size: 15px;
