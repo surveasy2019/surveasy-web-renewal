@@ -3,6 +3,7 @@ import Home from '../views/Home/Home'
 import HomeBrandStory from '../views/Home/HomeBrandStory'
 import HomeContact from '../views/Home/HomeContact'
 import Login from '../views/Login/Login'
+import FindPw from '../views/Login/FindPw'
 import Join from '../views/Join/Join'
 import JoinDone from '../views/Join/JoinDone'
 import Service from '../views/Service/Service'
@@ -11,8 +12,12 @@ import ServicePayDone from '../views/Service/ServicePayDone'
 import List from '../views/List/List'
 import KnowHow from '../views/KnowHow/KnowHow'
 import MyPage from '../views/MyPage/MyPage'
-import MyPageOrder from '../views/MyPage/MyPageMyInfo'
-import MyPageMyInfo from '../views/MyPage/MyPageOrder'
+import MyPageOrder from '../views/MyPage/MyPageOrder'
+import MyPageReview from '../views/MyPage/MyPageReview/MyPageReview'
+import MyPageReviewDone from '../views/MyPage/MyPageReview/MyPageReviewDone'
+import MyPageReviewDetail from '../views/MyPage/MyPageReview/MyPageReviewDetail'
+import MyPageReviewDetailDone from '../views/MyPage/MyPageReview/MyPageReviewDetailDone'
+import MyPageMyInfo from '../views/MyPage/MyPageMyInfo'
 
 const routes = [
   {
@@ -34,6 +39,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/findpw',
+    name: 'FindPw',
+    component: FindPw
   },
   {
     path: '/join',
@@ -79,6 +89,26 @@ const routes = [
     path: '/mypage/order',
     name: 'MyPageOrder',
     component: MyPageOrder
+  },
+  {
+    path: '/mypage/review',
+    name: 'MyPageReview',
+    component: MyPageReview
+  },
+  {
+    path: '/mypage/review/done',
+    name: 'MyPageReviewDone',
+    component: MyPageReviewDone
+  },
+  {
+    path: '/mypage/review/detail',
+    name: 'MyPageReviewDetail',
+    component: MyPageReviewDetail
+  },
+  {
+    path: '/mypage/review/detail/done',
+    name: 'MyPageReviewDetailDone',
+    component: MyPageReviewDetailDone
   },
   {
     path: '/mypage/myinfo',
