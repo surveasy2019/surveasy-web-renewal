@@ -1,7 +1,7 @@
 <template>
   <div class="header-container">
     <div>
-      <router-link to="/">
+      <router-link to="/mypage">
         <img loading="prelaod" decoding="async" class="img-fluid" width="120" src="@/assets/logo.png" alt="surveasy">
       </router-link>
     </div>
