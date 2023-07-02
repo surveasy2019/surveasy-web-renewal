@@ -3,6 +3,7 @@ import Home from '../views/Home/Home'
 import HomeBrandStory from '../views/Home/HomeBrandStory'
 import HomeContact from '../views/Home/HomeContact'
 import Login from '../views/Login/Login'
+import FindPw from '../views/Login/FindPw'
 import Join from '../views/Join/Join'
 import JoinDone from '../views/Join/JoinDone'
 import Service from '../views/Service/Service'
@@ -34,6 +35,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/findpw',
+    name: 'FindPw',
+    component: FindPw
   },
   {
     path: '/join',
