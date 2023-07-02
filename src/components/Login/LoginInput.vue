@@ -9,7 +9,7 @@
 
     <div class="login-input-button-container">
       <button id="btn-login">로그인하기</button>
-      <button id="btn-join">회원가입하기</button>
+      <router-link to="/join" id="btn-join-text"><button id="btn-join">회원가입하기</button></router-link>
     </div>
 
     <div class="login-input-findpw-container">
@@ -63,9 +63,11 @@ export default {
   color: white;
 }
 #btn-join {
-  background-color: white;
-  color: #0AAC00;
   border: solid 1px #0AAC00;
+}
+#btn-join a {
+  text-decoration: none;
+  color: white;
 }
 .login-input-findpw-container a {
   font-size: 11px;
