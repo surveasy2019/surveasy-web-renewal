@@ -1,12 +1,8 @@
 <template>
   <div class="service-active-container">
-    <div class="simple-active-container">
-      <div class="home-title">수집 가능한 최대 응답수</div>
-      <div class="home-title" @click="open">펼쳐보기</div>
-    </div>
-    <div class="full-active-container" v-if="this.show == true">
-      <p class="p-black-bold">설문대상별 수집 가능한 <span class="p-green-bold">최대 응답 수</span></p>
-      <div class="loading-contianer" v-if="!this.loading">
+    
+    <p class="p-black-bold">설문대상별 수집 가능한 <span class="p-green-bold">최대 응답 수</span></p>
+      <div class="loading-contianer">
         <p class="spinner-loading">
           <i class="fas fa-spinner"></i>
             불러오는 중 
@@ -69,7 +65,6 @@
       </div>
     
       </div> 
-    </div>
 
   </div>
 </template>
