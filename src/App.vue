@@ -69,7 +69,7 @@ export default {
   height: 40px; /* 탭바 높이 조정 가능 */
   bottom: 0;
   background-color: #ccc; /* 원하는 색상으로 변경 */
-  z-index: 999;
+  z-index: 998;
   left: 50%;
   transform: translateX(-50%);
 }
