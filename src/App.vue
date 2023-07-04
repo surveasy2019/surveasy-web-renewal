@@ -56,7 +56,7 @@ export default {
 .main-container {
   padding-top: 30px;
   position: relative;
-  width: 510px;
+  width: 700px;
   min-height: 100vh; /* 컨테이너를 화면 높이에 맞게 설정 */
   margin: 0 auto;
   border: solid 1px #dadada;
@@ -65,8 +65,8 @@ export default {
 }
 .bottom-bar-container {
   position: fixed;
-  width: 510px;
-  height: 40px; /* 탭바 높이 조정 가능 */
+  width: 700px;
+  height: 60px; /* 탭바 높이 조정 가능 */
   bottom: 0;
   background-color: #ccc; /* 원하는 색상으로 변경 */
   z-index: 998;
