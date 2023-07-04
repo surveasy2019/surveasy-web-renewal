@@ -1,14 +1,14 @@
 <template>
   <div>
-    <ServiceDetailVue />
-    <button type="button" @click="sheet" class="order-btn">주문하기</button>
+    <ServiceDetailVue v-if="this.pageChange == 0"/>
+    <button type="button" @click="sheet" class="order-btn" v-if="this.pageChange == 0">주문하기</button>
     <div class="bottom-sheet" :class="{ 'open': open }">
       <div class="close-btn"><button @click="sheet">내리기</button></div>
       <div class="sheet-container"> 
         <div class="item" :style="{ flex: item1Width }"><ServiceActivePanelVue /></div>
         <div class="item" :style="{ flex: item2Width }"><ServiceOptionVue /></div>
       </div>  
-      <div><button class="goServicePay-btn">설문 정보 입력하러 가기</button></div>
+      <div><button class="goServicePay-btn" @click="nextPage">설문 정보 입력하러 가기</button></div>
     </div>
   </div>
 
@@ -29,6 +29,7 @@ export default {
   },
   data(){
     return{
+      pageChange: 0,
       open : false,
       item1Width : 1.5,
       item2Width : 2
@@ -37,6 +38,10 @@ export default {
   methods: {
     sheet(){
       this.open = !this.open
+    },
+    
+    nextPage(){
+      this.pageChange = 1
     }
   }
 
