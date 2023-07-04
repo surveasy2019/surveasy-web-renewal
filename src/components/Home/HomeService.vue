@@ -1,23 +1,31 @@
 <template>
   <div class="home-service-container">
     <div class="home-title">
-      서비스 바로가기
+      서베이지가 도와드릴게요
     </div>
     <div class="home-service-item-container">
-      <router-link to="/service"><div class="circle-container">
-        <img src="@/assets/home/content01.png" class="circle-image" />
-      </div></router-link>
-      <div class="circle-container">
-          <img src="@/assets/home/content02.png" class="circle-image" />
-        </div>
-        <a href="https://surveasy.oopy.io/betaservice"><div class="circle-container">
-          <img src="@/assets/home/content03.png" class="circle-image" />
-        </div></a>
-    </div>
-    <div class="home-service-item-container">
-      <div class="item-title">설문</div>
-      <div class="item-title">인터뷰이</div>
-      <div class="item-title">베타테스터</div>
+      <div class="home-content">
+        <img src="@/assets/home/survey.png" width="30" class="item-img">
+        <div class="item-title">설문 응답 수집</div>
+        <div class="item-content">한 번에, 손쉽게 설문 응답을 모아보세요.<br>설문 링크만 올리면 서베이지의 패널이
+          <br>빠르게 설문에 응답해드립니다.</div>
+        <button class="item-btn">이용하러가기</button>
+      </div>
+      <div class="home-content">
+        <img src="@/assets/home/survey.png" width="30" class="item-img">
+        <div class="item-title">인터뷰이 모집</div>
+        <div class="item-content">인터뷰를 해야할 땐, 인터뷰이 모집 서비스를<br>이용해 보세요. 원하는 인터뷰이를, 원하는
+          <br>일정에 맞게 구해드립니다.</div>
+        <button class="item-btn">이용하러가기</button>
+      </div>
+      <div class="home-content">
+        <img src="@/assets/home/survey.png" width="30" class="item-img">
+        <div class="item-title">베타테스터 모집</div>
+        <div class="item-content">앱이나 웹사이트 출시를 앞두고 계신가요?<br>정식 출시에 앞서, 베타테스터를 모집해
+          <br>오류는 없는지 미리 확인해보세요!</div>
+        <button class="item-btn">이용하러가기</button>
+      </div>
+      
     </div>
     
     
@@ -45,8 +53,10 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  height: 240px;
 }
 .home-service-container .home-title{
+  font-family: 'Noto Sans KR', sans-serif;
   margin-top: 30px;
   margin-bottom: 20px;
   font-size: 15px;
@@ -56,22 +66,35 @@ export default {
 }
 
 .home-service-container .item-title{
-  text-align: center;
-  font-size: 12px;
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: left;
+  font-size: 14px;
   margin-top: 10px;
+  padding-left: 7px;
+  padding-right: 7px;
 }
-.circle-container {
-  width: 100px;
-  height: 100px;
-  padding: 10px;
-  border-radius: 50%;
-  background-color: #78C391;
-  overflow: hidden;
+.home-service-container .item-content{
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: left;
+  font-size: 10px;
+  margin-top: 10px;
+  padding-left: 7px;
+  padding-right: 7px;
+}
+.home-content{
+  display: flex;
+  flex-direction: column;
+  border: solid 0.5px #0AAB00;
+  width: 30%;
+  border-radius: 10px;
 }
 
-.circle-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.item-btn{
+  margin-top: 30%;
 }
+
+.item-img{
+  margin: 15px;
+}
+
 </style>

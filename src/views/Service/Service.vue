@@ -1,7 +1,7 @@
 <template>
   <div>
     <ServiceDetailVue />
-    <button type="button" @click="sheet">button</button>
+    <button type="button" @click="sheet" class="order-btn">주문하기</button>
     <div class="bottom-sheet" :class="{ 'open': open }">
       <div class="close-btn"><button @click="sheet">내리기</button></div>
       <div class="sheet-container"> 
@@ -55,6 +55,21 @@ export default {
   background-color: #f0f0f0;
   transition: bottom 0.3s ease-in-out;
   z-index: 999;
+}
+.order-btn{
+  position: sticky;
+  bottom: 80px;
+  padding: 10px 70px;
+  width: 700px;
+  background-color:#ffffff;
+  color: #000000;
+  margin-top: 10px;
+  border: 1.5px solid #0CAE02;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 .sheet-container{
   display: flex;
