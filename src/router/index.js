@@ -13,6 +13,7 @@ import List from '../views/List/List'
 import KnowHow from '../views/KnowHow/KnowHow'
 import MyPage from '../views/MyPage/MyPage'
 import MyPageOrder from '../views/MyPage/MyPageOrder'
+import MyPagePoint from '../views/MyPage/MyPagePoint'
 import MyPageReview from '../views/MyPage/MyPageReview/MyPageReview'
 import MyPageReviewDone from '../views/MyPage/MyPageReview/MyPageReviewDone'
 import MyPageReviewDetail from '../views/MyPage/MyPageReview/MyPageReviewDetail'
@@ -89,6 +90,11 @@ const routes = [
     path: '/mypage/order',
     name: 'MyPageOrder',
     component: MyPageOrder
+  },
+  {
+    path: '/mypage/point',
+    name: 'MyPagePoint',
+    component: MyPagePoint
   },
   {
     path: '/mypage/review',
