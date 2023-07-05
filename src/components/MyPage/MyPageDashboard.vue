@@ -1,5 +1,4 @@
 <template>
-  <h2>마이페이지</h2>
   <div class="mypage-dashboard-container">
     <div class="mypage-dashboard-container-item">
       <p>진행중인 설문</p>
@@ -28,9 +27,9 @@ export default {
 .mypage-dashboard-container {
   display: flex;
   flex-direction: row;
+  width: 75%;
+  margin: 40px auto;
   align-items: center;
-  margin-top: 20px;
-  width: 100%;
   background-color: #0AAC00;
   color: white;
   border-radius: 10px;

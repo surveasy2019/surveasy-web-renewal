@@ -1,6 +1,9 @@
 <template>
   <div class="mypage-order-container">
-    <h2>주문 내역</h2>
+    <div class="mypage-order-title-container">
+      <div>주문 내역</div>
+      <div>입금 계좌: 카카오뱅크 3333-11-5235460 (송*예)</div>
+    </div>
 
     <div class="mypage-order-item-container">
       <div class="mypage-order-item" v-for="item in surveyList" :key="item.id">
@@ -41,8 +44,8 @@
 
         <div class="mypage-order-bottom-container">
           <div class="mypage-order-bottom-container-item" v-if="item.progress<2">
-            <router-link to="/"><img id="mypage-img-edit" width=20 src="@/assets/mypage/edit_icon.png"></router-link>
-            <a><img id="mypage-img-delete" width=24 src="@/assets/mypage/delete_icon.png"></a>
+            <router-link to="/"><img id="mypage-img-btn" width=22 src="@/assets/mypage/icon_edit.png"></router-link>
+            <a><img id="mypage-img-btn" width=22 src="@/assets/mypage/icon_delete.png"></a>
           </div>
           <div class="mypage-order-bottom-container-item" v-else-if="item.progress>2">
             <router-link class="mypage-order-btn-review" to="/mypage/review">후기 작성하기 〉</router-link>
@@ -75,19 +78,28 @@ export default {
 .mypage-order-container {
   width: 100%;
   justify-content: center;
-  padding: 20px 0 30px 0;
+  padding: 10px 0 30px 0;
+}
+.mypage-order-title-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 40px 0 40px;
+  color: #0AAB00;
+  font-size: 19px;
+  font-weight: bold;
 }
 .mypage-order-item-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   margin: auto;
-  padding: 20px;
+  padding: 0 30px 20px 30px;
   justify-content: space-between
 }
 .mypage-order-item {
   width: 100%;
-  margin-top: 15px;
+  margin-top: 20px;
   padding: 15px;
   border: solid 1px #0AAC00;
   border-radius: 10px;
@@ -101,12 +113,12 @@ export default {
   margin-right: 7px;
   padding: 5px;
   border-radius: 5px;
-  background-color: #0AAC00;
-  color: white;
-  font-size: 12px;
+  color: #0AAC00;
+  font-size: 16px;
+  font-weight: bolder;
 }
 .mypage-order-item-title {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bold;
   text-align: left;
 }
@@ -133,11 +145,11 @@ export default {
 }
 .mypage-order-middle-item-option {
   margin-right: 7px;
-  padding: 4px;
-  border: solid 1px #0AAC00;
-  border-radius: 5px;
+  padding: 8px;
+  background-color: #EFEFEF;
+  border-radius: 3px;
   text-align: left;
-  color: #0AAC00;
+  color: #757272;
   font-size: 12px;
 }
 .mypage-order-bottom-container {
@@ -155,17 +167,22 @@ export default {
   cursor: pointer;
 }
 .mypage-order-btn-review {
-  background: none;
+  padding: 7px;
+  background-color: #0AAB00;
   border: none;
+  border-radius: 3px;
   text-decoration: none;
-  color: #0AAC00;
+  color: white;
   font-size: 14px;
   cursor: pointer;
 }
 .mypage-order-btn-review:hover {
   font-weight: bold;
 }
-#mypage-img-edit {
-  margin: 5px 10px 0 0;
+#mypage-img-btn {
+  background-color: #0AAB00;
+  padding: 10px;
+  margin-left: 10px;
+  border-radius: 5px;
 }
 </style>
