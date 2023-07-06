@@ -11,6 +11,7 @@ import ServiceInputForm from '../views/Service/ServiceInputForm'
 import ServicePayDone from '../views/Service/ServicePayDone'
 import List from '../views/List/List'
 import KnowHow from '../views/KnowHow/KnowHow'
+import KnowHowContent from '../views/KnowHow/KnowHowContent'
 import MyPage from '../views/MyPage/MyPage'
 import MyPageOrder from '../views/MyPage/MyPageOrder'
 import MyPageReview from '../views/MyPage/MyPageReview/MyPageReview'
@@ -79,6 +80,11 @@ const routes = [
     path: '/knowhow',
     name: 'KnowHow',
     component: KnowHow,
+  },
+  {
+    path: '/knowhowcontent',
+    name: 'KnowHowContent',
+    component: KnowHowContent,
   },
   {
     path: '/mypage',

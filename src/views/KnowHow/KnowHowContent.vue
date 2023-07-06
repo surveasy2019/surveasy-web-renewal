@@ -1,16 +1,15 @@
 <template>
   <div class="knowhow-container">
-    <KnowhowList />
+    <KnowhowTip1 />
   </div>
 </template>
 
 <script>
-
-import KnowhowList from '@/components/KnowHow/KnowhowList.vue'
+import KnowhowTip1 from '@/components/KnowHow/KnowhowTip1.vue'
 export default {
-  name: 'KnowHowContainer',
+  name: 'KnowHowContent',
   components: {
-    KnowhowList
+    KnowhowTip1
   }
 }
 </script>
