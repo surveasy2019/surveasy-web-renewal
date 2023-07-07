@@ -24,5 +24,6 @@ export default {
   display: flex;
   flex-direction: column;
   padding-top: 50px;
+  padding-bottom: 30px;
 }
 </style>

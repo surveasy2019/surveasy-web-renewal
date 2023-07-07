@@ -21,7 +21,9 @@
       </div>
     </div>
 
-    
+    <div class="mypage-myinfo-marketing-withdraw-container">
+      <button class="mypage-myinfo-marketing-withdraw-button">회원 탈퇴하기</button>
+    </div>
   </div>
 </template>
 
@@ -81,6 +83,22 @@ export default {
   font-size: 14px;
   color: white;
   background-color: #0AAC00;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.mypage-myinfo-marketing-withdraw-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  padding: 50px 50px 0 50px;
+}
+.mypage-myinfo-marketing-withdraw-button {
+  width: 100px;
+  height: 30px;
+  font-size: 14px;
+  color: white;
+  background-color: #757272;
   border: none;
   border-radius: 5px;
   cursor: pointer;

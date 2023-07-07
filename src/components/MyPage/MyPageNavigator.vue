@@ -5,6 +5,7 @@
       <router-link to="/mypage/myinfo"><div class="mypage-navigator-button-container-item">리뷰 작성</div></router-link>
       <router-link to="/mypage/point"><div class="mypage-navigator-button-container-item">적립금</div></router-link>
       <router-link to="/mypage/myinfo"><div class="mypage-navigator-button-container-item">나의 정보</div></router-link>
+      <a><div class="mypage-navigator-button-container-item">로그아웃</div></a>
     </div>
     
   </div>
