@@ -16,5 +16,7 @@ export default {
 </script>
 
 <style>
-
+.knowhow-container{
+  margin-bottom: 70px;
+}
 </style>
