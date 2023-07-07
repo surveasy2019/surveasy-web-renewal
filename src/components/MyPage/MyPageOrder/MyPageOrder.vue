@@ -78,13 +78,12 @@ export default {
 .mypage-order-container {
   width: 100%;
   justify-content: center;
-  padding: 10px 0 30px 0;
 }
 .mypage-order-title-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0 40px 0 40px;
+  padding: 0 50px 0 50px;
   color: #0AAB00;
   font-size: 19px;
   font-weight: bold;
@@ -94,13 +93,13 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
   margin: auto;
-  padding: 0 30px 20px 30px;
+  padding: 17px 50px 20px 50px;
   justify-content: space-between
 }
 .mypage-order-item {
   width: 100%;
-  margin-top: 20px;
-  padding: 15px;
+  margin-bottom: 25px;
+  padding: 30px 20px 20px 20px;
   border: solid 1px #0AAC00;
   border-radius: 10px;
 }
