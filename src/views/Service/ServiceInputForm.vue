@@ -1,6 +1,8 @@
 <template>
   <div>
-    
+    <OptionInfoVue />
+    <SurveyInfoVue />
+    <PaymentMethodVue />
 
   </div>
 </template>
