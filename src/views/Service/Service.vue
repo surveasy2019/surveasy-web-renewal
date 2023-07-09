@@ -42,6 +42,8 @@ export default {
     
     nextPage(){
       this.pageChange = 1
+      this.open = false
+      this.$router.push("/service/inputform")
     }
   }
 
