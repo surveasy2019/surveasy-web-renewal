@@ -4,6 +4,7 @@
     <MyPageNavigatorVue />
     <MyPageMyInfoVue />
     <MyPageMyInfoMarketingVue />
+    <MyPagePointVue />
   </div>
 </template>
 
@@ -11,13 +12,15 @@
 import MyPageNavigatorVue from '@/components/MyPage/MyPageNavigator.vue'
 import MyPageMyInfoVue from '@/components/MyPage/MyPageMyInfo/MyPageMyInfo.vue'
 import MyPageMyInfoMarketingVue from '@/components/MyPage/MyPageMyInfo/MyPageMyInfoMarketing.vue'
+import MyPagePointVue from '@/components/MyPage/MyPagePoint/MyPagePoint.vue'
 
 export default {
   name: 'MyPageMyInfo',
   components: {
     MyPageMyInfoVue,
     MyPageMyInfoMarketingVue,
-    MyPageNavigatorVue
+    MyPageNavigatorVue,
+    MyPagePointVue
   }
 }
 </script>

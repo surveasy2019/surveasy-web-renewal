@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import MyPageReviewDetailInputVue from '@/components/MyPage/MyPageReview/MyPageReviewDetailInput.vue'
+import MyPageReviewDetailInputVue from '@/components/MyPage/MyPageReview/ReviewDetail/MyPageReviewDetailInput.vue'
 
 export default {
-  name: 'MyPageReview',
+  name: 'MyPageReviewPost',
   components: {
     MyPageReviewDetailInputVue
   }

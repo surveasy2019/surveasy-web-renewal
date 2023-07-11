@@ -91,7 +91,7 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: right;
-  padding: 50px 50px 0 50px;
+  padding: 30px 50px 0 50px;
 }
 .mypage-myinfo-marketing-withdraw-button {
   width: 100px;

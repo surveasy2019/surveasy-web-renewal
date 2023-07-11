@@ -15,9 +15,10 @@ import MyPage from '../views/MyPage/MyPage'
 import MyPageOrder from '../views/MyPage/MyPageOrder'
 import MyPagePoint from '../views/MyPage/MyPagePoint'
 import MyPageReview from '../views/MyPage/MyPageReview/MyPageReview'
-import MyPageReviewDone from '../views/MyPage/MyPageReview/MyPageReviewDone'
-import MyPageReviewDetail from '../views/MyPage/MyPageReview/MyPageReviewDetail'
-import MyPageReviewDetailDone from '../views/MyPage/MyPageReview/MyPageReviewDetailDone'
+import MyPageReviewPost from '../views/MyPage/MyPageReview/Review/MyPageReviewPost'
+import MyPageReviewPostDone from '../views/MyPage/MyPageReview/Review/MyPageReviewPostDone'
+import MyPageReviewDetailPost from '../views/MyPage/MyPageReview/ReviewDetail/MyPageReviewDetailPost'
+import MyPageReviewDetailPostDone from '../views/MyPage/MyPageReview/ReviewDetail/MyPageReviewDetailPostDone'
 import MyPageMyInfo from '../views/MyPage/MyPageMyInfo'
 
 const routes = [
@@ -102,19 +103,24 @@ const routes = [
     component: MyPageReview
   },
   {
-    path: '/mypage/review/done',
-    name: 'MyPageReviewDone',
-    component: MyPageReviewDone
+    path: '/mypage/review/post',
+    name: 'MyPageReviewPost',
+    component: MyPageReviewPost
   },
   {
-    path: '/mypage/review/detail',
-    name: 'MyPageReviewDetail',
-    component: MyPageReviewDetail
+    path: '/mypage/review/post/done',
+    name: 'MyPageReviewPostDone',
+    component: MyPageReviewPostDone
   },
   {
-    path: '/mypage/review/detail/done',
-    name: 'MyPageReviewDetailDone',
-    component: MyPageReviewDetailDone
+    path: '/mypage/review/detail/post',
+    name: 'MyPageReviewDetailPost',
+    component: MyPageReviewDetailPost
+  },
+  {
+    path: '/mypage/review/detail/post/done',
+    name: 'MyPageReviewDetailPostDone',
+    component: MyPageReviewDetailPostDone
   },
   {
     path: '/mypage/myinfo',
