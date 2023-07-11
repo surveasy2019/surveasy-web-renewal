@@ -67,7 +67,7 @@ export default {
   font-family: 'Noto Sans KR', sans-serif;
   margin-top: 30px;
   margin-bottom: 20px;
-  font-size: 15px;
+  font-size: 25px;
   font-weight: 700;
   text-align: left;
   margin-left: 15px;
