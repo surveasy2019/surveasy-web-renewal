@@ -1,28 +1,28 @@
 <template>
-  <div class="mypage-order-container">
+  <div class="mypage-point-container">
     <h1>마이페이지</h1>
     <MyPageNavigatorVue />
-    <MyPageOrderVue />
+    <MyPagePointVue />
   </div>
 </template>
 
 <script>
 import MyPageNavigatorVue from '@/components/MyPage/MyPageNavigator.vue'
-import MyPageOrderVue from '@/components/MyPage/MyPageOrder/MyPageOrder.vue'
+import MyPagePointVue from '@/components/MyPage/MyPagePoint/MyPagePoint.vue'
 
 export default {
-  name: 'MyPageMyOrder',
+  name: 'MyPagePoint',
   components: {
-    MyPageOrderVue,
+    MyPagePointVue,
     MyPageNavigatorVue
   }
 }
 </script>
 
 <style>
-.mypage-order-container {
+.mypage-point-container {
   display: flex;
   flex-direction: column;
-  padding-top: 50px;
+  padding: 50px 0 50px 0;
 }
 </style>

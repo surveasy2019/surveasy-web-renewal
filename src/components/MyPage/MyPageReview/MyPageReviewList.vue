@@ -1,54 +1,49 @@
 <template>
-  <div class="mypage-order-container">
-    <div class="mypage-order-title-container">
-      <div>주문 내역</div>
-      <div>입금 계좌: 카카오뱅크 3333-11-5235460 (송*예)</div>
+  <div class="mypage-review-list-container">
+    <div class="mypage-review-list-title-container">
+      <div>리뷰 작성</div>
     </div>
 
-    <div class="mypage-order-item-container">
-      <div class="mypage-order-item" v-for="item in surveyList" :key="item.id">
-        <div class="mypage-order-item-title">{{item.title}}</div>
+    <div class="mypage-review-list-item-container">
+      <div class="mypage-review-list-item" v-for="item in surveyList" :key="item.id">
+        <div class="mypage-review-list-item-title">{{item.title}}</div>
 
-        <div class="mypage-order-top-container">
-          <span class="mypage-order-item-top">{{item.price}}원</span>  
-        </div>
+        <!-- <div class="mypage-review-list-top-container">
+          <span class="mypage-review-list-item-top">{{item.price}}원</span>  
+        </div> -->
 
-        <div class="mypage-order-line"></div>
+        <div class="mypage-review-list-line"></div>
 
-        <div class="mypage-order-middle-container">
-          <div class="mypage-order-middle-container-col">
-            <div class="mypage-order-middle-item">
-              <span class="mypage-order-middle-item-option">진행 단계</span>
+        <div class="mypage-review-list-middle-container">
+          <div class="mypage-review-list-middle-container-col">
+            <div class="mypage-review-list-middle-item">
+              <span class="mypage-review-list-middle-item-option">진행 단계</span>
               <span v-if="item.progress<2">검수중</span>
               <span v-else-if="item.progress==2">설문 진행중</span>
               <span v-else>패널 응답 완료</span>
             </div>
-            <div class="mypage-order-middle-item">
-              <span class="mypage-order-middle-item-option">답변 수</span>
+            <div class="mypage-review-list-middle-item">
+              <span class="mypage-review-list-middle-item-option">답변 수</span>
               <span v-if="item.progress==2">n / {{item.requiredHeadCount}}명</span>
               <span v-else>{{item.requiredHeadCount}}명</span>
             </div>
           </div>
 
-          <div class="mypage-order-middle-container-col">
-            <div class="mypage-order-middle-item">
-              <span class="mypage-order-middle-item-option">주문 날짜</span>
+          <div class="mypage-review-list-middle-container-col">
+            <div class="mypage-review-list-middle-item">
+              <span class="mypage-review-list-middle-item-option">주문 날짜</span>
               <span>{{item.date}}</span>
             </div>
-            <div class="mypage-order-middle-item">
-              <span class="mypage-order-middle-item-option">설문 기한</span>
+            <div class="mypage-review-list-middle-item">
+              <span class="mypage-review-list-middle-item-option">설문 기한</span>
               <span>{{item.dueDate}}</span>
             </div>
           </div>
         </div>    
 
-        <div class="mypage-order-bottom-container">
-          <div class="mypage-order-bottom-container-item" v-if="item.progress<2">
-            <router-link to="/"><img id="mypage-img-btn" width=22 src="@/assets/mypage/icon_edit.png"></router-link>
-            <a><img id="mypage-img-btn" width=22 src="@/assets/mypage/icon_delete.png"></a>
-          </div>
-          <div class="mypage-order-bottom-container-item" v-else-if="item.progress>2">
-            <router-link class="mypage-order-btn-review" to="/mypage/review">후기 작성하기 〉</router-link>
+        <div class="mypage-review-list-bottom-container">
+          <div class="mypage-review-list-bottom-container-item">
+            <router-link class="mypage-review-list-btn-review" to="/mypage/review">후기 작성하기 〉</router-link>
           </div>
           
         </div>    
@@ -75,11 +70,12 @@ export default {
 </script>
 
 <style>
-.mypage-order-container {
+.mypage-review-list-container {
   width: 100%;
   justify-content: center;
+  padding-top: 50px;
 }
-.mypage-order-title-container {
+.mypage-review-list-title-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -88,7 +84,7 @@ export default {
   font-size: 19px;
   font-weight: bold;
 }
-.mypage-order-item-container {
+.mypage-review-list-item-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -96,19 +92,19 @@ export default {
   padding: 17px 50px 20px 50px;
   justify-content: space-between
 }
-.mypage-order-item {
+.mypage-review-list-item {
   width: 100%;
   margin-bottom: 25px;
   padding: 30px 20px 20px 20px;
   border: solid 1px #0AAC00;
   border-radius: 10px;
 }
-.mypage-order-top-container {
+.mypage-review-list-top-container {
   display: flex;
   justify-content: right;
   margin: 10px 0 10px 0;
 }
-.mypage-order-item-top {
+.mypage-review-list-item-top {
   margin-right: 7px;
   padding: 5px;
   border-radius: 5px;
@@ -116,33 +112,33 @@ export default {
   font-size: 16px;
   font-weight: bolder;
 }
-.mypage-order-item-title {
+.mypage-review-list-item-title {
   font-size: 18px;
   font-weight: bold;
   text-align: left;
 }
-.mypage-order-line {
+.mypage-review-list-line {
   width: 100%;
   height: 1px;
   margin: 5px 0 5px 0;
   background-color: rgb(210, 210, 210);
 }
-.mypage-order-middle-container {
+.mypage-review-list-middle-container {
   display: flex;
   flex-direction: row;
   margin-top: 10px;
 }
-.mypage-order-middle-container-col {
+.mypage-review-list-middle-container-col {
   width: 50%;
 }
-.mypage-order-middle-item {
+.mypage-review-list-middle-item {
   width: 90%;
   display: flex;
   align-items: center;
   margin-top: 8px;
   font-size: 13px;
 }
-.mypage-order-middle-item-option {
+.mypage-review-list-middle-item-option {
   margin-right: 7px;
   padding: 8px;
   background-color: #EFEFEF;
@@ -151,21 +147,21 @@ export default {
   color: #757272;
   font-size: 12px;
 }
-.mypage-order-bottom-container {
+.mypage-review-list-bottom-container {
   display: flex;
   justify-content: right;
   margin: 15px 0 0px 0;
 }
-.mypage-order-bottom-container-item {
+.mypage-review-list-bottom-container-item {
   display: flex;
   justify-content: center;
 }
-.mypage-order-bottom-container-item a {
+.mypage-review-list-bottom-container-item a {
   display: flex;
   justify-content: center;
   cursor: pointer;
 }
-.mypage-order-btn-review {
+.mypage-review-list-btn-review {
   padding: 7px;
   background-color: #0AAB00;
   border: none;
@@ -175,7 +171,7 @@ export default {
   font-size: 14px;
   cursor: pointer;
 }
-.mypage-order-btn-review:hover {
+.mypage-review-list-btn-review:hover {
   font-weight: bold;
 }
 #mypage-img-btn {
