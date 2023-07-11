@@ -34,7 +34,7 @@ export default {
   flex-direction: column;
   width: 100%;
   justify-content: space-around;
-  margin-top: 5px;
+  margin-top: 35px;
 }
 .home-statics-item-container {
   background-color: #78C391;
@@ -51,7 +51,7 @@ export default {
 .home-statics-container .home-title{
   margin-top: 30px;
   margin-bottom: 20px;
-  font-size: 15px;
+  font-size: 25px;
   font-weight: 700;
   text-align: left;
   margin-left: 15px;
