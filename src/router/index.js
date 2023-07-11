@@ -20,6 +20,7 @@ import MyPageReviewPostDone from '../views/MyPage/MyPageReview/Review/MyPageRevi
 import MyPageReviewDetailPost from '../views/MyPage/MyPageReview/ReviewDetail/MyPageReviewDetailPost'
 import MyPageReviewDetailPostDone from '../views/MyPage/MyPageReview/ReviewDetail/MyPageReviewDetailPostDone'
 import MyPageMyInfo from '../views/MyPage/MyPageMyInfo'
+import MyPageWithdraw from '../views/MyPage/MyPageWithdraw/MyPageWithdraw'
 
 const routes = [
   {
@@ -126,6 +127,11 @@ const routes = [
     path: '/mypage/myinfo',
     name: 'MyPageMyInfo',
     component: MyPageMyInfo
+  },
+  {
+    path: '/mypage/withdraw',
+    name: 'MyPageWithdraw',
+    component: MyPageWithdraw
   },
   // {
   //   path: '/about',

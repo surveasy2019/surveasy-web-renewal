@@ -22,7 +22,7 @@
     </div>
 
     <div class="mypage-myinfo-marketing-withdraw-container">
-      <button class="mypage-myinfo-marketing-withdraw-button">회원 탈퇴하기</button>
+      <router-link to="/mypage/withdraw"><button class="mypage-myinfo-marketing-withdraw-button">회원 탈퇴하기</button></router-link>
     </div>
   </div>
 </template>

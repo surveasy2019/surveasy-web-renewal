@@ -5,15 +5,40 @@
       <router-link to="/mypage/review" class="mypage-navigator-button-container-item"><div>리뷰 작성</div></router-link>
       <!-- <router-link to="/mypage/point"><div class="mypage-navigator-button-container-item">적립금</div></router-link> -->
       <router-link to="/mypage/myinfo" class="mypage-navigator-button-container-item"><div>나의 정보</div></router-link>
-      <a><div class="mypage-navigator-button-logout">로그아웃 〉</div></a>
+
+      <div class="mypage-navigator-button-logout">
+        <span @click="showLogoutModal()">로그아웃 〉</span>
+        <MyPageLogoutModalVue :logoutModal="logoutModal" @closeLogout="closeLogoutModal()"></MyPageLogoutModalVue>
+      </div>      
     </div>
     
   </div>
 </template>
 
 <script>
+import MyPageLogoutModalVue from './MyPageLogoutModal.vue'
+
 export default {
-  name: 'MyPageNavigator'
+  name: 'MyPageNavigator',
+  components: {
+    MyPageLogoutModalVue
+  },
+
+  data() {
+    return {
+      logoutModal: false
+    }
+  },
+
+  methods: {
+    showLogoutModal() {
+      this.logoutModal = true
+    },
+
+    closeLogoutModal() {
+      this.logoutModal = false
+    }
+  }
 }
 </script>
 
@@ -30,12 +55,10 @@ export default {
   align-items: center;
   margin: 20px 0 20px 0;
 }
-.mypage-navigator-button-container a {
-  width: 100%;
-  margin: 10px auto;
-}
 .mypage-navigator-button-container-item {
+  width: 100%;
   height: 70px;
+  margin: 10px auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,14 +72,17 @@ export default {
   border-radius: 5px;
 }
 .mypage-navigator-button-logout {
+  width: 100%;
   height: 30px;
-  margin-top: 5px;
+  margin-top: 8px;
   padding-right: 10px;
   color: #919191;
   text-align: right;
-  text-decoration: none;
   font-size: 20px;
-  font-weight: bold;  
+  font-weight: bold;
   cursor: pointer;
+}
+.mypage-navigator-button-logout:hover {
+  color:#0CAE02;
 }
 </style>
