@@ -1,7 +1,8 @@
 <template>
   <div>
     <ServiceDetailVue v-if="this.pageChange == 0"/>
-    <button type="button" @click="sheet" class="order-btn" v-if="this.pageChange == 0">주문하기</button>
+    <!-- api test -->
+    <button type="button" @click="postTest" class="order-btn" v-if="this.pageChange == 0">주문하기</button>
     <div class="bottom-sheet" :class="{ 'open': open }">
       <div class="close-btn"><button @click="sheet">내리기</button></div>
       <div class="sheet-container"> 
@@ -16,6 +17,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import ServiceOptionVue from '@/components/Service/Service/ServiceOption.vue'
 import ServiceDetailVue from '@/components/Service/Service/ServiceDetail.vue'
 import ServiceActivePanelVue from '@/components/Service/Service/ServiceActivePanel.vue'
@@ -44,6 +46,37 @@ export default {
       this.pageChange = 1
       this.open = false
       this.$router.push("/service/inputform")
+    },
+
+    async postTest(){
+      try{
+        const response = await axios.post(
+          'http://15.164.17.148/survey/service',
+          {
+            enTarget: true,
+            account_userName: "sy",
+            dueDate: "2023-08-11",
+            institute: "school",
+            link: "https",
+            notice: "notice",
+            point_add: 100,
+            price: 10000,
+            priceIdentity: "student",
+            requiredHeadCount: 30,
+            spendTime: "1-2",
+            target: "all",
+            targetingAge: 1,
+            targetingAgeOption: 1,
+            targetingAgeOptionList: "[]",
+            targetingGender: 1,
+            targetingGenderOptionList: "[]",
+            title: "test2"
+          }
+        )
+        console.log(response.data)
+      }catch(error){
+        console.log(error)
+      }
     }
   }
 
