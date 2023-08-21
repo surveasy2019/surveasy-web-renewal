@@ -50,7 +50,7 @@ export default {
   methods: {
     async listSurveys() {
       try {
-        const response = await axios.get("survey/list")
+        const response = await axios.get("http://15.164.17.148/survey/admin/survey/list")
         this.surveyList = response.data.surveyListItemVos
       } catch (error) {
         console.log(error)
@@ -58,9 +58,10 @@ export default {
     },
 
     // admin 설문정보 업데이트
+    // error 500 발생함.
     async updateSurveyInfo(sid){
       try {
-        const response = await axios.patch(`survey/admin/${sid}`,
+        const response = await axios.patch(`http://15.164.17.148/survey/admin/${sid}`,
           {
             progress: 3,
             noticeToPanel: "string",

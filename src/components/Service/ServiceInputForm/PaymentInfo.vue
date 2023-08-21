@@ -14,26 +14,27 @@ import axios from 'axios'
 export default {
     methods:{
         async uploadSurvey() {
+            const start = Math.floor(Date.now()/1000)
             try {
                 const response = await axios.post(
-                    'survey/service',
+                    'http://15.164.17.148/survey/service',
                     {
                         english: true,
                         accountName: "sy",
-                        dueDate: Date(),
+                        dueDate: start,
                         institute: "school",
                         link: "https",
                         notice: "notice",
                         pointAdd: 100,
                         price: 10000,
                         priceDiscounted : 0,
-                        priceIdentity: "student",
+                        priceIdentity: 0,
                         headCount: 30,
                         spendTime: 0,
                         tarInput: "all",
                         tarAge: [0],
                         tarGender: 1,
-                        title: "sytest"
+                        title: "sytest2"
                     }
                 )
                 this.$router.push("/service/paydone")

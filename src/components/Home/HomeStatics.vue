@@ -36,7 +36,7 @@ export default {
     methods : {
       async querySurveyCnt(){
         try{
-          const response = await axios.get("survey/home")
+          const response = await axios.get("http://15.164.17.148/survey/admin/survey/home")
           this.surveyCnt = response.data.surveyCount
         }catch(error) {
           console.log(error)
