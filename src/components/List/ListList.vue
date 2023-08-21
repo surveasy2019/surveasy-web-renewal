@@ -1,13 +1,13 @@
 <template>
   <div class="list-list-container">
-    <h2>설문 리스트</h2>
+    <h2 @click="updateSurveyInfo(0)">설문 리스트</h2>
 
     <div class="list-list-item-container">
-      <div class="list-list-item" v-for="item in surveyList" :key="item.id">
+      <div class="list-list-item" v-for="item in surveyList" :key="item.sid">
         <div class="list-list-item-top-container">
-          <span class="list-list-item-top">{{item.id}}</span>
-          <span class="list-list-item-top" v-if="item.progress==2">진행중</span>
-          <span class="list-list-item-top" v-if="item.progress>2">완료</span>
+          <span class="list-list-item-top">{{item.sid}}</span>
+          <span class="list-list-item-top" v-if="item.isDone">완료</span>
+          <span class="list-list-item-top" v-else>{{ item.dday }} 일 남음</span>
         </div>
 
         <div class="list-list-item-title">{{item.title}}</div>
@@ -17,15 +17,15 @@
         <div class="list-list-item-bottom-container">
           <div class="list-list-item-bottom-item">
             <span class="list-list-item-option">설문 대상</span>
-            <span>{{item.target}}</span>
+            <span>{{item.tarInput}}</span>
           </div>
           <div class="list-list-item-bottom-item">
             <span class="list-list-item-option">응답수</span>
-            <span>{{item.requiredHeadCount}}</span>
+            <span>{{item.headCount}}</span>
           </div>
           <div class="list-list-item-bottom-item">
             <span class="list-list-item-option">의뢰자</span>
-            <span>{{item.user}}</span>
+            <span>{{item.username}}</span>
           </div>
         </div>
         
@@ -35,18 +35,48 @@
 </template>
 
 <script>
+import axios from 'axios'
+import router from '@/router'
 export default {
   data() {
     return {
-      surveyList: [ {id: 100, progress: 2, title: '메타버스에 대학생 인식 조사', target: '대학생', requiredHeadCount: 200, user: '김설문'},
-                  {id: 101, progress: 2, title: '소비자의 온라인 금융서비스 경험 조사', target: '20대', requiredHeadCount: 100, user: '강설문'},
-                  {id: 102, progress: 3, title: '대화 내용에 대한 감정평가 설문 대화 내용에 대한 감정평가 설문', target: '누구나', requiredHeadCount: 50, user: '이설문'},
-                  {id: 103, progress: 2, title: '메타버스에 대학생 인식 조사', target: '대학생', requiredHeadCount: 200, user: '김설문'},
-                  {id: 104, progress: 2, title: '소비자의 온라인 금융서비스 경험 조사', target: '20대', requiredHeadCount: 100, user: '강설문'},
-                  {id: 105, progress: 3, title: '대화 내용에 대한 감정평가 설문 설문', target: '누구나', requiredHeadCount: 50, user: '이설문'} 
-                ]
+      surveyList: []
     }
     
+  },
+  mounted() {
+    this.listSurveys()
+  },
+  methods: {
+    async listSurveys() {
+      try {
+        const response = await axios.get("http://15.164.17.148/survey/admin/survey/list")
+        this.surveyList = response.data.surveyListItemVos
+      } catch (error) {
+        console.log(error)
+      }
+    },
+
+    // admin 설문정보 업데이트
+    // error 500 발생함.
+    async updateSurveyInfo(sid){
+      try {
+        const response = await axios.patch(`http://15.164.17.148/survey/admin/${sid}`,
+          {
+            progress: 3,
+            noticeToPanel: "string",
+            reward: 0,
+            link: "string"
+          }
+        )
+        if(response.status == 200){
+          console.log("success")
+          router.go(0)
+        }else console.log(response.status)
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 }
 </script>

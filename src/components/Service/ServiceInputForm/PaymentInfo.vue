@@ -5,16 +5,44 @@
         <div class="pay-info-title">입금 계좌<br>
             카카오뱅크 3333-11-5235460 (송다예)</div>
         <input class="info-input" type="text" placeholder="입금자명">
-        <div><button class="pay-btn" @click="donePayment">결제하기</button></div>
+        <div><button class="pay-btn" @click="uploadSurvey">결제하기</button></div>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     methods:{
-        donePayment(){
-            this.$router.push("/service/paydone")
-        }
+        async uploadSurvey() {
+            const start = Math.floor(Date.now()/1000)
+            try {
+                const response = await axios.post(
+                    'http://15.164.17.148/survey/service',
+                    {
+                        english: true,
+                        accountName: "sy",
+                        dueDate: start,
+                        institute: "school",
+                        link: "https",
+                        notice: "notice",
+                        pointAdd: 100,
+                        price: 10000,
+                        priceDiscounted : 0,
+                        priceIdentity: 0,
+                        headCount: 30,
+                        spendTime: 0,
+                        tarInput: "all",
+                        tarAge: [0],
+                        tarGender: 1,
+                        title: "sytest2"
+                    }
+                )
+                this.$router.push("/service/paydone")
+                console.log(response.data)
+            } catch (error) {
+                console.log(error)
+            }
+        },
     }
 }
 </script>
