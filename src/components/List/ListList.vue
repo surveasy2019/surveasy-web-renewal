@@ -1,6 +1,6 @@
 <template>
   <div class="list-list-container">
-    <h2>설문 리스트</h2>
+    <h2 @click="updateSurveyInfo(0)">설문 리스트</h2>
 
     <div class="list-list-item-container">
       <div class="list-list-item" v-for="item in surveyList" :key="item.sid">
@@ -36,6 +36,7 @@
 
 <script>
 import axios from 'axios'
+import router from '@/router'
 export default {
   data() {
     return {
@@ -49,12 +50,31 @@ export default {
   methods: {
     async listSurveys() {
       try {
-        const response = await axios.get("http://15.164.17.148/survey/list")
+        const response = await axios.get("survey/list")
         this.surveyList = response.data.surveyListItemVos
       } catch (error) {
         console.log(error)
       }
+    },
 
+    // admin 설문정보 업데이트
+    async updateSurveyInfo(sid){
+      try {
+        const response = await axios.patch(`survey/admin/${sid}`,
+          {
+            progress: 3,
+            noticeToPanel: "string",
+            reward: 0,
+            link: "string"
+          }
+        )
+        if(response.status == 200){
+          console.log("success")
+          router.go(0)
+        }else console.log(response.status)
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 }
