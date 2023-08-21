@@ -6,7 +6,7 @@
 
     <div class="home-statics-item-container">
       <div class="statics-item">
-        <span class="title-bold">000개</span>
+        <span class="title-bold">{{ this.surveyCnt }}개</span>
         <span class="title-mid">설문수</span>
       </div>
       <div class="statics-item">
@@ -23,8 +23,27 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
+    data(){
+      return {
+        surveyCnt : "-"
+      }
+    },
+    mounted(){
+      this.querySurveyCnt()
+    },
+    methods : {
+      async querySurveyCnt(){
+        try{
+          const response = await axios.get("http://15.164.17.148/survey/home")
+          this.surveyCnt = response.data.surveyCount
+        }catch(error) {
+          console.log(error)
+        }
 
+      }
+    }
 }
 </script>
 
