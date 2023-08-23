@@ -8,7 +8,7 @@
     </div>
 
     <div class="login-input-button-container">
-      <button id="btn-login">로그인하기</button>
+      <button id="btn-login" @click="logIn">로그인하기</button>
       <router-link to="/join" id="btn-join-text"><button id="btn-join">회원가입하기</button></router-link>
     </div>
 
@@ -19,8 +19,27 @@
 </template>
 
 <script>
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 export default {
+  data() {
+    return {
+      email:'',
+      password:''
+    }
+  },
 
+  methods: {
+    logIn() {
+      console.log("logIn")
+      const auth = getAuth();
+      signInWithEmailAndPassword(auth, this.email, this.password)
+        .then((userCredential) => {
+          const user = userCredential.user
+          console.log(user)
+          console.log(user.email)
+        })
+    }
+  }
 }
 </script>
 
