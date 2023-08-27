@@ -3,7 +3,7 @@
     <div class="option-container">
       <div class="option-left-content" :style="{ flex: 1 }">
         <p class="option-title">요구 응답수</p>
-        <select class="option-select">
+        <select class="option-select" v-model="this.headCount">
           <option :value=0 selected disabled hidden>요구 응답수</option>
           <option :value=1>30명</option>
           <option :value=2>40명</option>
@@ -21,10 +21,10 @@
         </select>
         <p class="option-title">마감기간 지정</p>
         <div class="timedate-option-select">
-          <input type="Date" class="input-date"> 
+          <input type="Date" class="input-date" v-model="this.endDate"> 
         </div>
         <p class="option-title">설문 대상</p>
-        <select class="option-select" id="target-gender" >
+        <select class="option-select" id="target-gender" v-model="this.targetGender">
           <option :value=0 selected disabled hidden>대상 성별</option>
           <option :value=1>성별 무관</option>
           <option :value=2>남성</option>
@@ -34,7 +34,7 @@
 
       <div class="option-right-content" :style="{ flex: 1 }">
         <p class="option-title">소요 시간</p>
-        <select class="option-select">
+        <select class="option-select" v-model="this.spendTime">
           <option :value=0 selected disabled hidden>소요 시간</option>
           <option :value=2>1-3분</option>
           <option :value=1>1분 이내</option>
@@ -45,10 +45,10 @@
         </select>
         <p class="option-title" id="none1">a</p>
         <div class="timedate-option-select">
-          <input type="time" class="input-time"> 
+          <input type="time" class="input-time" v-model="this.endTime"> 
         </div>
         <p class="option-title" id="none2">a</p>
-        <select class="option-select" id="target_age" v-model="targetAge">
+        <select class="option-select" id="target_age" v-model="this.targetAge">
           <option :value=0 selected disabled hidden>대상 연령</option>
           <option :value=1>연령 무관</option>
           <option :value=2>연령 옵션 선택하기</option>
@@ -98,13 +98,13 @@
     </div>
     <div class="option-content-right">
       <div class="option-title">주문 금액</div>
-      <div class="option-title-bold">9,000 원</div>
+      <div class="option-title-bold">{{ this.orderPrice }} 원</div>
     </div>
     <div class="option-border"></div>
 
     <div class="option-content-left">
       <p class="option-title">대학생 / 대학원생 할인 여부</p>
-      <select class="option-select" id="identity">
+      <select class="option-select" id="identity" v-model="this.identity">
         <option :value=0 selected disabled hidden>대학생 / 대학원생 할인 여부</option>
         <option :value=1>중/고등학생입니다.</option>
         <option :value=2>대학생입니다.</option>
@@ -122,6 +122,8 @@
       <div class="option-title-green">9,000 원</div>
     </div>
 
+    <div><button class="goServicePay-btn" @click="nextPage">설문 정보 입력하러 가기</button></div>
+
   </div>
 </template>
 
@@ -129,7 +131,46 @@
 export default {
   data(){
     return{
-      targetAge : 0
+      orderPrice : 9000,
+      targetAge : 0,
+      headCount : 0,
+      spendTime : 0,
+      endDate : '',
+      endTime : '',
+      targetGender : 0,
+      identity : 0,
+
+      priceTable:
+        [[9000, 9000, 12000, 15000, 18000, 21000, 24000, 27000, 30000, 36000, 42000, 48000, 54000, 60000],
+        [9000, 9000, 12000, 15000, 18000, 21000, 24000, 27000, 30000, 36000, 42000, 48000, 54000, 60000],
+        [27000, 27000, 36000, 45000, 54000, 63000, 72000, 81000, 90000, 108000, 126000, 144000, 162000, 180000],
+        [54000, 54000, 72000, 90000, 108000, 126000, 144000, 162000, 180000, 216000, 252000, 288000, 324000, 360000],
+        [90000, 90000, 120000, 150000, 180000, 210000, 240000, 270000, 300000, 360000, 420000, 480000, 540000, 600000],
+        [135000, 135000, 180000, 225000, 270000, 315000, 360000, 405000, 450000, 540000, 630000, 720000, 810000, 900000],
+        [180000, 180000, 240000, 300000, 360000, 420000, 480000, 540000, 600000, 720000, 840000, 960000, 1080000, 1200000]],
+      IdentityOptionArray: [0.6, 0.6, 0.6, 0.8, 1.0],
+      EngOptionArray: [1.0, 1.8, 2.2],
+      AgeOptionArray: [1.0, 2.0, 1.875, 1.75, 1.625, 1.5, 1.375, 1.25, 1.125],
+      genderOptionArray: [1.0, 1.0, 1.4, 1.4],
+      TimeOptionArray: [0, 12000, 10000, 8000, 3000, 0, 0],
+      priceTextTable: [
+        ['', '30명', '40명', '50명', '60명', '70명', '80명', '90명', '100명', '120명', '140명', '160명', '180명', '200명'],
+        ['', '1분 이내', '1~3분', '4~6분', '7~10분', '11~15분', '16~20분'],
+        ['', '18~24시간', '24~36시간', '36~48시간', '48~72시간', '72시간~168시간'],
+        ['선택 안함', '영어 설문 (50명 이하)', '영어 설문 (50명 초과)'],
+        ['', '중/고등학생 할인', '대학생 할인', '대학원생 할인', '할인 대상이 아닙니다.'],
+      ],
+      targetingTable: [
+        ["", "연령 무관", "연령 옵션 선택"],
+        ['', '성별 무관', '남성', '여성'],
+        ['', '전 연령', '20대 (1994~2003년생)', '20세 이상 24세 이하', '25세 이상 29세 이하', '20세 이상 39세 이하', '20세 이상 49세 이하'],
+      ],
+    }
+  },
+  methods : {
+    nextPage() {
+      console.log(this.endDate, this.endTime)
+      //this.$router.push("/service/inputform")
     }
   }
 }
