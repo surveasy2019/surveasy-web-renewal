@@ -92,13 +92,13 @@
     <div class="option-content-left">
       <p class="option-title">영어설문</p>
       <div id="checkbox-item-eng"> 
-        <input class="form-check-input" v-model="addENTarget" @click="EngOptionCal" type="checkbox" name="Eng" id="Eng">
+        <input class="form-check-input" v-model="enTarget" @click="EngOptionCal" type="checkbox" name="Eng" id="Eng">
         <label id="checkbox-text-eng" for="Eng">영어설문</label>
       </div>
     </div>
     <div class="option-content-right">
       <div class="option-title">주문 금액</div>
-      <div class="option-title-bold">{{ this.orderPrice }} 원</div>
+      <div class="option-title-bold">{{ this.calOrderPrice }} 원</div>
     </div>
     <div class="option-border"></div>
 
@@ -139,6 +139,13 @@ export default {
       endTime : '',
       targetGender : 0,
       identity : 0,
+      enTarget : 0,
+
+      targetAgeOption : 0,
+      targetAgeOptionList : [],
+      targetGenderOption : 0,
+
+      price : 0,
 
       priceTable:
         [[9000, 9000, 12000, 15000, 18000, 21000, 24000, 27000, 30000, 36000, 42000, 48000, 54000, 60000],
@@ -165,6 +172,33 @@ export default {
         ['', '성별 무관', '남성', '여성'],
         ['', '전 연령', '20대 (1994~2003년생)', '20세 이상 24세 이하', '25세 이상 29세 이하', '20세 이상 39세 이하', '20세 이상 49세 이하'],
       ],
+    }
+  },
+  computed : {
+    calOrderPrice() {
+      var p = Math.ceil(parseFloat(parseFloat(this.priceTable[this.spendTime][this.headCount])
+        // * parseFloat(this.$store.state.IdentityOptionArray[this.priceIdentity])
+        * parseFloat(this.EngOptionArray[this.enTarget])
+        * parseFloat(this.AgeOptionArray[this.targetAgeOptionList.length])
+        * parseFloat(this.genderOptionArray[this.targetGenderOption])
+        //+ parseFloat(this.$store.state.TimeOptionArray[this.timeOptionCal])
+      ).toFixed(0) / 10) * 10
+
+      //this.orderPrice = p
+      return p
+    },
+
+    calculate() {
+      var p = Math.ceil(parseFloat(parseFloat(this.priceTable[this.spendTime][this.headCount])
+        * parseFloat(this.IdentityOptionArray[this.identity])
+        * parseFloat(this.EngOptionArray[this.enTarget])
+        * parseFloat(this.AgeOptionArray[this.targetAgeOptionList.length])
+        * parseFloat(this.genderOptionArray[this.targetGenderOption])
+        //+ parseFloat(this.TimeOptionArray[this.timeOptionCal])
+      ).toFixed(0) / 10) * 10
+
+      //this.price = p
+      return p
     }
   },
   methods : {
