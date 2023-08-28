@@ -135,8 +135,11 @@ export default {
       targetAge : 0,
       headCount : 0,
       spendTime : 0,
-      endDate : '',
+      endDate : '12:00:00',
       endTime : '',
+      endStamp : this.endDate+' '+this.endTime,
+      nowDate : new Date(),
+
       targetGender : 0,
       identity : 0,
       enTarget : 0,
@@ -175,13 +178,36 @@ export default {
     }
   },
   computed : {
+    timeOptionCal() {
+      var endDateTime = this.endDate + ' ' + this.endTime
+      var tmp = new Date(endDateTime).getTime()
+      var hourGap = parseInt((tmp - this.nowDate.getTime()) / 3600000)
+      var hourOptionIndex = 0
+
+      if (hourGap >= 18 && hourGap < 24) {
+        hourOptionIndex = 1
+      } else if (hourGap >= 24 && hourGap < 36) {
+        hourOptionIndex = 2
+      } else if (hourGap >= 36 && hourGap < 48) {
+        hourOptionIndex = 3
+      } else if (hourGap >= 48 && hourGap < 72) {
+        hourOptionIndex = 4
+      } else if (hourGap >= 72) {
+        hourOptionIndex = 5
+      } else if (hourGap < 18) {
+        hourOptionIndex = 6
+      }
+
+      //console.log('time', hourOptionIndex)
+      return hourOptionIndex
+    },
+
     calOrderPrice() {
       var p = Math.ceil(parseFloat(parseFloat(this.priceTable[this.spendTime][this.headCount])
-        // * parseFloat(this.$store.state.IdentityOptionArray[this.priceIdentity])
         * parseFloat(this.EngOptionArray[this.enTarget])
         * parseFloat(this.AgeOptionArray[this.targetAgeOptionList.length])
         * parseFloat(this.genderOptionArray[this.targetGenderOption])
-        //+ parseFloat(this.$store.state.TimeOptionArray[this.timeOptionCal])
+        + parseFloat(this.TimeOptionArray[this.timeOptionCal])
       ).toFixed(0) / 10) * 10
 
       //this.orderPrice = p
