@@ -4,7 +4,7 @@
         <div class="option-border"></div>
         <div class="pay-info-title">입금 계좌<br>
             카카오뱅크 3333-11-5235460 (송다예)</div>
-        <input class="info-input" type="text" placeholder="입금자명">
+        <input class="info-input" v-model="this.accountName" type="text" placeholder="입금자명" required>
         <div><button class="pay-btn" @click="uploadSurvey">결제하기</button></div>
     </div>
 </template>
@@ -12,6 +12,11 @@
 <script>
 import axios from 'axios'
 export default {
+    data(){
+        return{
+            accountName : ''
+        }
+    },
     methods:{
         async uploadSurvey() {
             const start = Math.floor(Date.now()/1000)

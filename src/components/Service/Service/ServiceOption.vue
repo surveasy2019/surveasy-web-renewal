@@ -229,8 +229,8 @@ export default {
   },
   methods : {
     nextPage() {
-      console.log(this.endDate, this.endTime)
-      //this.$router.push("/service/inputform")
+      //console.log(this.endDate, this.endTime)
+      this.$router.push("/service/inputform")
     }
   }
 }
