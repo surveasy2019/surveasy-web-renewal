@@ -21,7 +21,7 @@
         </select>
         <p class="option-title">마감기간 지정</p>
         <div class="timedate-option-select">
-          <input type="Date" class="input-date" v-model="this.endDate"> 
+          <input type="Date" class="input-date" v-model="this.endDate" :min="this.getDateStr_min" :max="this.getDateStr_max" required> 
         </div>
         <p class="option-title">설문 대상</p>
         <select class="option-select" id="target-gender" v-model="this.targetGender">
@@ -36,16 +36,16 @@
         <p class="option-title">소요 시간</p>
         <select class="option-select" v-model="this.spendTime">
           <option :value=0 selected disabled hidden>소요 시간</option>
-          <option :value=2>1-3분</option>
           <option :value=1>1분 이내</option>
-          <option :value=4>7-10분</option>
+          <option :value=2>1-3분</option>
           <option :value=3>4-6분</option>
-          <option :value=6>16-20분</option>
+          <option :value=4>7-10분</option>
           <option :value=5>11-15분</option>
+          <option :value=6>16-20분</option>
         </select>
         <p class="option-title" id="none1">a</p>
         <div class="timedate-option-select">
-          <input type="time" class="input-time" v-model="this.endTime"> 
+          <input type="time" class="input-time" v-model="this.endTime" required> 
         </div>
         <p class="option-title" id="none2">a</p>
         <select class="option-select" id="target_age" v-model="this.targetAge">
@@ -92,13 +92,13 @@
     <div class="option-content-left">
       <p class="option-title">영어설문</p>
       <div id="checkbox-item-eng"> 
-        <input class="form-check-input" v-model="enTarget" @click="EngOptionCal" type="checkbox" name="Eng" id="Eng">
-        <label id="checkbox-text-eng" for="Eng">영어설문</label>
+        <input class="form-check-input" v-model="enTarget" type="checkbox" name="Eng" id="Eng">
+        <label id="checkbox-text-eng" for="Eng">{{ this.changeEngText }}</label>
       </div>
     </div>
     <div class="option-content-right">
       <div class="option-title">주문 금액</div>
-      <div class="option-title-bold">{{ this.calOrderPrice }} 원</div>
+      <div class="option-title-bold">{{ priceToString(this.calOrderPrice) }} 원</div>
     </div>
     <div class="option-border"></div>
 
@@ -114,12 +114,12 @@
     </div>
     <div class="option-content-right">
       <div class="option-title">할인 금액</div>
-      <div class="option-title-bold">9,000 원</div>
+      <div class="option-title-bold">{{ priceToString(this.calOrderPrice - this.calculate) }}</div>
     </div>
     <div class="option-border"></div>
     <div class="option-content-right">
       <div class="option-title">결제 금액</div>
-      <div class="option-title-green">9,000 원</div>
+      <div class="option-title-green">{{ priceToString(this.calculate) }}</div>
     </div>
 
     <div><button class="goServicePay-btn" @click="nextPage">설문 정보 입력하러 가기</button></div>
@@ -128,9 +128,11 @@
 </template>
 
 <script>
+import store from '@/store'
 export default {
   data(){
     return{
+      engText : "영어 설문이 아닙니다.",
       orderPrice : 9000,
       targetAge : 0,
       headCount : 0,
@@ -144,9 +146,7 @@ export default {
       identity : 0,
       enTarget : 0,
 
-      targetAgeOption : 0,
       targetAgeOptionList : [],
-      targetGenderOption : 0,
 
       price : 0,
 
@@ -163,75 +163,145 @@ export default {
       AgeOptionArray: [1.0, 2.0, 1.875, 1.75, 1.625, 1.5, 1.375, 1.25, 1.125],
       genderOptionArray: [1.0, 1.0, 1.4, 1.4],
       TimeOptionArray: [0, 12000, 10000, 8000, 3000, 0, 0],
-      priceTextTable: [
-        ['', '30명', '40명', '50명', '60명', '70명', '80명', '90명', '100명', '120명', '140명', '160명', '180명', '200명'],
-        ['', '1분 이내', '1~3분', '4~6분', '7~10분', '11~15분', '16~20분'],
-        ['', '18~24시간', '24~36시간', '36~48시간', '48~72시간', '72시간~168시간'],
-        ['선택 안함', '영어 설문 (50명 이하)', '영어 설문 (50명 초과)'],
-        ['', '중/고등학생 할인', '대학생 할인', '대학원생 할인', '할인 대상이 아닙니다.'],
-      ],
-      targetingTable: [
-        ["", "연령 무관", "연령 옵션 선택"],
-        ['', '성별 무관', '남성', '여성'],
-        ['', '전 연령', '20대 (1994~2003년생)', '20세 이상 24세 이하', '25세 이상 29세 이하', '20세 이상 39세 이하', '20세 이상 49세 이하'],
-      ],
     }
   },
   computed : {
+    getDateStr_min() {
+      var today = new Date()
+      var todayPlus9 = today.setHours(today.getHours() + 9)
+      var todayPlus9Date = new Date(todayPlus9)
+      var min = todayPlus9Date.toISOString()
+      var tmp1 = min.split('T')
+      var tmp2 = tmp1[0]
+      var dddddd = tmp2.split('-')
+
+      var year = dddddd[0]
+      var month = dddddd[1]
+      var day = dddddd[2]
+
+      month = month.length == 2 ? month : '0' + month
+      day = day.length == 2 ? day : '0' + day
+      var date = year + '-' + month + '-' + day
+      return date
+    },
+
+    getDateStr_max() {
+      var today = new Date()
+      var maxD = new Date(today.setDate(today.getDate() + 7))
+      var tmp = maxD.setHours(maxD.getHours() + 9)
+      var maxT = new Date(tmp)
+
+      var max = maxT.toISOString()
+      var split = max.split('T')[0]
+      var fullDate = split.split('-')
+
+      var year = fullDate[0]
+      var month = fullDate[1]
+      var day = fullDate[2]
+
+      month = month.length == 2 ? month : '0' + month
+      day = day.length == 2 ? day : '0' + day
+
+      var date = year + '-' + month + '-' + day
+      return date
+    },
+
+    getTimeStr() {
+      var time = new Date()
+      var utc = time.getTime() + (time.getTimezoneOffset() * 60 * 1000)
+      var kr_diff = 9 * 60 * 60 * 1000
+      var krr = new Date(utc + (kr_diff))
+      var now = krr.toString().substring(16, 21)
+      // console.log(now);
+      return now
+    },
+
     timeOptionCal() {
       var endDateTime = this.endDate + ' ' + this.endTime
       var tmp = new Date(endDateTime).getTime()
       var hourGap = parseInt((tmp - this.nowDate.getTime()) / 3600000)
       var hourOptionIndex = 0
 
-      if (hourGap >= 18 && hourGap < 24) {
-        hourOptionIndex = 1
-      } else if (hourGap >= 24 && hourGap < 36) {
-        hourOptionIndex = 2
-      } else if (hourGap >= 36 && hourGap < 48) {
-        hourOptionIndex = 3
-      } else if (hourGap >= 48 && hourGap < 72) {
-        hourOptionIndex = 4
-      } else if (hourGap >= 72) {
-        hourOptionIndex = 5
-      } else if (hourGap < 18) {
-        hourOptionIndex = 6
-      }
+      if (hourGap >= 18 && hourGap < 24) hourOptionIndex = 1
+      else if (hourGap >= 24 && hourGap < 36) hourOptionIndex = 2
+      else if (hourGap >= 36 && hourGap < 48) hourOptionIndex = 3
+      else if (hourGap >= 48 && hourGap < 72) hourOptionIndex = 4
+      else if (hourGap >= 72) hourOptionIndex = 5
+      else if (hourGap < 18) hourOptionIndex = 6
 
-      //console.log('time', hourOptionIndex)
       return hourOptionIndex
+    },
+
+    engOptionCal() {
+      let idx = 0
+
+      if (!this.enTarget) idx = 0
+      else if ((this.headCount <= 3) && this.enTarget) idx = 1
+      else if ((this.headCount > 3) && this.enTarget) idx = 2
+      return idx
+    },
+
+    changeEngText(){
+      let idx = this.engOptionCal
+      if(idx == 0) return "영어 설문이 아닙니다."
+      else return "영어 설문입니다."
+      
     },
 
     calOrderPrice() {
       var p = Math.ceil(parseFloat(parseFloat(this.priceTable[this.spendTime][this.headCount])
-        * parseFloat(this.EngOptionArray[this.enTarget])
+        * parseFloat(this.EngOptionArray[this.engOptionCal])
         * parseFloat(this.AgeOptionArray[this.targetAgeOptionList.length])
-        * parseFloat(this.genderOptionArray[this.targetGenderOption])
+        * parseFloat(this.genderOptionArray[this.targetGender])
         + parseFloat(this.TimeOptionArray[this.timeOptionCal])
       ).toFixed(0) / 10) * 10
 
-      //this.orderPrice = p
       return p
     },
 
     calculate() {
       var p = Math.ceil(parseFloat(parseFloat(this.priceTable[this.spendTime][this.headCount])
         * parseFloat(this.IdentityOptionArray[this.identity])
-        * parseFloat(this.EngOptionArray[this.enTarget])
+        * parseFloat(this.EngOptionArray[this.engOptionCal])
         * parseFloat(this.AgeOptionArray[this.targetAgeOptionList.length])
-        * parseFloat(this.genderOptionArray[this.targetGenderOption])
-        //+ parseFloat(this.TimeOptionArray[this.timeOptionCal])
+        * parseFloat(this.genderOptionArray[this.targetGender])
+        + parseFloat(this.TimeOptionArray[this.timeOptionCal])
       ).toFixed(0) / 10) * 10
 
-      //this.price = p
       return p
     }
   },
   methods : {
     nextPage() {
-      //console.log(this.endDate, this.endTime)
-      this.$router.push("/service/inputform")
-    }
+      if (this.id == 0 || this.spendTime == 0 || this.headCount == 0 || this.timeOptionCal == 0 || this.targetAge == 0 || this.targetGender == 0){
+        alert("모든 옵션을 입력해주세요.")
+      } else if(this.timeOptionCal == 6) {
+        alert("마감 기한은 최소 18시간 이상부터 선택 가능합니다.")
+      } else {
+        this.saveOptions()
+        this.$router.push("/service/inputform")
+      }
+      
+    },
+
+    saveOptions(){
+      // 여기 headCount 등이 왜 string 으로 받아와지는지?
+      store.commit('saveSurveyOption', {
+        headCount : parseInt(this.headCount),
+        spendTime: parseInt(this.spendTime),
+        endDate: this.endDate,
+        endTime: this.endTime,
+        targetGender: this.targetGender,
+        targetAge: this.targetAge,
+        targetEng: this.engOptionCal,
+        identity: parseInt(this.identity),
+        price: this.calculate
+      })
+    },
+    priceToString(price) {
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    },
+
   }
 }
 </script>
