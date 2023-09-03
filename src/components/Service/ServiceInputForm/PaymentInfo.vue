@@ -4,45 +4,62 @@
         <div class="option-border"></div>
         <div class="pay-info-title">입금 계좌<br>
             카카오뱅크 3333-11-5235460 (송다예)</div>
-        <input class="info-input" type="text" placeholder="입금자명">
+        <input class="info-input" v-model="this.accountName" type="text" placeholder="입금자명" required>
         <div><button class="pay-btn" @click="uploadSurvey">결제하기</button></div>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
+import store from '@/store'
 export default {
+    data(){
+        return{
+            accountName : ''
+        }
+    },
     methods:{
+        
         async uploadSurvey() {
-            const start = Math.floor(Date.now()/1000)
-            try {
-                const response = await axios.post(
-                    'http://15.164.17.148/survey/service',
-                    {
-                        english: true,
-                        accountName: "sy",
-                        dueDate: start,
-                        institute: "school",
-                        link: "https",
-                        notice: "notice",
-                        pointAdd: 100,
-                        price: 10000,
-                        priceDiscounted : 0,
-                        priceIdentity: 0,
-                        headCount: 30,
-                        spendTime: 0,
-                        tarInput: "all",
-                        tarAge: [0],
-                        tarGender: 1,
-                        title: "sytest2"
-                    }
-                )
-                this.$router.push("/service/paydone")
-                console.log(response.data)
-            } catch (error) {
-                console.log(error)
+            const obj = store.state.surveyOption
+            
+            if(obj.title == '' || obj.institute == '' || obj.link == '' || this.accountName == ''){
+                alert("필수 항목을 모두 입력해주세요.")
+            }
+            else{
+                store.commit('saveAccountName', {
+                    accountName: this.accountName
+                })
+                try {
+                    const response = await axios.post(
+                        'http://15.164.17.148/survey/service',
+                        {
+                            english: obj.english,
+                            accountName: obj.accountName,
+                            dueDate: new Date(store.state.surveyOption.endDate + "T" + store.state.surveyOption.endTime),
+                            institute: obj.institute,
+                            link: obj.link,
+                            notice: obj.notice,
+                            pointAdd: 100,
+                            price: obj.price,
+                            priceDiscounted: obj.priceDiscounted,
+                            priceIdentity: obj.priceIdentity,
+                            headCount: obj.headCount,
+                            spendTime: obj.spendTime,
+                            tarInput: obj.tarInput,
+                            tarAge: obj.tarAge,
+                            tarGender: obj.tarGender,
+                            title: obj.title
+                        }
+                    )
+                    this.$router.push("/service/paydone")
+                    console.log(response.data)
+                } catch (error) {
+                    console.log(error)
+                }
             }
         },
+    
     }
 }
 </script>

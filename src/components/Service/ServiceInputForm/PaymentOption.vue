@@ -5,13 +5,13 @@
         <div class="pay-option-block">
             <div class="pay-option-title">쿠폰 번호</div>
             <div class="pay-option-row">
-                <input class="pay-option-input" type="text" placeholder="보유하신 쿠폰 번호를 입력해주세요.">
-                <div><button class="pay-option-btn">쿠폰 적용하기</button></div>
+                <input class="pay-option-input" v-model="this.coupon" type="text" placeholder="보유하신 쿠폰 번호를 입력해주세요.">
+                <div><button @click="checkCoupon" class="pay-option-btn">쿠폰 적용하기</button></div>
             </div>
             <div class="pay-option-title">적립금</div>
             <div class="pay-option-row">
-                <input class="pay-option-input" type="text" placeholder="사용하려는 적립금 액수를 입력해주세요.">
-                <div><button class="pay-option-btn">적립금 적용하기</button></div>
+                <input class="pay-option-input" v-model="this.payPoint" type="text" placeholder="사용하려는 적립금 액수를 입력해주세요.">
+                <div><button @click="usePayPoint" class="pay-option-btn">적립금 적용하기</button></div>
             </div>
             <div class="pay-option-warn">보유 적립금 000원</div>
             <div class="pay-option-warn">*적립금은 주문 금액의 최대 10%까지 사용 가능합니다.</div>
@@ -24,6 +24,22 @@
 
 <script>
 export default {
+  data(){
+    return{
+      coupon : '',
+      payPoint : 0
+    }
+  },
+
+  methods : {
+    checkCoupon(){
+      console.log(this.coupon, "유효한 쿠폰인지 확인하기")
+    },
+
+    usePayPoint(){
+      console.log(this.payPoint, "적립금 적용하고 보유 적립금 지우기")
+    }
+  }
 
 }
 </script>

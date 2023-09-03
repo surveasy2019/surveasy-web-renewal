@@ -8,7 +8,7 @@
         <div class="item" :style="{ flex: item1Width }"><ServiceActivePanelVue /></div>
         <div class="item" :style="{ flex: item2Width }"><ServiceOptionVue /></div>
       </div>  
-      <div><button class="goServicePay-btn" @click="nextPage">설문 정보 입력하러 가기</button></div>
+      
     </div>
   </div>
 

@@ -5,29 +5,29 @@
     <div class="option-row">
       <div :style="{ flex: 1 }">
         <div class="info-title">요구 응답수</div>
-        <div class="info-content">50명</div>
+        <div class="info-content">{{ this.headCount }}</div>
       </div>
       <div :style="{ flex: 1 }">
         <div class="info-title">소요시간</div>
-        <div class="info-content">1-2분</div>
+        <div class="info-content">{{ this.spendTime }}</div>
       </div>
       <div :style="{ flex: 1 }">
         <div class="info-title">마감기간 지정</div>
-        <div class="info-content">00-00 00:00</div>
+        <div class="info-content">{{ this.endDate }}</div>
       </div>  
     </div>
     <div class="option-row">
       <div :style="{ flex: 1 }">
         <div class="info-title">설문 대상</div>
-        <div class="info-content">없음</div>
+        <div class="info-content">{{ this.target }}</div>
       </div>
       <div :style="{ flex: 1 }">
         <div class="info-title">영어설문 여부</div>
-        <div class="info-content">선택 안함</div>
+        <div class="info-content">{{ this.targetEng }}</div>
       </div>
       <div :style="{ flex: 1 }">
         <div class="info-title">대학(원)생 할인</div>
-        <div class="info-content">대학생</div>
+        <div class="info-content">{{ this.identity }}</div>
       </div>  
     </div>
     
@@ -35,7 +35,49 @@
 </template>
 
 <script>
+import store from '@/store';
 export default {
+  data(){
+    return{
+      headCount : '',
+      spendTime : '',
+      endDate : '',
+      target : '',
+      targetEng : '',
+      identity : ''
+      
+    }
+  },
+
+  mounted(){
+    this.getOptions()
+  },
+
+  methods : {
+    getOptions(){
+      const info = store.state.surveyOption
+      const table = store.state.tables
+      console.log(info.tarAge)
+      this.headCount = table.priceTextTable[0][info.headCount]
+      this.spendTime = table.priceTextTable[1][info.spendTime]
+      this.endDate = info.endDate + " " + info.endTime
+      this.target = table.targetingTable[1][info.tarGender]+", "+ this.getAgeTarget()
+      this.targetEng = table.priceTextTable[3][info.english]
+      this.identity = table.priceTextTable[4][info.priceIdentity]
+    },
+
+    getAgeTarget(){
+      let age = ""
+      const info = store.state.surveyOption
+      const table = store.state.tables
+      for(let i in info.tarAge){
+        age += table.targetingTable[2][info.tarAge[i]] + " "
+      }
+      
+
+      return age
+    }
+  }
 
 }
 </script>
