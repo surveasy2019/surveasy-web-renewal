@@ -57,35 +57,35 @@
     </div>
     <div class="age-option-content" v-if="this.targetAge == 2">
         <div class="age-content">
-          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" value="20-24세"> 
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value=2> 
           <div id="checkbox-text">20-24세</div>
         </div>
         <div class="age-content">
-          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" value="25-29세"> 
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value=3> 
           <div id="checkbox-text">25-29세</div>
         </div>
         <div class="age-content">
-          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" value="30-34세"> 
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value=4> 
           <div id="checkbox-text">30-34세</div>
         </div>
         <div class="age-content">
-          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" value="35-39세"> 
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value=5> 
           <div id="checkbox-text">35-39세</div>
         </div>
         <div class="age-content">
-          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" value="40-44세"> 
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value=6> 
           <div id="checkbox-text">40-44세</div>
         </div>
         <div class="age-content">
-          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" value="45-49세"> 
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value=7> 
           <div id="checkbox-text">45-49세</div>
         </div>
         <div class="age-content">
-          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" value="50대"> 
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value=8> 
           <div id="checkbox-text">50대</div>
         </div>
         <div class="age-content">
-          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" value="60대"> 
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value=9> 
           <div id="checkbox-text">60대</div>
         </div>
     </div>
@@ -285,6 +285,7 @@ export default {
     },
 
     saveOptions(){
+      if(this.targetAge == 1) this.targetAgeOptionList = [1]
       // 여기 headCount 등이 왜 string 으로 받아와지는지?
       store.commit('saveSurveyOption', {
         headCount : parseInt(this.headCount),
@@ -292,10 +293,11 @@ export default {
         endDate: this.endDate,
         endTime: this.endTime,
         targetGender: this.targetGender,
-        targetAge: this.targetAge,
+        targetAge: this.targetAgeOptionList,
         targetEng: this.engOptionCal,
         identity: parseInt(this.identity),
-        price: this.calculate
+        price: this.calculate,
+        priceDiscounted : (this.calOrderPrice - this.calculate)
       })
     },
     priceToString(price) {

@@ -14,34 +14,57 @@ export default createStore({
             targetingTable: [
                 ["", "연령 무관", "연령 옵션 선택"],
                 ['', '성별 무관', '남성', '여성'],
-                ['', '전 연령', '20대 (1994~2003년생)', '20세 이상 24세 이하', '25세 이상 29세 이하', '20세 이상 39세 이하', '20세 이상 49세 이하'],
+                ['', '전 연령', '20-24세', '25-29세', '30-34세', '35-39세', '40-44세', '45-49세', '50대', '60대'],
             ],
+            
         },
         
-        surveyOption1 : {
+        surveyOption : {
             headCount : 0,
             spendTime : 0,
             endDate : '',
             endTime : '',
-            targetGender : 0,
-            targetAge : 0,
-            targetEng : 0,
-            identity : 0,
-            price : 0
+            tarGender : '',
+            tarAge : [],
+            english : 0,
+            priceIdentity : 0,
+            price : 0,
+            priceDiscounted : 0,
+            
+            title : '',
+            tarInput : '',
+            institute : '',
+            link : '',
+            notice : '',
+            accountName : ''
+
         }
     },
-
+    
     mutations : {
         saveSurveyOption(state, payload) {
-            state.surveyOption1.headCount = payload.headCount,
-            state.surveyOption1.spendTime = payload.spendTime,
-            state.surveyOption1.endDate = payload.endDate,
-            state.surveyOption1.endTime = payload.endTime,
-            state.surveyOption1.targetGender = payload.targetGender,
-            state.surveyOption1.targetAge = payload.targetAge,
-            state.surveyOption1.targetEng = payload.targetEng,
-            state.surveyOption1.identity = payload.identity,
-            state.surveyOption1.price = payload.price
+            state.surveyOption.headCount = payload.headCount,
+            state.surveyOption.spendTime = payload.spendTime,
+            state.surveyOption.endDate = payload.endDate,
+            state.surveyOption.endTime = payload.endTime,
+            state.surveyOption.tarGender = payload.targetGender,
+            state.surveyOption.tarAge = payload.targetAge,
+            state.surveyOption.english = payload.targetEng,
+            state.surveyOption.priceIdentity = payload.identity,
+            state.surveyOption.price = payload.price,
+            state.surveyOption.priceDiscounted = payload.priceDiscounted
+        },
+
+        saveSurveyInputInfo(state, payload) {
+            state.surveyOption.title = payload.title,
+            state.surveyOption.tarInput = payload.tarInput,
+            state.surveyOption.institute = payload.institute,
+            state.surveyOption.link = payload.link,
+            state.surveyOption.notice = payload.notice
+        },
+
+        saveAccountName (state, payload){
+            state.surveyOption.accountName = payload.accountName
         }
     }
 })

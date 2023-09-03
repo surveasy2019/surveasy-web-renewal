@@ -4,23 +4,39 @@
     <div class="option-border"></div>
     <div class="pay-block">
       <div class="pay-title" :style="{ flex: 1 }">주문 금액</div>
-      <div class="pay-content" :style="{ flex: 2 }">0000 원</div>
+      <div class="pay-content" :style="{ flex: 2 }">{{ this.orderPrice }} 원</div>
     </div>
     <div class="pay-block">
       <div class="pay-title" :style="{ flex: 1 }">쿠폰/적립금 할인</div>
-      <div class="pay-content" :style="{ flex: 2 }">0000 원</div>
+      <div class="pay-content" :style="{ flex: 2 }">{{ this.discount }} 원</div>
     </div>
     <div class="option-border"></div>
     <div class="pay-block">
       <div class="pay-title" :style="{ flex: 1 }">총 결제금액</div>
-      <div class="pay-content-bold" :style="{ flex: 2 }">0000 원</div>
+      <div class="pay-content-bold" :style="{ flex: 2 }">{{ this.totalPrice }} 원</div>
     </div>
 
   </div>
 </template>
-
 <script>
+import store from '@/store';
 export default {
+  data() {
+    return{
+      orderPrice : store.state.surveyOption.price,
+      discount : 0,
+      totalPrice : store.state.surveyOption.price
+    }
+  },
+
+  mounted(){
+  },
+
+  method : {
+    priceToString(price) {
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    },
+  }
 
 }
 </script>

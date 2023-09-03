@@ -55,14 +55,27 @@ export default {
 
   methods : {
     getOptions(){
-      const info = store.state.surveyOption1
+      const info = store.state.surveyOption
       const table = store.state.tables
+      console.log(info.tarAge)
       this.headCount = table.priceTextTable[0][info.headCount]
       this.spendTime = table.priceTextTable[1][info.spendTime]
       this.endDate = info.endDate + " " + info.endTime
-      this.target = table.targetingTable[1][info.targetGender]+" "+ table.targetingTable[2][info.targetAge]
-      this.targetEng = table.priceTextTable[3][info.targetEng]
-      this.identity = table.priceTextTable[4][info.identity]
+      this.target = table.targetingTable[1][info.tarGender]+", "+ this.getAgeTarget()
+      this.targetEng = table.priceTextTable[3][info.english]
+      this.identity = table.priceTextTable[4][info.priceIdentity]
+    },
+
+    getAgeTarget(){
+      let age = ""
+      const info = store.state.surveyOption
+      const table = store.state.tables
+      for(let i in info.tarAge){
+        age += table.targetingTable[2][info.tarAge[i]] + " "
+      }
+      
+
+      return age
     }
   }
 

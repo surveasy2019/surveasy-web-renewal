@@ -4,21 +4,21 @@
     <div class="option-border"></div>
     <div class="info-block">
       <div class="info-title">설문 제목</div>
-      <input class="info-input" type="text" v-model="this.title" placeholder="예) 쓰레기 분리수거에 대한 대학생 인식 조사 (40자 이내 권장)" required>
+      <input class="info-input" type="text" @change="setSurveyOptions()" v-model="this.title" placeholder="예) 쓰레기 분리수거에 대한 대학생 인식 조사 (40자 이내 권장)" required>
     </div>
     <div class="info-block">
       <div class="info-title">설문 대상 상세 정보 (선택)</div>
-      <input class="info-input" type="text" v-model="this.target" placeholder="예) 재학생, 1인 가구, 특정 서비스 이용 경험이 있는 분">
+      <input class="info-input" type="text" @change="setSurveyOptions()" v-model="this.target" placeholder="예) 재학생, 1인 가구, 특정 서비스 이용 경험이 있는 분">
       <div class="info-warn">*서베이지 패널은 20대 위주로 구성되어 있으며, 특정 상세 설문 대상의 경우,<br>
       해당되는 패널이 적어 설문 응답 수집에 어려움이 있을 수 있다는 점 유의해주시기 바랍니다.</div>
     </div>
     <div class="info-block">
       <div class="info-title">설문 기관</div>
-      <input class="info-input" type="text" v-model="this.institute" placeholder="예) ㅇㅇ학교, ㅁㅁ수업, @@학회, **기업" required>
+      <input class="info-input" type="text" @change="setSurveyOptions()" v-model="this.institute" placeholder="예) ㅇㅇ학교, ㅁㅁ수업, @@학회, **기업" required>
     </div>
     <div class="info-block">
       <div class="info-title">설문 링크</div>
-      <input class="info-input" type="text" v-model="this.link" placeholder="링크 입력 시 단축 URL이 아니며, 'https://'를 포함한 주소를 입력해주세요." required>
+      <input class="info-input" type="text" @change="setSurveyOptions()" v-model="this.link" placeholder="링크 입력 시 단축 URL이 아니며, 'https://'를 포함한 주소를 입력해주세요." required>
       <div class="info-highlight">링크 확인</div>
     </div>
     <div class="info-block">
@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import store from '@/store';
 export default {
   data() {
     return {
@@ -43,8 +44,13 @@ export default {
 
   methods : {
     setSurveyOptions(){
-      // add to store state
-      console.log(this.title, this.target, this.institute, this.link, this.notice)
+      store.commit('saveSurveyInputInfo', {
+        title : this.title,
+        tarInput : this.target,
+        institute : this.institute,
+        link : this.link,
+        notice : this.notice
+      })
     }
   }
 }
