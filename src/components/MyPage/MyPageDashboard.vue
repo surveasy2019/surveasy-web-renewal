@@ -2,22 +2,43 @@
   <div class="mypage-dashboard-container">
     <div class="mypage-dashboard-container-item">
       <p>진행중인 설문</p>
-      <h2>n개</h2>
+      <h2>{{ this.surveyOngoing }}개</h2>
     </div>
     <div class="mypage-dashboard-container-line"></div>
     <div class="mypage-dashboard-container-item">
       <p>완료된 설문</p>
-      <h2>n개</h2>
+      <h2>{{ this.surveyDone }}개</h2>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name: 'MyPageDashboard',
   data() {
     return {
-      grade: 1
+      surveyOngoing : 0,
+      surveyDone : 0
+    }
+  },
+
+  mounted(){
+    this.fetchDashBoard()
+  },
+
+  methods : {
+    async fetchDashBoard(){
+      try {
+        const response = await axios.post("http://15.164.17.148/survey/mypage",
+        {
+          email : "min@dong.com"
+        })
+        this.surveyOngoing = response.data.surveyOngoing
+        this.surveyDone = response.data.surveyDone
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 }
