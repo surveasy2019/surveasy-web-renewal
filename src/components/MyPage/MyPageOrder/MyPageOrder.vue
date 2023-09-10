@@ -6,7 +6,7 @@
     </div>
 
     <div class="mypage-order-item-container">
-      <div class="mypage-order-item" v-for="item in surveyList" :key="item.id">
+      <div class="mypage-order-item" v-for="item in orderList" :key="item.id">
         <div class="mypage-order-item-title">{{item.title}}</div>
 
         <div class="mypage-order-top-container">
@@ -25,15 +25,15 @@
             </div>
             <div class="mypage-order-middle-item">
               <span class="mypage-order-middle-item-option">답변 수</span>
-              <span v-if="item.progress==2">n / {{item.requiredHeadCount}}명</span>
-              <span v-else>{{item.requiredHeadCount}}명</span>
+              <span v-if="item.progress==2">{{ item.nowCount }}명 / {{item.headCount}}명</span>
+              <span v-else>{{item.headCount }}명</span>
             </div>
           </div>
 
           <div class="mypage-order-middle-container-col">
             <div class="mypage-order-middle-item">
               <span class="mypage-order-middle-item-option">주문 날짜</span>
-              <span>{{item.date}}</span>
+              <span>{{item.uploadedAt}}</span>
             </div>
             <div class="mypage-order-middle-item">
               <span class="mypage-order-middle-item-option">설문 기한</span>
@@ -58,18 +58,30 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
-      surveyList: [ {id: 100, progress: 2, price: 20000, title: '메타버스에 대학생 인식 조사', date: '2022-11-10', dueDate: '2022-12-10', requiredHeadCount: 200},
-                  {id: 101, progress: 1, price: 30000, title: '소비자의 온라인 금융서비스 경험 조사', date: '2022-11-10', dueDate: '2022-12-10', requiredHeadCount: 100, user: '강설문'},
-                  {id: 102, progress: 3, price: 12000, title: '대화 내용에 대한 감정평가 설문 대화 내용에 대한 감정평가 설문 대화 내용에 대한 감정평가 설문', date: '2022-11-10', dueDate: '2022-12-10', requiredHeadCount: 50},
-                  {id: 103, progress: 4, price: 7000, title: '메타버스에 대학생 인식 조사', target: '대학생', dueDate: '2022-12-10', requiredHeadCount: 200},
-                  {id: 104, progress: 2, price: 199000, title: '소비자의 온라인 금융서비스 경험 조사', date: '2022-11-10', dueDate: '2022-12-10', requiredHeadCount: 100},
-                  {id: 105, progress: 3, price: 26000, title: '대화 내용에 대한 감정평가 설문 설문', date: '2022-11-10', dueDate: '2022-12-10', requiredHeadCount: 50} 
-                ]
+      orderList: []
     }
-    
+  },
+
+  mounted(){
+    this.listOrders()
+  },
+
+  methods : {
+    async listOrders() {
+      try {
+        const response = await axios.post("http://15.164.17.148/survey/mypage/list",
+        {
+          email : "min@dong.com"
+        })
+        this.orderList = response.data.surveyMyPageOrderList
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 }
 </script>
