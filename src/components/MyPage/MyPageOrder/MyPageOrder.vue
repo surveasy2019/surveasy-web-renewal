@@ -45,7 +45,7 @@
         <div class="mypage-order-bottom-container">
           <div class="mypage-order-bottom-container-item" v-if="item.progress<2">
             <router-link to="/"><img id="mypage-img-btn" width=22 src="@/assets/mypage/icon_edit.png"></router-link>
-            <a><img id="mypage-img-btn" width=22 src="@/assets/mypage/icon_delete.png"></a>
+            <a @click="deleteSurvey(item.id)"><img id="mypage-img-btn" width=22 src="@/assets/mypage/icon_delete.png"></a>
           </div>
           <div class="mypage-order-bottom-container-item" v-else-if="item.progress>2">
             <router-link class="mypage-order-btn-review" to="/mypage/review">후기 작성하기 〉</router-link>
@@ -81,7 +81,19 @@ export default {
       } catch (error) {
         console.log(error)
       }
+    },
+
+    async deleteSurvey(id){
+      try {
+        const response = await axios.delete(`http://15.164.17.148/survey/mypage/delete/${id}`)
+        if(confirm("yes?")){
+          console.log(response)
+        }
+      } catch (error) {
+        console.log(error)
+      }
     }
+    
   }
 }
 </script>
