@@ -44,7 +44,7 @@
 
         <div class="mypage-order-bottom-container">
           <div class="mypage-order-bottom-container-item" v-if="item.progress<2">
-            <a @click="openModal(item.sid)"><img id="mypage-img-btn" width=22 src="@/assets/mypage/icon_edit.png"></a>
+            <a @click="openModal(item)"><img id="mypage-img-btn" width=22 src="@/assets/mypage/icon_edit.png"></a>
             <a @click="deleteSurvey(item.id)"><img id="mypage-img-btn" width=22 src="@/assets/mypage/icon_delete.png"></a>
           </div>
           <div class="mypage-order-bottom-container-item" v-else-if="item.progress>2">
@@ -78,34 +78,20 @@
           <div id="edit-container">
             <div id="detail-title">요구 응답수</div>
               <select class="modal-input" v-model="modalHeadCount" aria-label="Default select example">
-                <!-- <option v-for="item in requiredHeadCount_list" :key="item.key" :value=item[1]>{{ item[0] }}</option> -->
-                <option :value=0 selected disabled hidden>요구 응답수</option>
-                <option :value=1>30명</option>
-                <option :value=2>40명</option>
-                <option :value=3>50명</option>
-                <option :value=4>60명</option>
-                <option :value=5>70명</option>
-                <option :value=6>80명</option>
-                <option :value=7>90명</option>
-                <option :value=8>100명</option>
-                <option :value=9>120명</option>
-                <option :value=10>140명</option>
-                <option :value=11>160명</option>
-                <option :value=12>180명</option>
-                <option :value=13>200명 (최대 응답수)</option>
+                <option v-for="item in modalHeadCountList" :key="item.key" :value=item[1]>{{ item[0] }}</option>
               </select>
           </div>
 
           <div id="edit-container">
             <div id="edit-container-price"> 
-              <span>(기존 금액) + </span>
-              <span id="edit-container-price-diff">(추가 금액)</span>
+              <span>{{ this.modalPrice }}(기존 금액) + </span>
+              <span id="edit-container-price-diff">{{ this.modalNewPrice }}(추가 금액)</span>
               <span> = </span>
-              <span id="edit-container-price-after">원</span>
+              <span id="edit-container-price-after">{{ this.modalPrice + this.modalNewPrice }}원</span>
             </div>
           
           </div>
-          <button id="edit-fin-btn">수정 완료</button>
+          <button id="edit-fin-btn" @click="editSurvey">수정 완료</button>
       </div>    
     </div>
   </div>
@@ -117,12 +103,16 @@ export default {
   data() {
     return {
       orderList: [],
-      editModal: true,
+      editModal: false,
       editTargetId : 0,
 
+      editTarget : null,
       modalTitle : "",
       modalLink : "",
-      modalHeadCount : 0
+      modalHeadCount : 0,
+      modalPrice : 0,
+      modalNewPrice : 0,
+      modalHeadCountList : [],
     }
   },
 
@@ -154,14 +144,36 @@ export default {
       }
     },
 
-    async openModal(id){
-      console.log(id)
-      
-      this.editTargetId = id
+    async openModal(item){
+      this.editTarget = item
+      this.modalTitle = item.title
+      this.modalLink = item.link
+      this.modalHeadCount = item.headCount
+      this.modalPrice = item.price
       this.editModal = true
-      this.modalTitle = "test"
-      this.modalLink = "test"
-      this.modalHeadCount = 1
+      this.modalHeadCountList = [
+        ["", 0], ["30명", 1], ["40명", 2], ["50명", 3], ["60명", 4], ["70명", 5], ["80명", 6],
+        ["90명", 7], ["100명", 8], ["120명", 9], ["140명", 10], ["160명", 11], ["180명", 12], ["200명", 13]
+      ].slice(item.headCount)
+      
+    },
+
+    async editSurvey(){
+      try {
+        await axios.patch(
+          `http://15.164.17.148/survey/mypage/edit/${this.editTarget.sid}`,
+          {
+            title: this.modalTitle,
+            link: this.modalLink,
+            headCount: this.modalHeadCount,
+            price: 0
+          }
+        )
+        this.editModal = false
+        this.$router.go("/mypage/order")
+      } catch (error) {
+        console.log(error)
+      }
     },
 
     closeModal() {

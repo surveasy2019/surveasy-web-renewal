@@ -1,6 +1,6 @@
 <template>
   <div class="list-list-container">
-    <h2 @click="updateSurveyInfo(0)">설문 리스트</h2>
+    <h2 @click="updateSurveyInfo(3)">설문 리스트</h2>
 
     <div class="list-list-item-container">
       <div class="list-list-item" v-for="item in surveyList" :key="item.sid">
@@ -63,7 +63,7 @@ export default {
       try {
         const response = await axios.patch(`http://15.164.17.148/survey/admin/${sid}`,
           {
-            progress: 3,
+            progress: 1,
             noticeToPanel: "string",
             reward: 0,
             link: "string"
