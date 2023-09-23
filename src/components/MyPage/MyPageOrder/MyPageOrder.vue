@@ -44,7 +44,7 @@
 
         <div class="mypage-order-bottom-container">
           <div class="mypage-order-bottom-container-item" v-if="item.progress<2">
-            <router-link to="/"><img id="mypage-img-btn" width=22 src="@/assets/mypage/icon_edit.png"></router-link>
+            <a @click="openModal(item)"><img id="mypage-img-btn" width=22 src="@/assets/mypage/icon_edit.png"></a>
             <a @click="deleteSurvey(item.id)"><img id="mypage-img-btn" width=22 src="@/assets/mypage/icon_delete.png"></a>
           </div>
           <div class="mypage-order-bottom-container-item" v-else-if="item.progress>2">
@@ -54,6 +54,46 @@
         </div>    
       </div>
     </div>
+
+    <!-- 설문 수정 모달창 -->
+    <div v-if="editModal == true" class="edit-modal">
+      <div class="edit-contentsbox">
+        <div id="edit-top">
+          <a class="edit-close" @click="closeModal">X</a>
+          <p class="edit-title">설문 수정하기</p>
+
+        </div>
+      
+        <div id="edit-container">
+          <div id="detail-title">설문 제목</div>
+            <input class="modal-input" type="text" v-model="modalTitle" required>
+          </div>
+
+          <div id="edit-container">
+            <div id="detail-title">설문 링크</div>
+            <input class="modal-input" type="text" v-model="modalLink" required>
+            <div id="container-link-btn"><button id="link-btn"><a :href="link" target="_blank">링크 확인</a></button></div>
+          </div>
+    
+          <div id="edit-container">
+            <div id="detail-title">요구 응답수</div>
+              <select class="modal-input" v-model="modalHeadCount" aria-label="Default select example">
+                <option v-for="item in modalHeadCountList" :key="item.key" :value=item[1]>{{ item[0] }}</option>
+              </select>
+          </div>
+
+          <div id="edit-container">
+            <div id="edit-container-price"> 
+              <span>{{ this.modalPrice }}(기존 금액) + </span>
+              <span id="edit-container-price-diff">{{ this.modalNewPrice }}(추가 금액)</span>
+              <span> = </span>
+              <span id="edit-container-price-after">{{ this.modalPrice + this.modalNewPrice }}원</span>
+            </div>
+          
+          </div>
+          <button id="edit-fin-btn" @click="editSurvey">수정 완료</button>
+      </div>    
+    </div>
   </div>
 </template>
 
@@ -62,7 +102,17 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      orderList: []
+      orderList: [],
+      editModal: false,
+      editTargetId : 0,
+
+      editTarget : null,
+      modalTitle : "",
+      modalLink : "",
+      modalHeadCount : 0,
+      modalPrice : 0,
+      modalNewPrice : 0,
+      modalHeadCountList : [],
     }
   },
 
@@ -92,7 +142,43 @@ export default {
       } catch (error) {
         console.log(error)
       }
-    }
+    },
+
+    async openModal(item){
+      this.editTarget = item
+      this.modalTitle = item.title
+      this.modalLink = item.link
+      this.modalHeadCount = item.headCount
+      this.modalPrice = item.price
+      this.editModal = true
+      this.modalHeadCountList = [
+        ["", 0], ["30명", 1], ["40명", 2], ["50명", 3], ["60명", 4], ["70명", 5], ["80명", 6],
+        ["90명", 7], ["100명", 8], ["120명", 9], ["140명", 10], ["160명", 11], ["180명", 12], ["200명", 13]
+      ].slice(item.headCount)
+      
+    },
+
+    async editSurvey(){
+      try {
+        await axios.patch(
+          `http://15.164.17.148/survey/mypage/edit/${this.editTarget.sid}`,
+          {
+            title: this.modalTitle,
+            link: this.modalLink,
+            headCount: this.modalHeadCount,
+            price: 0
+          }
+        )
+        this.editModal = false
+        this.$router.go("/mypage/order")
+      } catch (error) {
+        console.log(error)
+      }
+    },
+
+    closeModal() {
+      this.editModal = false
+    },
     
   }
 }
@@ -206,6 +292,104 @@ export default {
   background-color: #0AAB00;
   padding: 10px;
   margin-left: 10px;
+  border-radius: 5px;
+}
+.edit-modal {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.202);
+  display: table;
+  transition: opacity .3s ease;
+}
+.edit-contentsbox {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+  font-family: 'Noto Sans KR', sans-serif;
+  width: 600px;
+  height: 560px;
+  margin: 120px auto;
+  padding-top: 15px;
+  padding-bottom: 30px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  box-shadow: 0 2px 3px rgba(56, 56, 56, 0.042);
+  transition: all .3s ease;
+  z-index: 2;
+}
+#edit-container-price {
+  text-align: right;
+}
+#edit-container-price-diff {
+  text-align: center;
+  color: #0AAB00;
+}
+#edit-container-price-after {
+  padding: 3px;
+  font-size: 20px;
+  text-align: center;
+  background: #0AAB00;
+  color: #FFFFFF;
+}
+.edit-title {
+  text-align: center;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 23px;
+  font-weight: bold;
+  margin-bottom: 9px;
+  color: #0CAE02;
+}
+.edit-close {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  cursor: pointer;
+  color:#494949;
+}
+#detail-title {
+  font-size: 16px;
+  color: #000000;
+  text-align: left;
+  margin: 5px;
+}
+#container-link-btn {
+  display: flex;
+  justify-content: right;
+}
+#link-btn {
+  border: 0;
+  font-size: 15px;
+  color: #0CAE02;
+}
+#edit-fin-btn {
+  padding: 7px;
+  margin: 15px 0px 0px 0px;
+  color:#0CAE02;
+  background-color: #FFFFFF;
+  border: 1.5px solid #0CAE02;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+#edit-fin-btn:hover{
+  color: white;
+  background: #0AAB00;
+}
+
+.modal-input {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  width: 98%;
+  height: 40px;
+  padding-left: 7px;
+  color: #a0a0a0;
+  background-color: white;
+  border: solid 1px #dadada;
   border-radius: 5px;
 }
 </style>
