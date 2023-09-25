@@ -7,8 +7,8 @@
     </div>
 
     <div>
-      <router-link to="/login" id="header-text" v-if="!isLoggedIn">로그인 / 회원가입</router-link>
-      <router-link to="/mypage" id="header-text" v-else>마이페이지</router-link>
+      <router-link to="/login" id="header-text" v-if="!this.$store.state.isLoggedIn">로그인 / 회원가입</router-link>
+      <router-link to="/mypage" id="header-text" v-else>안녕하세요, {{this.$store.state.currentUser.name}}님!</router-link>
     </div>
     
   </div>
