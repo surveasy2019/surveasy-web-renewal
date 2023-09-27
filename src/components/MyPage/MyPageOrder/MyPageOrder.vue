@@ -85,9 +85,9 @@
           <div id="edit-container">
             <div id="edit-container-price"> 
               <span>{{ this.modalPrice }}(기존 금액) + </span>
-              <span id="edit-container-price-diff">{{ this.modalNewPrice }}(추가 금액)</span>
+              <span id="edit-container-price-diff">{{ this.updatePrice - this.modalPrice }}(추가 금액)</span>
               <span> = </span>
-              <span id="edit-container-price-after">{{ this.modalPrice + this.modalNewPrice }}원</span>
+              <span id="edit-container-price-after">{{ this.updatePrice }}원</span>
             </div>
           
           </div>
@@ -109,15 +109,24 @@ export default {
       editTarget : null,
       modalTitle : "",
       modalLink : "",
+      modalLastHeadCount : 0,
       modalHeadCount : 0,
+      modalSpendTime : 0,
       modalPrice : 0,
-      modalNewPrice : 0,
       modalHeadCountList : [],
+      modalPriceDiffList : [4000, 6000, 11000, 16000, 21000, 26000] // 1-3분부터 21-25분 각각 10명 추가시 추가금액
     }
   },
 
   mounted(){
     this.listOrders()
+  },
+
+  computed :{
+    updatePrice(){
+      let addPrice = (this.modalHeadCount - this.modalLastHeadCount) * (this.modalPriceDiffList[this.modalSpendTime])
+      return this.modalPrice + addPrice
+    }
   },
 
   methods : {
@@ -135,8 +144,8 @@ export default {
 
     async deleteSurvey(id){
       try {
-        const response = await axios.delete(`http://15.164.17.148/survey/mypage/delete/${id}`)
-        if(confirm("yes?")){
+        if(confirm("정말 삭제하시겠습니까?")){
+          const response = await axios.delete(`http://15.164.17.148/survey/mypage/delete/${id}`)
           console.log(response)
         }
       } catch (error) {
@@ -148,7 +157,9 @@ export default {
       this.editTarget = item
       this.modalTitle = item.title
       this.modalLink = item.link
+      this.modalLastHeadCount = item.headCount
       this.modalHeadCount = item.headCount
+      this.modalSpendTime = item.spendTime
       this.modalPrice = item.price
       this.editModal = true
       this.modalHeadCountList = [
@@ -166,7 +177,7 @@ export default {
             title: this.modalTitle,
             link: this.modalLink,
             headCount: this.modalHeadCount,
-            price: 0
+            price: this.updatePrice
           }
         )
         this.editModal = false
