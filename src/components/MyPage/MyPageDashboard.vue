@@ -30,7 +30,7 @@ export default {
   methods : {
     async fetchDashBoard(){
       try {
-        const response = await axios.post("http://15.164.17.148/survey/mypage",
+        const response = await axios.post("http://3.39.170.7/survey/mypage",
         {
           email : "min@dong.com"
         })

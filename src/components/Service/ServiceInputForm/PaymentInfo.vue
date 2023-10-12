@@ -32,7 +32,7 @@ export default {
                 })
                 try {
                     const response = await axios.post(
-                        'http://15.164.17.148/survey/service',
+                        'http://3.39.170.7/survey/service',
                         {
                             english: obj.english,
                             accountName: obj.accountName,

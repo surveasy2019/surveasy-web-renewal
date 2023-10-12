@@ -132,7 +132,7 @@ export default {
   methods : {
     async listOrders() {
       try {
-        const response = await axios.post("http://15.164.17.148/survey/mypage/list",
+        const response = await axios.post("http://3.39.170.7/survey/mypage/list",
         {
           email : "min@dong.com"
         })
@@ -145,7 +145,7 @@ export default {
     async deleteSurvey(id){
       try {
         if(confirm("정말 삭제하시겠습니까?")){
-          const response = await axios.delete(`http://15.164.17.148/survey/mypage/delete/${id}`)
+          const response = await axios.delete(`http://3.39.170.7/survey/mypage/delete/${id}`)
           console.log(response)
         }
       } catch (error) {
@@ -172,7 +172,7 @@ export default {
     async editSurvey(){
       try {
         await axios.patch(
-          `http://15.164.17.148/survey/mypage/edit/${this.editTarget.sid}`,
+          `http://3.39.170.7/survey/mypage/edit/${this.editTarget.sid}`,
           {
             title: this.modalTitle,
             link: this.modalLink,
