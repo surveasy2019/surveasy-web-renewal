@@ -50,7 +50,7 @@ export default {
   methods: {
     async listSurveys() {
       try {
-        const response = await axios.get("http://15.164.17.148/survey/list")
+        const response = await axios.get("http://3.39.170.7/survey/list")
         this.surveyList = response.data.surveyListItemVos
       } catch (error) {
         console.log(error)
@@ -61,7 +61,7 @@ export default {
     // error 500 발생함.
     async updateSurveyInfo(sid){
       try {
-        const response = await axios.patch(`http://15.164.17.148/survey/admin/${sid}`,
+        const response = await axios.patch(`http://3.39.170.7/survey/admin/${sid}`,
           {
             progress: 1,
             noticeToPanel: "string",
