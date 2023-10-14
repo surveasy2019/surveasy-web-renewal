@@ -1,7 +1,7 @@
 <template>
     <div class="bottom-bar-container">
         <router-link to="/"><div class="bar-item-container">
-            <div><img class="bar-img" src="@/assets/barIcon/home_icon.png" alt="home"></div>
+            <div class="ii"><img class="bar-img" src="@/assets/barIcon/home_icon.png" alt="home"></div>
             <div>홈</div>
         </div></router-link>
         <router-link to="/service"><div class="bar-item-container">
@@ -44,7 +44,7 @@ export default {
 }
 
 .bottom-bar-container a.router-link-exact-active {
-    color: #000000;
+    color: #0AAC00;
 }
 
 .bar-img{
@@ -55,8 +55,9 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    border-right: solid 0.3px gray;
+    border-right: solid 1px gray;
 }
+
 
 .bottom-bar-container {
     display: flex;
@@ -64,8 +65,10 @@ export default {
     padding-bottom: 10px;
     flex-direction: row;
     height: 55px;
+    background-color: white;
     justify-content: space-around;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    background-color: rgb(237, 237, 237);
-}</style>
+}
+
+</style>
