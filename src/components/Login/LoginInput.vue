@@ -38,6 +38,7 @@ export default {
           this.$store.dispatch('setCurrentUser', {
             payload: auth.currentUser.email
           })
+          console.log(this.$store.currentUser)
           this.$router.push('/')
         })
         .catch((error) => {

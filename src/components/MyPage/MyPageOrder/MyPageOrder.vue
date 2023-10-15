@@ -134,7 +134,7 @@ export default {
       try {
         const response = await axios.post("http://3.39.170.7/survey/mypage/list",
         {
-          email : "min@dong.com"
+          email : this.$store.state.currentUser.email
         })
         this.orderList = response.data.surveyMyPageOrderList
       } catch (error) {
