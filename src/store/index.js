@@ -44,9 +44,11 @@ export default createStore({
   mutations: {
     setCurrentUserMutation(state, payload) {
       state.currentUser = payload
+      console.log(state.currentUser)
       state.isLoggedIn = true
     },
     logoutMutation(state) {
+      console.log('logoutMutation')
       state.currentUser = null
       state.isLoggedIn = false
     },
@@ -76,15 +78,18 @@ export default createStore({
 
   actions: {
     async setCurrentUser({state, commit}, payload){
+      console.log('setCurrentUser in Store')
       const db = getFirestore()
       const docRef = doc(db, "userData", payload['payload'].toString())
       const docSnap = await getDoc(docRef)
         .then((data) => {
           commit('setCurrentUserMutation',data.data())
+          console.log(data.data())
         })
     },
 
     logout({commit}){
+      console.log('logoutAction')
       commit('logoutMutation')
     }
   }

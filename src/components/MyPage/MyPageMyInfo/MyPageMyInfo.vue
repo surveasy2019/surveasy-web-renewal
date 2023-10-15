@@ -8,23 +8,23 @@
       <div id="mypage-myinfo-title-green">회원 정보</div>
       <div class="mypage-myinfo-main-row">
         <div class="mypage-myinfo-option">이메일</div>
-        <div class="mypage-myinfo-value">surveasy2019@yonsei.ac.kr</div>
+        <div class="mypage-myinfo-value">{{this.$store.state.currentUser.email}}</div>
       </div>
       <div class="mypage-myinfo-main-row">
         <div class="mypage-myinfo-option">이름</div>
-        <div class="mypage-myinfo-value">서베이지</div>
+        <div class="mypage-myinfo-value">{{this.$store.state.currentUser.name}}</div>
       </div>
       <div class="mypage-myinfo-main-row">
         <div class="mypage-myinfo-option">휴대폰 번호</div>
-        <div class="mypage-myinfo-value">01054118647</div>
+        <div class="mypage-myinfo-value">{{this.$store.state.currentUser.phoneNumber}}</div>
       </div>
       <div class="mypage-myinfo-main-row">
         <div class="mypage-myinfo-option">생년월일</div>
-        <div class="mypage-myinfo-value">20020202</div>
+        <div class="mypage-myinfo-value">{{this.$store.state.currentUser.birth}}</div>
       </div>
       <div class="mypage-myinfo-main-row">
         <div class="mypage-myinfo-option">할인 대상</div>
-        <div class="mypage-myinfo-value">할인 대상이 아닙니다.</div>
+        <div class="mypage-myinfo-value">{{this.$store.state.currentUser.identity}}</div>
       </div>
 
       <div class="mypage-myinfo-main-line-container"><div class="mypage-myinfo-main-line"></div></div>

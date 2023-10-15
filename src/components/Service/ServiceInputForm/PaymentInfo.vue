@@ -49,7 +49,9 @@ export default {
                             tarInput: obj.tarInput,
                             tarAge: obj.tarAge,
                             tarGender: obj.tarGender,
-                            title: obj.title
+                            title: obj.title,
+                            email: this.$store.state.currentUser.email,
+                            username: this.$store.state.currentUser.name
                         }
                     )
                     this.$router.push("/service/paydone")
