@@ -29,12 +29,10 @@ export default {
 
   methods : {
     async fetchDashBoard(){
-      console.log(this.$store.state.currentUser.email)
       try {
         const response = await axios.post("http://3.39.170.7/survey/mypage",
         {
           email : this.$store.state.currentUser.email
-          //email : this.$store.state.currentUser
         })
         this.surveyOngoing = response.data.surveyOngoing
         this.surveyDone = response.data.surveyDone
