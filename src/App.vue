@@ -57,18 +57,19 @@ export default {
   padding-top: 30px;
   position: relative;
   width: 700px;
-  min-height: 100vh; /* 컨테이너를 화면 높이에 맞게 설정 */
+  min-height: 100vh;
   margin: 0 auto;
   border: solid 1px #dadada;
-  padding-bottom: 70px; /* bottom-bar-container 높이만큼 여백 추가 */
-  box-sizing: border-box; /* padding이 너비에 포함되도록 설정 */
+  padding-bottom: 70px; 
+  box-sizing: border-box; 
 }
 .bottom-bar-container {
   position: fixed;
   width: 700px;
-  height: 60px; /* 탭바 높이 조정 가능 */
+  height: 60px;
   bottom: 0;
-  background-color: #ccc; /* 원하는 색상으로 변경 */
+  background-color: white; 
+  border: solid 1px gray;
   z-index: 998;
   left: 50%;
   transform: translateX(-50%);

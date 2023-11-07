@@ -32,7 +32,7 @@ export default {
       try {
         const response = await axios.post("http://3.39.170.7/survey/mypage",
         {
-          email : "min@dong.com"
+          email : this.$store.state.currentUser.email
         })
         this.surveyOngoing = response.data.surveyOngoing
         this.surveyDone = response.data.surveyDone

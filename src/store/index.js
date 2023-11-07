@@ -81,7 +81,7 @@ export default createStore({
       console.log('setCurrentUser in Store')
       const db = getFirestore()
       const docRef = doc(db, "userData", payload['payload'].toString())
-      const docSnap = await getDoc(docRef)
+      await getDoc(docRef)
         .then((data) => {
           commit('setCurrentUserMutation',data.data())
           console.log(data.data())
