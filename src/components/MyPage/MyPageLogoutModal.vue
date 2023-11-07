@@ -7,7 +7,7 @@
 
       <div class="mypage-logout-button-container">
         <button class="mypage-logout-button" id="no" @click="$emit('closeLogout')">취소</button>
-        <button class="mypage-logout-button" id="yes"><router-link to="/">로그아웃</router-link></button>
+        <button class="mypage-logout-button" id="yes" @click="logout()"><router-link to="/">로그아웃</router-link></button>
       </div>
       
     </div>
@@ -22,6 +22,12 @@ export default {
       require: true,
       default: false
     },
+  },
+  methods: {
+    logout() {
+      console.log('closeLogoutModal')
+      this.$store.dispatch('logout')
+    }
   }
 }
 </script>
