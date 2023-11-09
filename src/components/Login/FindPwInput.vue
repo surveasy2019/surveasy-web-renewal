@@ -12,14 +12,36 @@
     </div>
 
     <div class="findpw-input-button-container">
-      <button id="btn-findpw">비밀번호 재설정하기</button>
+      <button id="btn-findpw" @click="resetPW(this.email)">비밀번호 재설정하기</button>
     </div>
   </div>
 </template>
 
 <script>
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 export default {
-
+  data() {
+    return {
+      email : ''
+    }
+  },
+  methods : {
+    resetPW(email) {
+      const auth = getAuth();
+      sendPasswordResetEmail(auth, email)
+        .then(() => {
+          alert('비밀번호 재설정 이메일이 전송되었습니다!')
+          if(confirm) {
+            this.$router.push('/login')
+          }
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          alert(this.$store.state.firebaseAuthErrorMsg[errorCode])
+        })
+    }
+  }
 }
 </script>
 

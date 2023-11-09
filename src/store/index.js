@@ -38,6 +38,11 @@ export default createStore({
       link : '',
       notice : '',
       accountName : ''
+    },
+    firebaseAuthErrorMsg : {
+      "auth/wrong-password" : "비밀번호가 맞지 않습니다.",
+      "auth/user-not-found" : "가입되어 있지 않은 이메일입니다.",
+      "auth/invalid-email" : "유효하지 않은 형식입니다."
     }
   },
 
