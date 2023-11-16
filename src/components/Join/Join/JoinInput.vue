@@ -5,16 +5,16 @@
     <div class="join-input-form-container">
       <div class="join-input-form-item">
         <label>이메일*</label>
-        <input type="email" id="id" placeholder="이메일을 입력해주세요" v-model="dataSet.email">
+        <input type="email" id="id" placeholder="이메일을 입력해주세요" v-model="dataSet.email" @change="validateEmail(dataSet.email)">
       </div>
       <div class="join-input-form-item">
         <label>비밀번호*</label>
-        <input type="password" id="pw" placeholder="비밀번호를 입력해주세요" v-model="dataSet.password">
+        <input type="password" id="pw" placeholder="비밀번호를 입력해주세요" v-model="dataSet.password" @change="validatePassword(dataSet.password, dataSet.passCheck)">
         <span>* 8자리 이상의 비밀번호를 설정해주세요</span>
       </div>
       <div class="join-input-form-item">
         <label>비밀번호 확인*</label>
-        <input type="password" id="pw-check" placeholder="비밀번호를 한번 더 입력해주세요" v-model="dataSet.passCheck">
+        <input type="password" id="pw-check" placeholder="비밀번호를 한번 더 입력해주세요" v-model="dataSet.passCheck" @change="validatePassword(dataSet.password, dataSet.passCheck)">
       </div>
       <div class="join-input-form-item">
         <label>이름*</label>
@@ -22,11 +22,11 @@
       </div>
       <div class="join-input-form-item">
         <label>휴대폰 번호*</label>
-        <input type="tel" id="phone" placeholder="- 없이 입력해주세요" v-model="dataSet.phoneNumber">
+        <input type="tel" id="phone" placeholder="- 없이 입력해주세요" v-model="dataSet.phoneNumber" @change="validatePhoneNumber(dataSet.phoneNumber)">
       </div>
       <div class="join-input-form-item">
         <label>생년월일*</label>
-        <input type="num" id="birth" placeholder="ex. 20220101" v-model="dataSet.birth">
+        <input type="num" id="birth" placeholder="ex. 20220101" v-model="dataSet.birth" @change="validateBirthDate(dataSet.birth)">
       </div>
 
       <div class="join-input-form-item">
@@ -148,6 +148,10 @@ export default {
           check3: false,
         },
         validReg : false,
+        validEmail : false,
+        validPassword : false,
+        validPhoneNumber : false,
+        validBirthDate : false
     }
   },
   computed: {
@@ -169,23 +173,41 @@ export default {
     }
   },
   methods: {
+    validateEmail(email) {
+      const result = /^[A-Za-z0-9_\\.\\-]+@[A-Za-z0-9\\-]+\.[A-Za-z0-9\\-]+/
+      this.validEmail = result.test(email)
+    },
+
+    validatePassword(pw, pwCheck) {
+      var pwLength = (pw.length >= 8)
+      var pwSame = (pw == pwCheck)
+      this.validPassword = pwLength && pwSame
+    },
+
+    validatePhoneNumber(phoneNumber) {
+      this.validPhoneNumber = (phoneNumber.length >= 11 && isNaN(phoneNumber) == false)
+    },
+
+    validateBirthDate(date) {
+      this.validBirthDate = ((date.length == 8) && date < 20230000)
+    },
+
     validateSignUp(dataSet) {
-      console.log("validate")
       var errCode = [];
       if (this.hasNullOption(dataSet)) {
         alert("입력하지 않은 항목이 있습니다.")
       } else {
-        if (dataSet.password !== dataSet.passCheck){
+        if (!this.validPassword){
+        // if (dataSet.password !== dataSet.passCheck){
           errCode.push(2)
         }
-        if ((dataSet.password).length < 8) {
-          errCode.push(3)
-        }
         //휴대폰번호 숫자만있는지 확인 (#Todo)
-        if((dataSet.phoneNumber).length<11 || isNaN(dataSet.phoneNumber)==true || (dataSet.phoneNumber).includes('.')==true){
+        if(!this.validPhoneNumber){
+        // if((dataSet.phoneNumber).length<11 || isNaN(dataSet.phoneNumber)==true || (dataSet.phoneNumber).includes('.')==true){
           errCode.push(4)
         }
-        if((dataSet.birth).length<8 || dataSet.birth>=20220000){
+        if(!this.validBirthDate){
+        // if((dataSet.birth).length<8 || dataSet.birth>=20220000){
           errCode.push(5)
         }
         if(!(dataSet.check1 ==true && dataSet.check2 ==true && dataSet.check3 ==true)){
@@ -193,13 +215,12 @@ export default {
         }
         if (errCode.length == 0 ){
           this.validReg = true
-          console.log("errCode length 0")
           return true
         } else {
           var registerErrorMessage =[
           "",
           "입력하지 않은 항목이 있습니다.",
-          "비밀번호 확인란을 올바르게 입력하세요.",
+          "비밀번호를 확인해주세요.",
           "비밀번호는 8자 이상이여야 합니다.",
           "휴대폰 번호를 올바르게 입력하세요.",
           "생년월일을 올바르게 입력하세요.",
@@ -231,23 +252,15 @@ export default {
 
     signUp(data) {
       const validResult = this.validateSignUp(data);
-      console.log(validResult)
       if (validResult) {
-        console.log(this.validResult)
         const auth = getAuth();
         createUserWithEmailAndPassword(auth, data.email, data.password)
         .then((userCredential) => {
-          console.log("next1")
-          console.log(userCredential.user)
           const user = userCredential.user;
+          this.$router.push('/login')
           this.createFirebaseUserData(data);
-          console.log("createFirebaseUserData")
-          this.$router.push('/')
-          // 라우터 푸시가 안됨.. ㅠ 왜인지 모르겠음..
         })
         .catch((error) => {
-          console.log("err")
-          console.log(error.code)
           const errcode = error.code;
           if(error.code=="auth/email-already-in-use") {
               this.error = "이미 가입된 계정입니다."
@@ -259,25 +272,23 @@ export default {
           }
         })
       } else {
-        console.log(this.validResult)
       }
     },
 
-    createFirebaseUserData(data) {
-      console.log("createFirebaseUserData")
+    async createFirebaseUserData(data) {
       const db = getFirestore()
-      setDoc(doc(db, "userData",data.email.toString()), {
-        name: dataSet.name,
-        email: dataSet.email,
-        phoneNumber: dataSet.phoneNumber,
+      await setDoc(doc(db, "userData",data.email.toString()), {
+        name: data.name,
+        email: data.email,
+        phoneNumber: data.phoneNumber,
         isPanel: false,
-        birth: dataSet.birth,
+        birth: data.birth,
         uploadIndex: [],
         identity: '할인 대상이 아닙니다.',
         identity_request: false,
         identity_responded: false,
-        funnel : dataSet.funnel,
-        funnel_detail : dataSet.funnel_detail,
+        funnel : data.funnel,
+        funnel_detail : data.funnel_detail,
         respondArray: [],
         clientGrade: 0,
         point_total : 0,
@@ -285,6 +296,7 @@ export default {
         marketingSMS: false,
         marketingEmail: false
       });
+      
     }
   }
 }
