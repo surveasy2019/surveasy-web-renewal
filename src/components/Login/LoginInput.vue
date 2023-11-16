@@ -30,7 +30,6 @@ export default {
 
   methods: {
     logIn() {
-      console.log("logIn")
       const auth = getAuth();
       signInWithEmailAndPassword(auth, this.email, this.password)
         .then((userCredential) => {
@@ -42,28 +41,9 @@ export default {
           this.$router.push('/')
         })
         .catch((error) => {
-          // 이 부분 alert 말고 다른 디자인 적용해도 좋을 듯.
           const errorCode = error.code;
           const errorMsg = error.message;
-
-          console.log(errorCode)
-          console.log(errorMsg)
-
-          // if(error.code=="auth/invalid-email") {
-          //   this.error = "유효하지 않은 이메일 형식입니다."
-          // }
-
-          // if(error.code=="auth/user-not-found") {
-
-          //   this.error = "가입되지 않은 이메일 주소입니다." 
-          //   this.notice = "웹사이트 리뉴얼로 인해, 기존 회원분들도 새로운 회원가입이 필요합니다."
-
-          // }
-
-          // if(error.code=="auth/wrong-password") {
-          //   this.error = "잘못된 비밀번호입니다."
-          // }
-
+          alert(this.$store.state.firebaseAuthErrorMsg[errorCode])
         })
     }
   }
