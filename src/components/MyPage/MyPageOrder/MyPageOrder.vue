@@ -85,7 +85,7 @@
           <div id="edit-container">
             <div id="edit-container-price"> 
               <span>{{ this.modalPrice }}(기존 금액) + </span>
-              <span id="edit-container-price-diff">{{ this.updatePrice - this.modalPrice }}(추가 금액)</span>
+              <span id="edit-container-price-diff">{{  }}(추가 금액)</span>
               <span> = </span>
               <span id="edit-container-price-after">{{ this.updatePrice }}원</span>
             </div>
@@ -114,7 +114,6 @@ export default {
       modalSpendTime : 0,
       modalPrice : 0,
       modalHeadCountList : [],
-      modalPriceDiffList : [4000, 6000, 11000, 16000, 21000, 26000] // 1-3분부터 21-25분 각각 10명 추가시 추가금액
     }
   },
 
@@ -123,10 +122,16 @@ export default {
   },
 
   computed :{
-    updatePrice(){
-      let addPrice = (this.modalHeadCount - this.modalLastHeadCount) * (this.modalPriceDiffList[this.modalSpendTime])
-      return this.modalPrice + addPrice
-    }
+    updatePrice() {
+      var p = Math.ceil(parseFloat(this.modalPrice
+        * ((this.$store.state.tables.priceTable[this.modalSpendTime][this.modalHeadCount]) / this.$store.state.tables.priceTable[this.modalSpendTime][this.modalLastHeadCount])).toFixed(0) / 10) * 10
+
+      return p
+    },
+    // updatePrice(){
+    //   let addPrice = (this.modalHeadCount - this.modalLastHeadCount) * (this.modalPriceDiffList[this.modalSpendTime])
+    //   return this.modalPrice + addPrice
+    // }
   },
 
   methods : {
@@ -137,6 +142,7 @@ export default {
           email : this.$store.state.currentUser.email
         })
         this.orderList = response.data.surveyMyPageOrderList
+        console.log(this.orderList)
       } catch (error) {
         console.log(error)
       }
