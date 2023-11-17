@@ -70,17 +70,29 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
       show: false,
       loading : true
     }
+  }, 
+  mounted() {
+    this.listActivePanel()
   },
   methods: {
     open() {
       this.show = !this.show
-    }
+    },
+    async listActivePanel() {
+      try {
+        const response = await axios.get("http://3.39.170.7/activepanel")
+        console.log(response.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }, 
   }
 }
 </script>
