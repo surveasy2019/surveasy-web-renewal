@@ -25,7 +25,10 @@
     <div class="option-border"></div>
     <div class="done-content">설문조사의 진행 상황은 마이 페이지에서 확인하실 수 있습니다.<br>
     문의 사항은 카카오채널 @surveasy로 보내주세요.</div>
-    <div><button class="pay-btn">마이페이지 가기</button></div>
+    <div>
+      <router-link to="/mypage" class="pay-btn">마이페이지 가기</router-link>
+      <!-- <button class="pay-btn">마이페이지 가기</button> -->
+    </div>
   </div>
 </template>
 
