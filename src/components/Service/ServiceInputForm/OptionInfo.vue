@@ -57,7 +57,6 @@ export default {
     getOptions(){
       const info = store.state.surveyOption
       const table = store.state.tables
-      console.log(info.tarAge)
       this.headCount = table.priceTextTable[0][info.headCount]
       this.spendTime = table.priceTextTable[1][info.spendTime]
       this.endDate = info.endDate + " " + info.endTime

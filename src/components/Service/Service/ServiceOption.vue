@@ -255,7 +255,7 @@ export default {
         * parseFloat(this.genderOptionArray[this.targetGender])
         + parseFloat(this.TimeOptionArray[this.timeOptionCal])
       ).toFixed(0) / 10) * 10
-
+      this.orderPrice = p
       return p
     },
 
@@ -268,6 +268,7 @@ export default {
         + parseFloat(this.TimeOptionArray[this.timeOptionCal])
       ).toFixed(0) / 10) * 10
 
+      this.price = p
       return p
     }
   },
@@ -296,8 +297,8 @@ export default {
         targetAge: this.targetAgeOptionList,
         targetEng: this.engOptionCal,
         identity: parseInt(this.identity),
-        price: this.calculate,
-        priceDiscounted : (this.calOrderPrice - this.calculate)
+        price: this.price,
+        priceDiscounted : (this.orderPrice - this.price)
       })
     },
     priceToString(price) {
