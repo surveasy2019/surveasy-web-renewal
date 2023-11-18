@@ -10,7 +10,7 @@
         <div class="mypage-order-item-title">{{item.title}}</div>
 
         <div class="mypage-order-top-container">
-          <span class="mypage-order-item-top">{{item.price}}원</span>  
+          <span class="mypage-order-item-top">{{item.priceDiscounted}}원</span>  
         </div>
 
         <div class="mypage-order-line"></div>
@@ -166,7 +166,7 @@ export default {
       this.modalLastHeadCount = item.headCount
       this.modalHeadCount = item.headCount
       this.modalSpendTime = item.spendTime
-      this.modalPrice = item.price
+      this.modalPrice = item.priceDiscounted
       this.editModal = true
       this.modalHeadCountList = [
         ["", 0], ["30명", 1], ["40명", 2], ["50명", 3], ["60명", 4], ["70명", 5], ["80명", 6],

@@ -31,6 +31,7 @@ export default {
                     accountName: this.accountName
                 })
                 try {
+                    console.log("test", obj.price)
                     const response = await axios.post(
                         'http://3.39.170.7/survey/service',
                         {
