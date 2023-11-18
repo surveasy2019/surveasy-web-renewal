@@ -19,12 +19,14 @@ export default {
         }
     },
     methods:{
-        
         async uploadSurvey() {
             const obj = store.state.surveyOption
             
             if(obj.title == '' || obj.institute == '' || obj.link == '' || this.accountName == ''){
                 alert("필수 항목을 모두 입력해주세요.")
+            }
+            if (!this.$store.state.isLoggedIn) {
+                alert("로그인이 필요합니다.")
             }
             else{
                 store.commit('saveAccountName', {

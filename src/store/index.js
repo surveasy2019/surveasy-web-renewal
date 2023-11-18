@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
 import { doc, getDoc, getFirestore } from 'firebase/firestore'
+import createPersistedState from 'vuex-persistedstate'
 
 // state, getters, mutations, actions, modules
 export default createStore({
@@ -106,5 +107,10 @@ export default createStore({
       console.log('logoutAction')
       commit('logoutMutation')
     }
-  }
+  },
+  plugins: [
+    createPersistedState({
+      paths: ["isLoggedIn", "currentUser"]
+    })
+  ]
 });

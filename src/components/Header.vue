@@ -1,7 +1,7 @@
 <template>
   <div class="header-container">
     <div>
-      <router-link to="/mypage">
+      <router-link to="/">
         <img loading="prelaod" decoding="async" class="img-fluid" width="120" src="@/assets/logo.png" alt="surveasy">
       </router-link>
     </div>
@@ -17,12 +17,7 @@
 <script>
 export default {
   name: 'HeaderContainer',
-
-  data() {
-    return {
-      isLoggedIn: false
-    }
-  }
+  
 }
 </script>
 
