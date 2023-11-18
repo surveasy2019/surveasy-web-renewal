@@ -2,13 +2,13 @@
   <div class="service-active-container">
     
     <p class="p-black-bold">설문대상별 수집 가능한 <span class="p-green-bold">최대 응답 수</span></p>
-      <div class="loading-contianer">
+      <div class="loading-contianer" v-if="this.loading">
         <p class="spinner-loading">
           <i class="fas fa-spinner"></i>
             불러오는 중 
         </p>
       </div>
-      <div class="active-pannel-box-continer" v-if="this.loading">
+      <div class="active-pannel-box-continer" v-if="!this.loading">
       <div class="table-container">
         <table class="active-table">
           <tr class="table-topline">
@@ -19,39 +19,39 @@
           </tr>
           <tr>
             <td class="table-leftline">전연령</td>
-            <td>000명</td>
-            <td>000명</td>
-            <td>000명</td>
+            <td>{{ this.activePanel.totalList[0] }}명</td>
+            <td>{{ this.activePanel.maleList[0] }}명</td>
+            <td>{{ this.activePanel.femaleList[0] }}명</td>
           </tr>
           <tr>
             <td class="table-leftline">20대</td>
-            <td>000명</td>
-            <td>000명</td>
-            <td>000명</td>
+            <td>{{ this.activePanel.totalList[1] }}명</td>
+            <td>{{ this.activePanel.maleList[1] }}명</td>
+            <td>{{ this.activePanel.femaleList[1] }}명</td>
           </tr>
           <tr>
             <td class="table-leftline">20세 이상 24세 이하</td>
-            <td>000명</td>
-            <td>000명</td>
-            <td>000명</td>
+            <td>{{ this.activePanel.totalList[2] }}명</td>
+            <td>{{ this.activePanel.maleList[2] }}명</td>
+            <td>{{ this.activePanel.femaleList[2] }}명</td>
           </tr>
           <tr>
             <td class="table-leftline">25세 이상 29세 이하</td>
-            <td>000명</td>
-            <td>000명</td>
-            <td>000명</td>
+            <td>{{ this.activePanel.totalList[3] }}명</td>
+            <td>{{ this.activePanel.maleList[3] }}명</td>
+            <td>{{ this.activePanel.femaleList[3] }}명</td>
           </tr>
           <tr>
             <td class="table-leftline">20세 이상 39세 이하</td>
-            <td>000명</td>
-            <td>000명</td>
-            <td>000명</td>
+            <td>{{ this.activePanel.totalList[4] }}명</td>
+            <td>{{ this.activePanel.maleList[4] }}명</td>
+            <td>{{ this.activePanel.femaleList[4] }}명</td>
           </tr>
           <tr>
             <td class="table-leftline">20세 이상 49세 이하</td>
-            <td>000명</td>
-            <td>000명</td>
-            <td>000명</td>
+            <td>{{ this.activePanel.totalList[5] }}명</td>
+            <td>{{ this.activePanel.maleList[5] }}명</td>
+            <td>{{ this.activePanel.femaleList[5] }}명</td>
           </tr>
         
         </table>
@@ -75,7 +75,12 @@ export default {
   data() {
     return {
       show: false,
-      loading : true
+      loading : true,
+      activePanel: {
+        totalList : [],
+        maleList : [],
+        femaleList : []
+      }
     }
   }, 
   mounted() {
@@ -88,7 +93,8 @@ export default {
     async listActivePanel() {
       try {
         const response = await axios.get("http://3.39.170.7/activepanel")
-        console.log(response.data)
+        this.loading = false
+        this.activePanel = response.data
       } catch (error) {
         console.log(error)
       }
