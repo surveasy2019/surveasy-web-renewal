@@ -102,7 +102,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      requireHeadCountText: this.$store.state.tables.requireDataTable,
+      requireHeadCountText: this.$store.state.tables.priceTextTable[0],
       orderList: [],
       editModal: false,
       editTargetId : 0,
