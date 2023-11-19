@@ -10,7 +10,7 @@
         <div class="mypage-order-item-title">{{item.title}}</div>
 
         <div class="mypage-order-top-container">
-          <span class="mypage-order-item-top">{{item.priceDiscounted}}원</span>  
+          <span class="mypage-order-item-top">{{item.price}}원</span>  
         </div>
 
         <div class="mypage-order-line"></div>
@@ -25,8 +25,8 @@
             </div>
             <div class="mypage-order-middle-item">
               <span class="mypage-order-middle-item-option">답변 수</span>
-              <span v-if="item.progress==2">{{ item.nowCount }}명 / {{item.headCount}}명</span>
-              <span v-else>{{item.headCount }}명</span>
+              <span v-if="item.progress==2">{{ item.nowCount }}명 / {{ this.requireHeadCountText[item.headCount] }}</span>
+              <span v-else>{{ this.requireHeadCountText[item.headCount] }}</span>
             </div>
           </div>
 
@@ -85,7 +85,7 @@
           <div id="edit-container">
             <div id="edit-container-price"> 
               <span>{{ this.modalPrice }}(기존 금액) + </span>
-              <span id="edit-container-price-diff">{{  }}(추가 금액)</span>
+              <span id="edit-container-price-diff">{{ this.updatePrice - this.modalPrice }}(추가 금액)</span>
               <span> = </span>
               <span id="edit-container-price-after">{{ this.updatePrice }}원</span>
             </div>
@@ -102,6 +102,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      requireHeadCountText: this.$store.state.tables.priceTextTable[0],
       orderList: [],
       editModal: false,
       editTargetId : 0,
@@ -127,11 +128,7 @@ export default {
         * ((this.$store.state.tables.priceTable[this.modalSpendTime][this.modalHeadCount]) / this.$store.state.tables.priceTable[this.modalSpendTime][this.modalLastHeadCount])).toFixed(0) / 10) * 10
 
       return p
-    },
-    // updatePrice(){
-    //   let addPrice = (this.modalHeadCount - this.modalLastHeadCount) * (this.modalPriceDiffList[this.modalSpendTime])
-    //   return this.modalPrice + addPrice
-    // }
+    }
   },
 
   methods : {
@@ -142,7 +139,6 @@ export default {
           email : this.$store.state.currentUser.email
         })
         this.orderList = response.data.surveyMyPageOrderList
-        console.log(this.orderList)
       } catch (error) {
         console.log(error)
       }
@@ -152,7 +148,15 @@ export default {
       try {
         if(confirm("정말 삭제하시겠습니까?")){
           const response = await axios.delete(`http://3.39.170.7/survey/mypage/delete/${id}`)
-          console.log(response)
+          if(response.status == 200) {
+            if(confirm("삭제되었습니다.")){
+              this.$router.go("/mypage/order")
+            }
+          }else {
+            if (confirm("삭제에 실패하였습니다. 다시 시도해주세요.")) {
+              this.$router.go("/mypage/order")
+            }
+          }
         }
       } catch (error) {
         console.log(error)
@@ -166,7 +170,7 @@ export default {
       this.modalLastHeadCount = item.headCount
       this.modalHeadCount = item.headCount
       this.modalSpendTime = item.spendTime
-      this.modalPrice = item.priceDiscounted
+      this.modalPrice = item.price
       this.editModal = true
       this.modalHeadCountList = [
         ["", 0], ["30명", 1], ["40명", 2], ["50명", 3], ["60명", 4], ["70명", 5], ["80명", 6],
@@ -178,7 +182,7 @@ export default {
     async editSurvey(){
       try {
         await axios.patch(
-          `http://3.39.170.7/survey/mypage/edit/${this.editTarget.sid}`,
+          `http://3.39.170.7/survey/mypage/edit/${this.editTarget.id}`,
           {
             title: this.modalTitle,
             link: this.modalLink,
