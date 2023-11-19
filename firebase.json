@@ -16,6 +16,7 @@
     }
   ],
   "hosting": {
+    "target": "newweb",
     "public": "dist",
     "ignore": [
       "firebase.json",

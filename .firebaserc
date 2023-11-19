@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "surveasy-workspace"
+  },
+  "targets": {
+    "surveasy-workspace": {
+      "hosting": {
+        "newweb": [
+          "newSurveasyWeb"
+        ]
+      }
+    }
   }
 }
