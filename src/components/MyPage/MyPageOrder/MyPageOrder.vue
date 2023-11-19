@@ -25,7 +25,7 @@
             </div>
             <div class="mypage-order-middle-item">
               <span class="mypage-order-middle-item-option">답변 수</span>
-              <span v-if="item.progress==2">{{ item.nowCount }}명 / {{ this.requireHeadCountText[item.headCount] }}</span>
+              <span v-if="item.progress==2">{{ item.responseCount }}명 / {{ this.requireHeadCountText[item.headCount] }}</span>
               <span v-else>{{ this.requireHeadCountText[item.headCount] }}</span>
             </div>
           </div>
@@ -102,7 +102,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      requireHeadCountText: this.$store.state.tables.priceTextTable[0],
+      requireHeadCountText: this.$store.state.tables.requireDataTable,
       orderList: [],
       editModal: false,
       editTargetId : 0,

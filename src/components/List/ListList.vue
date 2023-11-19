@@ -21,11 +21,11 @@
           </div>
           <div class="list-list-item-bottom-item">
             <span class="list-list-item-option">응답수</span>
-            <span>{{item.headCount}}</span>
+            <span>{{ this.requireHeadCountText[item.headCount] }}</span>
           </div>
           <div class="list-list-item-bottom-item">
             <span class="list-list-item-option">의뢰자</span>
-            <span>{{item.username}}</span>
+            <span>{{ item.username.substring(0, item.username.length - 1) + "*" }} </span>
           </div>
         </div>
         
@@ -36,11 +36,11 @@
 
 <script>
 import axios from 'axios'
-import router from '@/router'
 export default {
   data() {
     return {
-      surveyList: []
+      surveyList: [],
+      requireHeadCountText: this.$store.state.tables.requireDataTable
     }
     
   },
@@ -55,30 +55,10 @@ export default {
       } catch (error) {
         console.log(error)
       }
-    },
-
-    // admin 설문정보 업데이트
-    // error 500 발생함.
-    async updateSurveyInfo(sid){
-      try {
-        const response = await axios.patch(`http://3.39.170.7/survey/admin/${sid}`,
-          {
-            progress: 1,
-            noticeToPanel: "string",
-            reward: 0,
-            link: "string"
-          }
-        )
-        if(response.status == 200){
-          console.log("success")
-          router.go(0)
-        }else console.log(response.status)
-      } catch (error) {
-        console.log(error)
-      }
     }
   }
 }
+
 </script>
 
 <style>
