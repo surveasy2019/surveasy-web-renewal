@@ -278,6 +278,8 @@ export default {
         alert("모든 옵션을 입력해주세요.")
       } else if(this.timeOptionCal == 6) {
         alert("마감 기한은 최소 18시간 이상부터 선택 가능합니다.")
+      } else if (!this.$store.state.isLoggedIn) {
+        alert("로그인이 필요합니다.")
       } else {
         this.saveOptions()
         this.$router.push("/service/inputform")
