@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       surveyList: [],
-      requireHeadCountText: this.$store.state.tables.requireDataTable
+      requireHeadCountText: this.$store.state.tables.priceTextTable[0]
     }
     
   },

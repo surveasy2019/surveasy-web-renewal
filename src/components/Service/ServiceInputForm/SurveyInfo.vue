@@ -19,7 +19,8 @@
     <div class="info-block">
       <div class="info-title">설문 링크</div>
       <input class="info-input" type="text" @change="setSurveyOptions()" v-model="this.link" placeholder="링크 입력 시 단축 URL이 아니며, 'https://'를 포함한 주소를 입력해주세요." required>
-      <div class="info-highlight">링크 확인</div>
+      <div class="info-highlight"><a :href="link" target="_blank" class="link-check">링크 확인</a></div>
+      <LinkCheckModal :showLinkIframe="showLinkIframe" @closeIframe="showLinkModal" />
     </div>
     <div class="info-block">
       <div class="info-title">설문 참여 시 유의사항 (선택)</div>
@@ -97,5 +98,9 @@ export default {
   font-weight: 600;
   margin-left: 3px;
   margin-top: 5px;
+}
+.link-check{
+  text-decoration: none;
+  color: #0CAE02;
 }
 </style>
