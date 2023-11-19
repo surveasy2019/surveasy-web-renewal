@@ -10,7 +10,7 @@
         <span class="title-mid">설문수</span>
       </div>
       <div class="statics-item">
-        <span class="title-bold">000명</span>
+        <span class="title-bold">{{ this.panelCnt }}명</span>
         <span class="title-mid">패널수</span>
       </div>
       <div class="statics-item">
@@ -27,7 +27,8 @@ import axios from 'axios'
 export default {
     data(){
       return {
-        surveyCnt : "-"
+        surveyCnt : "-",
+        panelCnt : "-"
       }
     },
     mounted(){
@@ -38,6 +39,7 @@ export default {
         try{
           const response = await axios.get("http://3.39.170.7/survey/home")
           this.surveyCnt = response.data.surveyCount
+          this.panelCnt = response.data.panelCount
         }catch(error) {
           console.log(error)
         }
