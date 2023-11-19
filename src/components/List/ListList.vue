@@ -7,10 +7,12 @@
         <div class="list-list-item-top-container">
           <span class="list-list-item-top">{{item.sid}}</span>
           <span class="list-list-item-top" v-if="item.isDone">완료</span>
-          <span class="list-list-item-top" v-else>{{ item.dday }} 일 남음</span>
-        </div>
+          <span class="list-list-item-top" v-else-if="item.dday == 0">{{ item.dtime }}시간 남음</span>
+          <span class="list-list-item-top" v-else>{{ item.dday }}일 남음</span>
 
-        <div class="list-list-item-title">{{item.title}}</div>
+        </div>
+        <div class="list-list-item-title" v-if="item.isDone">{{ item.title }}</div>
+        <div class="list-list-item-title" v-else><a :href=item.link target="_blank" class="list-link">{{ item.title }}</a></div>
 
         <div class="list-list-item-line"></div>
 
@@ -52,6 +54,7 @@ export default {
       try {
         const response = await axios.get("http://3.39.170.7/survey/list")
         this.surveyList = response.data.surveyListItemVos
+        console.log(this.surveyList)
       } catch (error) {
         console.log(error)
       }
@@ -98,6 +101,7 @@ export default {
   font-size: 14px;
   font-weight: bold;
   text-align: left;
+  color: gray;
 }
 .list-list-item-line {
   width: 100%;
@@ -123,5 +127,10 @@ export default {
   text-align: left;
   color: #0AAC00;
   font-size: 12px;
+}
+
+.list-link {
+  text-decoration: none;
+  color: black;
 }
 </style>
