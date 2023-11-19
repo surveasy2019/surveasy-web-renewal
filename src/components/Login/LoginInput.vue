@@ -4,11 +4,11 @@
 
     <div class="login-input-form-container">
       <input type="email" id="id" v-model="email" placeholder="이메일">
-      <input type="password" id="pw" v-model="password" placeholder="비밀번호">
+      <input type="password" id="pw" v-model="password" placeholder="비밀번호" @keyup.enter="logIn()">
     </div>
 
     <div class="login-input-button-container">
-      <button id="btn-login" @click="logIn">로그인하기</button>
+      <button id="btn-login" @click="logIn()">로그인하기</button>
       <router-link to="/join" id="btn-join-text"><button id="btn-join">회원가입하기</button></router-link>
     </div>
 

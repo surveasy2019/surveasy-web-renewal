@@ -9,12 +9,12 @@
     <div class="option-border"></div>
     <div class="done-block">
       <div class="done-bold" :style="{ flex: 1 }">총 결제금액</div>
-      <div class="done-bold" :style="{ flex: 1.5 }">0 원</div>
+      <div class="done-bold" :style="{ flex: 1.5 }">{{this.totalPrice}} 원</div>
     </div>
     <div class="option-border"></div>
     <div class="done-block">
       <div class="done-bold" :style="{ flex: 1 }">입금자</div>
-      <div class="done-bold" :style="{ flex: 1.5 }">ㅇㅇㅇ</div>
+      <div class="done-bold" :style="{ flex: 1.5 }">{{this.$store.state.surveyOption.accountName}}</div>
     </div>
     <div class="option-border"></div>
     <div class="done-block">
@@ -33,8 +33,16 @@
 </template>
 
 <script>
+import store from '@/store'
 export default {
-
+  data() {
+    return{
+      orderPrice : store.state.surveyOption.price,
+      discount : 0,
+      totalPrice : store.state.surveyOption.price,
+      accountName : store.state.surveyOption.accountName
+    }
+  },
 }
 </script>
 
