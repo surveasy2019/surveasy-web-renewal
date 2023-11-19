@@ -2,8 +2,8 @@
     <div class="navbar-container">
         <nav>
             <router-link to="/">서베이지 홈</router-link>
-            <router-link to="/home/brandstory">About 서베이지</router-link>
-            <router-link to="/home/contact">문의하기</router-link>
+            <a href="https://surveasy.oopy.io/" target="_blank">About 서베이지</a>
+            <a href="https://surveasy.oopy.io/faq" target="_blank">문의하기</a>
         </nav>
     </div>
 </template>
@@ -28,6 +28,10 @@ nav a {
     color: #a4a4a4;
     text-decoration: none;
     margin: 10px;
+}
+
+nav a:hover {
+    color: #000000;
 }
 
 nav a.router-link-exact-active {
