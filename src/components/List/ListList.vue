@@ -23,7 +23,8 @@
           </div>
           <div class="list-list-item-bottom-item">
             <span class="list-list-item-option">응답수</span>
-            <span>{{ this.requireHeadCountText[item.headCount] }}</span>
+            <span v-if="item.isDone">{{ this.requireHeadCountText[item.headCount] }}</span>
+            <span v-else><span>{{ item.responseCount }}명 / </span><span>{{ this.requireHeadCountText[item.headCount] }}</span></span>
           </div>
           <div class="list-list-item-bottom-item">
             <span class="list-list-item-option">의뢰자</span>
@@ -48,7 +49,7 @@ export default {
   },
   mounted() {
     this.listSurveys()
-  },
+  },  
   methods: {
     async listSurveys() {
       try {
