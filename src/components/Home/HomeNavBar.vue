@@ -1,7 +1,6 @@
 <template>
     <div class="navbar-container">
         <nav>
-            <router-link to="/">서베이지 홈</router-link>
             <a href="https://surveasy.oopy.io/" target="_blank">About 서베이지</a>
             <a href="https://surveasy.oopy.io/faq" target="_blank">문의하기</a>
         </nav>
@@ -20,7 +19,7 @@ export default {
 nav {
     padding-top: 30px;
     padding-bottom: 30px;
-    padding-left: 10px;
+    padding-left: 20px;
 }
 
 nav a {
