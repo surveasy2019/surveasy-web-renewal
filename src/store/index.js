@@ -29,22 +29,48 @@ export default createStore({
         [135000, 135000, 180000, 225000, 270000, 315000, 360000, 405000, 450000, 540000, 630000, 720000, 810000, 900000],
         [180000, 180000, 240000, 300000, 360000, 420000, 480000, 540000, 600000, 720000, 840000, 960000, 1080000, 1200000] ],
       requireDataTable: ['30명', '40명', '50명', '60명', '70명', '80명', '90명', '100명', '120명', '140명', '160명', '180명', '200명'],
-
     },
+    maps: {
+      surveyStatusMap: {
+        "CREATED" : 0, "WAITING" : 1, "IN_PROGRESS" : 2, "DONE" : 3
+      },
+      headCountMap: {
+        "HEAD" : 0, "HEAD_30" : 1, "HEAD_40" : 2, "HEAD_50" : 3, "HEAD_60" : 4, "HEAD_70" : 5, "HEAD_80" : 6, 
+        "HEAD_90" : 7, "HEAD_100" : 8, "HEAD_120" : 9, "HEAD_140" : 10, "HEAD_160" : 11, "HEAD_180" : 12, "HEAD_200" : 13
+      },
+      spendTimeMap: {
+        "TIME" : 0, "TIME_0" : 1, "TIME_1_3" : 2, "TIME_4_6" : 3, "TIME_7_10" : 4, "TIME_11_15" : 5, "TIME_16_20" : 6
+      },
+      languageMap: {
+        "KOR" : 1, "ENG": 2
+      },
+      identityMap: {
+        "IDENTITY" : 0, "MID_HIGH" : 1, "UNDERGRADUATE" : 2, "GRADUATE" : 3, "NONE" : 4
+      },
+      targetAgeMap: {
+        "AGE": -1, "All" : 0, "AGE_20_24" : 1, "AGE_25_29" : 2, "AGE_30_34" : 3, "AGE_35_39" : 4, 
+        "AGE_40_44" : 5, "AGE_45_49" : 6, "AGE_50_59" : 7, "AGE_60_69" : 8
+      },
+      targetGenderMap: {
+        "GENDER": 0, "ALL" : 1, "MALE" : 2, "FEMALE" : 3
+      }
+    },
+
     surveyOption : {
-      headCount : 0,
-      spendTime : 0,
+      headCount : "",
+      spendTime : "",
       endDate : '',
       endTime : '',
-      tarGender : '',
-      tarAge : [],
-      english : 0,
-      priceIdentity : 0,
+      targetGender : '',
+      targetAge : [],
+      targetEng : 0,
+      language: "",
+      identity : "",
       price : 0,
       priceDiscounted : 0,
       
       title : '',
-      tarInput : '',
+      targetInput : '',
       institute : '',
       link : '',
       notice : '',
@@ -73,16 +99,17 @@ export default createStore({
       state.surveyOption.spendTime = payload.spendTime,
       state.surveyOption.endDate = payload.endDate,
       state.surveyOption.endTime = payload.endTime,
-      state.surveyOption.tarGender = payload.targetGender,
-      state.surveyOption.tarAge = payload.targetAge,
-      state.surveyOption.english = payload.targetEng,
-      state.surveyOption.priceIdentity = payload.identity,
+      state.surveyOption.targetGender = payload.targetGender,
+      state.surveyOption.targetAge = payload.targetAge,
+      state.surveyOption.targetEng = payload.targetEng,
+      state.surveyOption.language = (payload.targetEng == 1) ? "KOR" : "ENG"
+      state.surveyOption.identity = payload.identity,
       state.surveyOption.price = payload.price,
       state.surveyOption.priceDiscounted = payload.priceDiscounted
     },
     saveSurveyInputInfo(state, payload) {
       state.surveyOption.title = payload.title,
-      state.surveyOption.tarInput = payload.tarInput,
+      state.surveyOption.targetInput = payload.targetInput,
       state.surveyOption.institute = payload.institute,
       state.surveyOption.link = payload.link,
       state.surveyOption.notice = payload.notice

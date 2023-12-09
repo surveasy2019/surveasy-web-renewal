@@ -57,20 +57,20 @@ export default {
     getOptions(){
       const info = store.state.surveyOption
       const table = store.state.tables
-      this.headCount = table.priceTextTable[0][info.headCount]
-      this.spendTime = table.priceTextTable[1][info.spendTime]
+      this.headCount = table.priceTextTable[0][store.state.maps.headCountMap[info.headCount]]
+      this.spendTime = table.priceTextTable[1][store.state.maps.spendTimeMap[info.spendTime]]
       this.endDate = info.endDate + " " + info.endTime
-      this.target = table.targetingTable[1][info.tarGender]+", "+ this.getAgeTarget()
-      this.targetEng = table.priceTextTable[3][info.english]
-      this.identity = table.priceTextTable[4][info.priceIdentity]
+      this.target = table.targetingTable[1][store.state.maps.targetGenderMap[info.targetGender]]+", "+ this.getAgeTarget()
+      this.targetEng = table.priceTextTable[3][info.targetEng]
+      this.identity = table.priceTextTable[4][store.state.maps.identityMap[info.identity]]
     },
 
     getAgeTarget(){
       let age = ""
       const info = store.state.surveyOption
       const table = store.state.tables
-      for(let i in info.tarAge){
-        age += table.targetingTable[2][info.tarAge[i]] + " "
+      for(let i in info.targetAge){
+        age += table.targetingTable[2][store.state.maps.targetAgeMap[info.targetAge[i]]] + " "
       }
       
 

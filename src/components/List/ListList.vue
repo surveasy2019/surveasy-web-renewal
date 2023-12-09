@@ -53,7 +53,7 @@ export default {
   methods: {
     async listSurveys() {
       try {
-        const response = await axios.get("http://3.39.170.7/survey/list")
+        const response = await axios.get("https://gosurveasy.co.kr/survey/list")
         this.surveyList = response.data.surveyListItemVos
         console.log(this.surveyList)
       } catch (error) {

@@ -19,14 +19,14 @@
           <div class="mypage-order-middle-container-col">
             <div class="mypage-order-middle-item">
               <span class="mypage-order-middle-item-option">진행 단계</span>
-              <span v-if="item.progress<2">검수중</span>
-              <span v-else-if="item.progress==2">설문 진행중</span>
+              <span v-if="item.status=='CREATED' || item.status=='WAITING'">검수중</span>
+              <span v-else-if="item.status=='IN_PROGRESS'">설문 진행중</span>
               <span v-else>패널 응답 완료</span>
             </div>
             <div class="mypage-order-middle-item">
               <span class="mypage-order-middle-item-option">답변 수</span>
-              <span v-if="item.progress==2">{{ item.responseCount }}명 / {{ this.requireHeadCountText[item.headCount] }}</span>
-              <span v-else>{{ this.requireHeadCountText[item.headCount] }}</span>
+              <span v-if="item.status=='IN_PROGRESS'">{{ item.responseCount }}명 / {{ this.headCountText[this.headCountIdxMap[item.headCount]] }}</span>
+              <span v-else>{{ this.headCountText[this.headCountIdxMap[item.headCount]] }}</span>
             </div>
           </div>
 
@@ -43,11 +43,11 @@
         </div>    
 
         <div class="mypage-order-bottom-container">
-          <div class="mypage-order-bottom-container-item" v-if="item.progress<2">
+          <div class="mypage-order-bottom-container-item" v-if="item.status=='CREATED' || item.status=='WAITING'">
             <a @click="openModal(item)"><img id="mypage-img-btn" width=22 src="@/assets/mypage/icon_edit.png"></a>
             <a @click="deleteSurvey(item.id)"><img id="mypage-img-btn" width=22 src="@/assets/mypage/icon_delete.png"></a>
           </div>
-          <div class="mypage-order-bottom-container-item" v-else-if="item.progress>2">
+          <div class="mypage-order-bottom-container-item" v-else-if="item.status=='DONE'">
             <router-link class="mypage-order-btn-review" to="/mypage/review">후기 작성하기 〉</router-link>
           </div>
           
@@ -102,7 +102,9 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      requireHeadCountText: this.$store.state.tables.priceTextTable[0],
+      headCountText: this.$store.state.tables.priceTextTable[0],
+      headCountIdxMap: this.$store.state.maps.headCountMap,
+      spendTimeIdxMap: this.$store.state.maps.spendTimeMap,
       orderList: [],
       editModal: false,
       editTargetId : 0,
@@ -110,9 +112,9 @@ export default {
       editTarget : null,
       modalTitle : "",
       modalLink : "",
-      modalLastHeadCount : 0,
-      modalHeadCount : 0,
-      modalSpendTime : 0,
+      modalLastHeadCount : "",
+      modalHeadCount : "",
+      modalSpendTime : "",
       modalPrice : 0,
       modalHeadCountList : [],
     }
@@ -125,7 +127,7 @@ export default {
   computed :{
     updatePrice() {
       var p = Math.ceil(parseFloat(this.modalPrice
-        * ((this.$store.state.tables.priceTable[this.modalSpendTime][this.modalHeadCount]) / this.$store.state.tables.priceTable[this.modalSpendTime][this.modalLastHeadCount])).toFixed(0) / 10) * 10
+        * ((this.$store.state.tables.priceTable[this.spendTimeIdxMap[this.modalSpendTime]][this.headCountIdxMap[this.modalHeadCount]]) / this.$store.state.tables.priceTable[this.spendTimeIdxMap[this.modalSpendTime]][this.headCountIdxMap[this.modalLastHeadCount]])).toFixed(0) / 10) * 10
 
       return p
     }
@@ -134,7 +136,7 @@ export default {
   methods : {
     async listOrders() {
       try {
-        const response = await axios.post("http://3.39.170.7/survey/mypage/list",
+        const response = await axios.post("https://gosurveasy.co.kr/survey/mypage/list",
         {
           email : this.$store.state.currentUser.email
         })
@@ -147,7 +149,7 @@ export default {
     async deleteSurvey(id){
       try {
         if(confirm("정말 삭제하시겠습니까?")){
-          const response = await axios.delete(`http://3.39.170.7/survey/mypage/delete/${id}`)
+          const response = await axios.delete(`https://gosurveasy.co.kr/survey/${id}`)
           if(response.status == 200) {
             if(confirm("삭제되었습니다.")){
               this.$router.go("/mypage/order")
@@ -173,8 +175,8 @@ export default {
       this.modalPrice = item.price
       this.editModal = true
       this.modalHeadCountList = [
-        ["", 0], ["30명", 1], ["40명", 2], ["50명", 3], ["60명", 4], ["70명", 5], ["80명", 6],
-        ["90명", 7], ["100명", 8], ["120명", 9], ["140명", 10], ["160명", 11], ["180명", 12], ["200명", 13]
+        ["요구 응답수를 선택하세요", "HEAD"], ["30명", "HEAD_30"], ["40명", "HEAD_40"], ["50명", "HEAD_50"], ["60명", "HEAD_60"], ["70명", "HEAD_70"], ["80명", "HEAD_80"],
+        ["90명", "HEAD_90"], ["100명", "HEAD_100"], ["120명", "HEAD_120"], ["140명", "HEAD_140"], ["160명", "HEAD_160"], ["180명", "HEAD_180"], ["200명", "HEAD_200"]
       ].slice(item.headCount)
       
     },
@@ -182,7 +184,7 @@ export default {
     async editSurvey(){
       try {
         await axios.patch(
-          `http://3.39.170.7/survey/mypage/edit/${this.editTarget.id}`,
+          `https://gosurveasy.co.kr/survey/${this.editTarget.id}`,
           {
             title: this.modalTitle,
             link: this.modalLink,
