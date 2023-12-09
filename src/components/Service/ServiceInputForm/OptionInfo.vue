@@ -5,7 +5,7 @@
     <div class="option-row">
       <div :style="{ flex: 1 }">
         <div class="info-title">요구 응답수</div>
-        <div class="info-content">{{ this.headcount }}</div>
+        <div class="info-content">{{ this.headCount }}</div>
       </div>
       <div :style="{ flex: 1 }">
         <div class="info-title">소요시간</div>
@@ -39,7 +39,7 @@ import store from '@/store';
 export default {
   data(){
     return{
-      headcount : '',
+      headCount : '',
       spendTime : '',
       endDate : '',
       target : '',
@@ -57,7 +57,7 @@ export default {
     getOptions(){
       const info = store.state.surveyOption
       const table = store.state.tables
-      this.headcount = table.priceTextTable[0][store.state.maps.headcountMap[info.headcount]]
+      this.headCount = table.priceTextTable[0][store.state.maps.headCountMap[info.headCount]]
       this.spendTime = table.priceTextTable[1][store.state.maps.spendTimeMap[info.spendTime]]
       this.endDate = info.endDate + " " + info.endTime
       this.target = table.targetingTable[1][store.state.maps.targetGenderMap[info.targetGender]]+", "+ this.getAgeTarget()

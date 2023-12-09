@@ -3,7 +3,7 @@
     <div class="option-container">
       <div class="option-left-content" :style="{ flex: 1 }">
         <p class="option-title">요구 응답수</p>
-        <select class="option-select" v-model="this.headcount">
+        <select class="option-select" v-model="this.headCount">
           <option :value="String('HEAD')" selected disabled hidden>요구 응답수</option>
           <option :value="String('HEAD_30')">30명</option>
           <option :value="String('HEAD_40')">40명</option>
@@ -135,7 +135,7 @@ export default {
       engText : "영어 설문이 아닙니다.",
       orderPrice : 9000,
       targetAge : "AGE",
-      headcount : "HEAD",
+      headCount : "HEAD",
       spendTime : "TIME",
       endDate : '12:00:00',
       endTime : '',
@@ -237,8 +237,8 @@ export default {
       let idx = 0
 
       if (!this.enTarget) idx = 0
-      else if ((store.state.maps.headcountMap[this.headCount] <= 3) && this.enTarget) idx = 1
-      else if ((store.state.maps.headcountMap[this.headCount] > 3) && this.enTarget) idx = 2
+      else if ((store.state.maps.headCountMap[this.headCount] <= 3) && this.enTarget) idx = 1
+      else if ((store.state.maps.headCountMap[this.headCount] > 3) && this.enTarget) idx = 2
       return idx
     },
 
@@ -251,10 +251,10 @@ export default {
 
     calOrderPrice() {
       var spendTimeIdx = store.state.maps.spendTimeMap[this.spendTime]
-      var headCountIdx = store.state.maps.headcountMap[this.headcount]
+      var headCountIdx = store.state.maps.headCountMap[this.headCount]
       var targetGenderIdx = store.state.maps.targetGenderMap[this.targetGender]
 
-      console.log(this.spendTime + " " + this.headcount + " " + this.targetGender)
+      console.log(this.spendTime + " " + this.headCount + " " + this.targetGender)
       console.log(spendTimeIdx + " " + headCountIdx + " " + targetGenderIdx)
 
       var p = Math.ceil(parseFloat(parseFloat(this.priceTable[spendTimeIdx][headCountIdx])
@@ -269,7 +269,7 @@ export default {
 
     calculate() {
       var spendTimeIdx = store.state.maps.spendTimeMap[this.spendTime]
-      var headCountIdx = store.state.maps.headcountMap[this.headcount]
+      var headCountIdx = store.state.maps.headCountMap[this.headCount]
       var targetGenderIdx = store.state.maps.targetGenderMap[this.targetGender]
       var identityIdx = store.state.maps.identityMap[this.identity]
 
@@ -304,7 +304,7 @@ export default {
       if(this.targetAge == "ALL") this.targetAgeOptionList = ["ALL"]
       // 여기 headCount 등이 왜 string 으로 받아와지는지?
       store.commit('saveSurveyOption', {
-        headcount : this.headcount,
+        headCount : this.headCount,
         spendTime: this.spendTime,
         endDate: this.endDate,
         endTime: this.endTime,

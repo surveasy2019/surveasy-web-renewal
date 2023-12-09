@@ -34,7 +34,7 @@ export default createStore({
       surveyStatusMap: {
         "CREATED" : 0, "WAITING" : 1, "IN_PROGRESS" : 2, "DONE" : 3
       },
-      headcountMap: {
+      headCountMap: {
         "HEAD" : 0, "HEAD_30" : 1, "HEAD_40" : 2, "HEAD_50" : 3, "HEAD_60" : 4, "HEAD_70" : 5, "HEAD_80" : 6, 
         "HEAD_90" : 7, "HEAD_100" : 8, "HEAD_120" : 9, "HEAD_140" : 10, "HEAD_160" : 11, "HEAD_180" : 12, "HEAD_200" : 13
       },
@@ -57,7 +57,7 @@ export default createStore({
     },
 
     surveyOption : {
-      headcount : "",
+      headCount : "",
       spendTime : "",
       endDate : '',
       endTime : '',
@@ -95,7 +95,7 @@ export default createStore({
       state.isLoggedIn = false
     },
     saveSurveyOption(state, payload) {
-      state.surveyOption.headcount = payload.headcount,
+      state.surveyOption.headCount = payload.headCount,
       state.surveyOption.spendTime = payload.spendTime,
       state.surveyOption.endDate = payload.endDate,
       state.surveyOption.endTime = payload.endTime,

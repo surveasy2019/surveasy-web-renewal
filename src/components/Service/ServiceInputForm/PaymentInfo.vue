@@ -34,7 +34,7 @@ export default {
                     const response = await axios.post(
                         'https://gosurveasy.co.kr/survey',
                         {
-                            headcount: obj.headcount,
+                            headCount: obj.headCount,
                             spendTime: obj.spendTime,
                             dueDate: new Date(store.state.surveyOption.endDate + "T" + store.state.surveyOption.endTime),
                             targetGender: obj.targetGender,
