@@ -24,9 +24,8 @@ export default {
 <style>
 .header-container {
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0 30px;
 }
 .header-container a {
   color: #000000;

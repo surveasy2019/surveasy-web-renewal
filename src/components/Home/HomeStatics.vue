@@ -58,7 +58,7 @@ export default {
   margin-top: 35px;
 }
 .home-statics-item-container {
-  background-color: #78C391;
+  background-color: #0AAB00;
   display: flex;
   height: 150px;
   flex-direction: row;
@@ -76,5 +76,19 @@ export default {
   font-weight: 700;
   text-align: left;
   margin-left: 15px;
+}
+
+.home-statics-container .title-bold{
+  font-size: 25px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 600;
+  color: white;
+}
+
+.home-statics-container .title-mid{
+  font-size: 15px;
+  margin-top: 10px;
+  font-weight: 300;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 </style>
