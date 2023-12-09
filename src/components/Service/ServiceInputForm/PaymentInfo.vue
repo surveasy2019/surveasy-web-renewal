@@ -5,6 +5,14 @@
         <div class="pay-info-title">입금 계좌<br>
             카카오뱅크 3333-11-5235460 (송다예)</div>
         <input class="info-input" v-model="this.accountName" type="text" placeholder="입금자명" required>
+        <div class="icon-container">
+        <div class="icon" @mouseover="showInfo" @mouseleave="hideInfo">
+          <img src="@/assets/service/question.png" width="20" class="item-img">
+        </div>
+        <div v-if="isInfoVisible" class="info-box">
+          카드 결제와 관련된 문의는 입금자명에 본인 성함 작성하여'결제하기' 버튼 클릭 후 문의 채널로 문의 주세요!
+        </div>
+      </div>
         <div><button class="pay-btn" @click="uploadSurvey">결제하기</button></div>
     </div>
 </template>
@@ -15,10 +23,17 @@ import store from '@/store'
 export default {
     data(){
         return{
-            accountName : ''
+            accountName : '',
+            isInfoVisible: false,
         }
     },
     methods:{
+        showInfo() {
+            this.isInfoVisible = true;
+        },
+        hideInfo() {
+            this.isInfoVisible = false;
+        },
         async uploadSurvey() {
             const obj = store.state.surveyOption
             
@@ -101,7 +116,6 @@ export default {
   padding-top: 10px;
   padding-bottom: 10px;
   color: #0CAE02;
-  margin-top: 15px;
   background-color: #ffffff;
   border: 1px solid #0CAE02;
   border-radius: 5px;
@@ -113,6 +127,35 @@ export default {
 .pay-btn:hover {
   color: white;
   background: #0AAB00;
+}
+
+
+
+.icon-container {
+  position: relative; 
+  align-self: flex-start; 
+}
+
+.icon {
+  cursor: pointer;
+}
+
+
+.info-box {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 40vw; 
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  display: none;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 12px;
+}
+
+.icon:hover + .info-box {
+  display: block;
 }
 
 </style>
