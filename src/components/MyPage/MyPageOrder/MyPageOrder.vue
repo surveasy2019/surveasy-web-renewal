@@ -134,7 +134,7 @@ export default {
   methods : {
     async listOrders() {
       try {
-        const response = await axios.post("http://3.39.170.7/survey/mypage/list",
+        const response = await axios.post("https://gosurveasy.co.kr/survey/mypage/list",
         {
           email : this.$store.state.currentUser.email
         })
@@ -147,7 +147,7 @@ export default {
     async deleteSurvey(id){
       try {
         if(confirm("정말 삭제하시겠습니까?")){
-          const response = await axios.delete(`http://3.39.170.7/survey/mypage/delete/${id}`)
+          const response = await axios.delete(`https://gosurveasy.co.kr/survey/mypage/delete/${id}`)
           if(response.status == 200) {
             if(confirm("삭제되었습니다.")){
               this.$router.go("/mypage/order")
@@ -182,7 +182,7 @@ export default {
     async editSurvey(){
       try {
         await axios.patch(
-          `http://3.39.170.7/survey/mypage/edit/${this.editTarget.id}`,
+          `https://gosurveasy.co.kr/survey/mypage/edit/${this.editTarget.id}`,
           {
             title: this.modalTitle,
             link: this.modalLink,

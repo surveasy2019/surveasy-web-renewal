@@ -92,7 +92,7 @@ export default {
     },
     async listActivePanel() {
       try {
-        const response = await axios.get("http://3.39.170.7/activepanel")
+        const response = await axios.get("https://gosurveasy.co.kr/activepanel")
         this.loading = false
         this.activePanel = response.data
       } catch (error) {

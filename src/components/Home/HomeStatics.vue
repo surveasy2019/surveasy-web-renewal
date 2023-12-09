@@ -37,7 +37,7 @@ export default {
     methods : {
       async querySurveyCnt(){
         try{
-          const response = await axios.get("http://3.39.170.7/survey/home")
+          const response = await axios.get("https://gosurveasy.co.kr/survey/home")
           this.surveyCnt = response.data.surveyCount
           this.panelCnt = response.data.panelCount
         }catch(error) {

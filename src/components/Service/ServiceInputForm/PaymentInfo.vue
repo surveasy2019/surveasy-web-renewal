@@ -32,7 +32,7 @@ export default {
                 })
                 try {
                     const response = await axios.post(
-                        'http://3.39.170.7/survey/service',
+                        'https://gosurveasy.co.kr/survey/service',
                         {
                             english: obj.english,
                             accountName: obj.accountName,
