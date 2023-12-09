@@ -32,8 +32,27 @@ export default {
                 })
                 try {
                     const response = await axios.post(
-                        'https://gosurveasy.co.kr/survey/service',
+                        'https://gosurveasy.co.kr/survey',
                         {
+                            headcount: obj.headcount,
+                            spendTime: obj.spendTime,
+                            dueDate: new Date(store.state.surveyOption.endDate + "T" + store.state.surveyOption.endTime),
+                            targetGender: obj.targetGender,
+                            targetAgeList: obj.targetAge,
+                            language: obj.language,
+                            identity: obj.identity,
+                            title: obj.title,
+                            targetInput: obj.targetInput,
+                            institute: obj.institute,
+                            link: obj.link,
+                            notice: obj.notice,
+                            accountName: obj.accountName,
+                            price: obj.price,
+                            priceDiscounted: obj.priceDiscounted,
+                            pointAdd: 100,
+                            email: this.$store.state.currentUser.email,
+                            username: this.$store.state.currentUser.name
+                            /*
                             english: obj.english,
                             accountName: obj.accountName,
                             dueDate: new Date(store.state.surveyOption.endDate + "T" + store.state.surveyOption.endTime),
@@ -52,6 +71,7 @@ export default {
                             title: obj.title,
                             email: this.$store.state.currentUser.email,
                             username: this.$store.state.currentUser.name
+                            */
                         }
                     )
                     this.$router.push("/service/paydone")

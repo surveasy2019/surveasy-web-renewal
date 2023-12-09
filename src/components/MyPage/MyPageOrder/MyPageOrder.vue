@@ -147,7 +147,7 @@ export default {
     async deleteSurvey(id){
       try {
         if(confirm("정말 삭제하시겠습니까?")){
-          const response = await axios.delete(`https://gosurveasy.co.kr/survey/mypage/delete/${id}`)
+          const response = await axios.delete(`https://gosurveasy.co.kr/survey/${id}`)
           if(response.status == 200) {
             if(confirm("삭제되었습니다.")){
               this.$router.go("/mypage/order")
@@ -182,7 +182,7 @@ export default {
     async editSurvey(){
       try {
         await axios.patch(
-          `https://gosurveasy.co.kr/survey/mypage/edit/${this.editTarget.id}`,
+          `https://gosurveasy.co.kr/survey/${this.editTarget.id}`,
           {
             title: this.modalTitle,
             link: this.modalLink,

@@ -5,7 +5,7 @@
     <div class="option-row">
       <div :style="{ flex: 1 }">
         <div class="info-title">요구 응답수</div>
-        <div class="info-content">{{ this.headCount }}</div>
+        <div class="info-content">{{ this.headcount }}</div>
       </div>
       <div :style="{ flex: 1 }">
         <div class="info-title">소요시간</div>
@@ -39,7 +39,7 @@ import store from '@/store';
 export default {
   data(){
     return{
-      headCount : '',
+      headcount : '',
       spendTime : '',
       endDate : '',
       target : '',
@@ -57,20 +57,20 @@ export default {
     getOptions(){
       const info = store.state.surveyOption
       const table = store.state.tables
-      this.headCount = table.priceTextTable[0][info.headCount]
-      this.spendTime = table.priceTextTable[1][info.spendTime]
+      this.headcount = table.priceTextTable[0][store.state.maps.headcountMap[info.headcount]]
+      this.spendTime = table.priceTextTable[1][store.state.maps.spendTimeMap[info.spendTime]]
       this.endDate = info.endDate + " " + info.endTime
-      this.target = table.targetingTable[1][info.tarGender]+", "+ this.getAgeTarget()
-      this.targetEng = table.priceTextTable[3][info.english]
-      this.identity = table.priceTextTable[4][info.priceIdentity]
+      this.target = table.targetingTable[1][store.state.maps.targetGenderMap[info.targetGender]]+", "+ this.getAgeTarget()
+      this.targetEng = table.priceTextTable[3][info.targetEng]
+      this.identity = table.priceTextTable[4][store.state.maps.identityMap[info.identity]]
     },
 
     getAgeTarget(){
       let age = ""
       const info = store.state.surveyOption
       const table = store.state.tables
-      for(let i in info.tarAge){
-        age += table.targetingTable[2][info.tarAge[i]] + " "
+      for(let i in info.targetAge){
+        age += table.targetingTable[2][store.state.maps.targetAgeMap[info.targetAge[i]]] + " "
       }
       
 

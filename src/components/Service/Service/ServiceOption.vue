@@ -3,21 +3,21 @@
     <div class="option-container">
       <div class="option-left-content" :style="{ flex: 1 }">
         <p class="option-title">요구 응답수</p>
-        <select class="option-select" v-model="this.headCount">
-          <option :value=0 selected disabled hidden>요구 응답수</option>
-          <option :value=1>30명</option>
-          <option :value=2>40명</option>
-          <option :value=3>50명</option>
-          <option :value=4>60명</option>
-          <option :value=5>70명</option>
-          <option :value=6>80명</option>
-          <option :value=7>90명</option>
-          <option :value=8>100명</option>
-          <option :value=9>120명</option>
-          <option :value=10>140명</option>
-          <option :value=11>160명</option>
-          <option :value=12>180명</option>
-          <option :value=13>200명 (최대 응답수)</option>
+        <select class="option-select" v-model="this.headcount">
+          <option :value="String('HEAD')" selected disabled hidden>요구 응답수</option>
+          <option :value="String('HEAD_30')">30명</option>
+          <option :value="String('HEAD_40')">40명</option>
+          <option :value="String('HEAD_50')">50명</option>
+          <option :value="String('HEAD_60')">60명</option>
+          <option :value="String('HEAD_70')">70명</option>
+          <option :value="String('HEAD_80')">80명</option>
+          <option :value="String('HEAD_90')">90명</option>
+          <option :value="String('HEAD_100')">100명</option>
+          <option :value="String('HEAD_120')">120명</option>
+          <option :value="String('HEAD_140')">140명</option>
+          <option :value="String('HEAD_160')">160명</option>
+          <option :value="String('HEAD_180')">180명</option>
+          <option :value="String('HEAD_200')">200명 (최대 응답수)</option>
         </select>
         <p class="option-title">마감기간 지정</p>
         <div class="timedate-option-select">
@@ -25,23 +25,23 @@
         </div>
         <p class="option-title">설문 대상</p>
         <select class="option-select" id="target-gender" v-model="this.targetGender">
-          <option :value=0 selected disabled hidden>대상 성별</option>
-          <option :value=1>성별 무관</option>
-          <option :value=2>남성</option>
-          <option :value=3>여성</option>
+          <option :value="String('GENDER')" selected disabled hidden>대상 성별</option>
+          <option :value="String('ALL')">성별 무관</option>
+          <option :value="String('MALE')">남성</option>
+          <option :value="String('FEMALE')">여성</option>
         </select>
       </div>
 
       <div class="option-right-content" :style="{ flex: 1 }">
         <p class="option-title">소요 시간</p>
         <select class="option-select" v-model="this.spendTime">
-          <option :value=0 selected disabled hidden>소요 시간</option>
-          <option :value=1>1분 이내</option>
-          <option :value=2>1-3분</option>
-          <option :value=3>4-6분</option>
-          <option :value=4>7-10분</option>
-          <option :value=5>11-15분</option>
-          <option :value=6>16-20분</option>
+          <option :value="String('TIME')" selected disabled hidden>소요 시간</option>
+          <option :value="String('TIME_0')">1분 이내</option>
+          <option :value="String('TIME_1_3')">1-3분</option>
+          <option :value="String('TIME_4_6')">4-6분</option>
+          <option :value="String('TIME_7_10')">7-10분</option>
+          <option :value="String('TIME_11_15')">11-15분</option>
+          <option :value="String('TIME_16_20')">16-20분</option>
         </select>
         <p class="option-title" id="none1">a</p>
         <div class="timedate-option-select">
@@ -49,43 +49,43 @@
         </div>
         <p class="option-title" id="none2">a</p>
         <select class="option-select" id="target_age" v-model="this.targetAge">
-          <option :value=0 selected disabled hidden>대상 연령</option>
-          <option :value=1>연령 무관</option>
-          <option :value=2>연령 옵션 선택하기</option>
+          <option :value="String('AGE')" selected disabled hidden>대상 연령</option>
+          <option :value="String('ALL')">연령 무관</option>
+          <option :value="String('TARGET_AGE')">연령 옵션 선택하기</option>
         </select>
       </div>     
     </div>
-    <div class="age-option-content" v-if="this.targetAge == 2">
+    <div class="age-option-content" v-if="this.targetAge==String('TARGET_AGE')">
         <div class="age-content">
-          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value=2> 
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value="String('AGE_20_24')"> 
           <div id="checkbox-text">20-24세</div>
         </div>
         <div class="age-content">
-          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value=3> 
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value="String('AGE_25_29')"> 
           <div id="checkbox-text">25-29세</div>
         </div>
         <div class="age-content">
-          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value=4> 
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value="String('AGE_30_34')"> 
           <div id="checkbox-text">30-34세</div>
         </div>
         <div class="age-content">
-          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value=5> 
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value="String('AGE_35_39')"> 
           <div id="checkbox-text">35-39세</div>
         </div>
         <div class="age-content">
-          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value=6> 
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value="String('AGE_40_44')"> 
           <div id="checkbox-text">40-44세</div>
         </div>
         <div class="age-content">
-          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value=7> 
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value="String('AGE_45_49')"> 
           <div id="checkbox-text">45-49세</div>
         </div>
         <div class="age-content">
-          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value=8> 
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value="String('AGE_50_59')"> 
           <div id="checkbox-text">50대</div>
         </div>
         <div class="age-content">
-          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value=9> 
+          <input v-model="targetAgeOptionList" :true-value="[]" type="checkbox" name="selectedAges" :value="String('AGE_60_69')"> 
           <div id="checkbox-text">60대</div>
         </div>
     </div>
@@ -105,11 +105,11 @@
     <div class="option-content-left">
       <p class="option-title">대학생 / 대학원생 할인 여부</p>
       <select class="option-select" id="identity" v-model="this.identity">
-        <option :value=0 selected disabled hidden>대학생 / 대학원생 할인 여부</option>
-        <option :value=1>중/고등학생입니다.</option>
-        <option :value=2>대학생입니다.</option>
-        <option :value=3>대학원생입니다.</option>
-        <option :value=4>할인대상이 아닙니다.</option>
+        <option :value="String('IDENTITY')" selected disabled hidden>대학생 / 대학원생 할인 여부</option>
+        <option :value="String('MID_HIGH')">중/고등학생입니다.</option>
+        <option :value="String('UNDERGRADUATE')">대학생입니다.</option>
+        <option :value="String('GRADUATE')">대학원생입니다.</option>
+        <option :value="String('NONE')">할인대상이 아닙니다.</option>
       </select>
     </div>
     <div class="option-content-right">
@@ -134,17 +134,18 @@ export default {
     return{
       engText : "영어 설문이 아닙니다.",
       orderPrice : 9000,
-      targetAge : 0,
-      headCount : 0,
-      spendTime : 0,
+      targetAge : "AGE",
+      headcount : "HEAD",
+      spendTime : "TIME",
       endDate : '12:00:00',
       endTime : '',
       endStamp : this.endDate+' '+this.endTime,
       nowDate : new Date(),
 
-      targetGender : 0,
-      identity : 0,
+      targetGender : "GENDER",
+      identity : "IDENTITY",
       enTarget : 0,
+      language: "",
 
       targetAgeOptionList : [],
 
@@ -162,7 +163,7 @@ export default {
       EngOptionArray: [1.0, 1.8, 2.2],
       AgeOptionArray: [1.0, 2.0, 1.875, 1.75, 1.625, 1.5, 1.375, 1.25, 1.125],
       genderOptionArray: [1.0, 1.0, 1.4, 1.4],
-      TimeOptionArray: [0, 12000, 10000, 8000, 3000, 0, 0],
+      TimeOptionArray: [0, 12000, 10000, 8000, 3000, 0, 0]
     }
   },
   computed : {
@@ -236,8 +237,8 @@ export default {
       let idx = 0
 
       if (!this.enTarget) idx = 0
-      else if ((this.headCount <= 3) && this.enTarget) idx = 1
-      else if ((this.headCount > 3) && this.enTarget) idx = 2
+      else if ((store.state.maps.headcountMap[this.headCount] <= 3) && this.enTarget) idx = 1
+      else if ((store.state.maps.headcountMap[this.headCount] > 3) && this.enTarget) idx = 2
       return idx
     },
 
@@ -249,10 +250,17 @@ export default {
     },
 
     calOrderPrice() {
-      var p = Math.ceil(parseFloat(parseFloat(this.priceTable[this.spendTime][this.headCount])
+      var spendTimeIdx = store.state.maps.spendTimeMap[this.spendTime]
+      var headCountIdx = store.state.maps.headcountMap[this.headcount]
+      var targetGenderIdx = store.state.maps.targetGenderMap[this.targetGender]
+
+      console.log(this.spendTime + " " + this.headcount + " " + this.targetGender)
+      console.log(spendTimeIdx + " " + headCountIdx + " " + targetGenderIdx)
+
+      var p = Math.ceil(parseFloat(parseFloat(this.priceTable[spendTimeIdx][headCountIdx])
         * parseFloat(this.EngOptionArray[this.engOptionCal])
         * parseFloat(this.AgeOptionArray[this.targetAgeOptionList.length])
-        * parseFloat(this.genderOptionArray[this.targetGender])
+        * parseFloat(this.genderOptionArray[targetGenderIdx])
         + parseFloat(this.TimeOptionArray[this.timeOptionCal])
       ).toFixed(0) / 10) * 10
       this.orderPrice = p
@@ -260,11 +268,16 @@ export default {
     },
 
     calculate() {
-      var p = Math.ceil(parseFloat(parseFloat(this.priceTable[this.spendTime][this.headCount])
-        * parseFloat(this.IdentityOptionArray[this.identity])
+      var spendTimeIdx = store.state.maps.spendTimeMap[this.spendTime]
+      var headCountIdx = store.state.maps.headcountMap[this.headcount]
+      var targetGenderIdx = store.state.maps.targetGenderMap[this.targetGender]
+      var identityIdx = store.state.maps.identityMap[this.identity]
+
+      var p = Math.ceil(parseFloat(parseFloat(this.priceTable[spendTimeIdx][headCountIdx])
+        * parseFloat(this.IdentityOptionArray[identityIdx])
         * parseFloat(this.EngOptionArray[this.engOptionCal])
         * parseFloat(this.AgeOptionArray[this.targetAgeOptionList.length])
-        * parseFloat(this.genderOptionArray[this.targetGender])
+        * parseFloat(this.genderOptionArray[targetGenderIdx])
         + parseFloat(this.TimeOptionArray[this.timeOptionCal])
       ).toFixed(0) / 10) * 10
 
@@ -274,7 +287,7 @@ export default {
   },
   methods : {
     nextPage() {
-      if (this.id == 0 || this.spendTime == 0 || this.headCount == 0 || this.timeOptionCal == 0 || this.targetAge == 0 || this.targetGender == 0){
+      if (this.id == 0 || this.spendTime == "TIME" || this.headCount == "HEAD" || this.timeOptionCal == 0 || this.targetAge == "AGE" || this.targetGender == "GENDER" || this.identity == "IDENTITY"){
         alert("모든 옵션을 입력해주세요.")
       } else if(this.timeOptionCal == 6) {
         alert("마감 기한은 최소 18시간 이상부터 선택 가능합니다.")
@@ -288,17 +301,17 @@ export default {
     },
 
     saveOptions(){
-      if(this.targetAge == 1) this.targetAgeOptionList = [1]
+      if(this.targetAge == "ALL") this.targetAgeOptionList = ["ALL"]
       // 여기 headCount 등이 왜 string 으로 받아와지는지?
       store.commit('saveSurveyOption', {
-        headCount : parseInt(this.headCount),
-        spendTime: parseInt(this.spendTime),
+        headcount : this.headcount,
+        spendTime: this.spendTime,
         endDate: this.endDate,
         endTime: this.endTime,
         targetGender: this.targetGender,
         targetAge: this.targetAgeOptionList,
         targetEng: this.engOptionCal,
-        identity: parseInt(this.identity),
+        identity: this.identity,
         price: this.price,
         priceDiscounted : (this.orderPrice - this.price)
       })
