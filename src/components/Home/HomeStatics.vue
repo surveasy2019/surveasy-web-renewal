@@ -89,6 +89,7 @@ export default {
   font-size: 15px;
   margin-top: 10px;
   font-weight: 300;
+  color: white;
   font-family: 'Noto Sans KR', sans-serif;
 }
 </style>
