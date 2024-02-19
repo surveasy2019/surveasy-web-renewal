@@ -2,7 +2,7 @@
   <div class="header-container">
     <div>
       <router-link to="/">
-        <img loading="prelaod" decoding="async" class="img-fluid" width="120" src="@/assets/logo.png" alt="surveasy">
+        <img loading="prelaod" decoding="async" class="img-fluid" width="160" src="@/assets/logo.png" alt="surveasy">
       </router-link>
     </div>
 
@@ -24,14 +24,25 @@ export default {
 <style>
 .header-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* 수평 가운데 정렬 */
+  align-items: center; /* 수직 가운데 정렬 */
+  flex-direction: row; 
   padding: 0 30px;
 }
+
+.header-container .img-fluid {
+  padding-top: 10px;
+}
+
+.header-container
 .header-container a {
   color: #000000;
   text-decoration: none;
 }
 #header-text {
   color: #0AAC00;
+  text-decoration: none;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1.1rem;
 }
 </style>
