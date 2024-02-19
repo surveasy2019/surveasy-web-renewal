@@ -8,7 +8,9 @@
       </div>
       <div class="footer-right">
         <div class="content-gray">어플 다운로드</div>
-        <div class="content-gray">이용약관 | 개인정보처리방침</div>
+        <div class="content-gray">
+          <a href="https://surveasy.oopy.io/terms-of-use" target="_blank" class="content-link">이용약관</a> | <a href="https://surveasy.oopy.io/privacy-policy" target="_blank" class="content-link">개인정보처리방침</a>
+        </div>
       </div>
     </div>
   </div>
@@ -52,6 +54,11 @@ export default {
 .content-gray{
   text-align: left;
   font-size: 0.8rem;
+  color: gray;
+  
+}
+
+.content-link{
   color: gray;
 }
 </style>
