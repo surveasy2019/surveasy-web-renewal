@@ -66,9 +66,9 @@ export default {
 .order-btn{
   position: sticky;
   bottom: 80px;
-  padding: 10px 70px;
-  width: 700px;
-  background-color:#ffffff;
+  padding: 12px 70px;
+  width: 99%;
+  background-color: #0CAE02;
   color: #000000;
   margin-top: 10px;
   border: 1.5px solid #0CAE02;
