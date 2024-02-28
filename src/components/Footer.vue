@@ -7,7 +7,11 @@
         <div class="content-gray">사업자 등록번호 :  369-16-01796</div>
       </div>
       <div class="footer-right">
-        <div class="content-gray">어플 다운로드</div>
+        <div class="content-gray">
+          다운로드 
+          <a href="https://play.google.com/store/apps/details?id=com.surveasy.surveasy" target="_blank" class="content-link">안드로이드</a> | 
+          <a href="https://apps.apple.com/kr/app/%EC%84%9C%EB%B2%A0%EC%9D%B4%EC%A7%80/id1614071000" target="_blank" class="content-link">iOS</a>
+        </div>
         <div class="content-gray">
           <a href="https://surveasy.oopy.io/terms-of-use" target="_blank" class="content-link">이용약관</a> | <a href="https://surveasy.oopy.io/privacy-policy" target="_blank" class="content-link">개인정보처리방침</a>
         </div>
@@ -55,7 +59,7 @@ export default {
   text-align: left;
   font-size: 0.8rem;
   color: gray;
-  
+  margin-bottom: 8px;
 }
 
 .content-link{
