@@ -48,7 +48,7 @@ export default createStore({
         "IDENTITY" : 0, "MID_HIGH" : 1, "UNDERGRADUATE" : 2, "GRADUATE" : 3, "NONE" : 4
       },
       targetAgeMap: {
-        "AGE": -1, "All" : 0, "AGE_20_24" : 1, "AGE_25_29" : 2, "AGE_30_34" : 3, "AGE_35_39" : 4, 
+        "AGE": -1, "ALL" : 0, "AGE_20_24" : 1, "AGE_25_29" : 2, "AGE_30_34" : 3, "AGE_35_39" : 4, 
         "AGE_40_44" : 5, "AGE_45_49" : 6, "AGE_50_59" : 7, "AGE_60_69" : 8
       },
       targetGenderMap: {
