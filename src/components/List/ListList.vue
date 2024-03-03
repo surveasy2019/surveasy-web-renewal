@@ -3,7 +3,7 @@
     <h2>설문 리스트</h2>
 
     <div class="list-list-item-container">
-      <div class="list-list-item" :class="{ 'done': item.isDone }" v-for="item in surveyList" :key="item.sid">
+      <div class="list-list-item" :class="{ 'done': item.isDone }" v-for="item in surveyList" :key="item.id">
         <div class="list-list-item-top-container">
           <span class="list-list-item-top" id="list-done" v-if="item.isDone">마감</span>
           <span class="list-list-item-top" v-else-if="item.dday == 0 && item.dtime >= 0">{{ item.dtime }}시간 남음</span>
@@ -41,10 +41,10 @@
     </div>
     <div class="page-container">
       <span class="page-btn-done" v-if="pageInfo.pageNum==0">&lt; 이전 페이지</span>
-      <span class="page-btn" v-else @click="listSurveys(pageCnt, false)">&lt; 이전 페이지</span>
+      <span class="page-btn" v-else @click="listSurveys(false)">&lt; 이전 페이지</span>
 
       <span class="page-btn-done" v-if="pageInfo.pageNum == pageInfo.totalPages-1">다음 페이지 &gt;</span>
-      <span class="page-btn" v-else @click="listSurveys(pageCnt, true)">다음 페이지 &gt;</span>
+      <span class="page-btn" v-else @click="listSurveys(true)">다음 페이지 &gt;</span>
     </div>
   </div>  
 </template>
@@ -62,10 +62,10 @@ export default {
     
   },
   mounted() {
-    this.listSurveys(this.pageCnt, true)
+    this.listSurveys(true)
   },  
   methods: {
-    async listSurveys(page, up) {
+    async listSurveys(up) {
       try {
         
         if(up){
@@ -79,9 +79,10 @@ export default {
             size: 10
           }
         })
-        
+      
         this.surveyList = response.data.surveyListVos
         this.pageInfo = response.data.pageInfo
+        console.log(this.pageCnt)
         console.log(this.surveyList)
       } catch (error) {
         console.log(error)
