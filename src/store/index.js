@@ -68,13 +68,16 @@ export default createStore({
       identity : "",
       price : 0,
       priceDiscounted : 0,
+      coupon : 0,
+      point : 0,
       
       title : '',
       targetInput : '',
       institute : '',
       link : '',
       notice : '',
-      accountName : ''
+      accountName : '',
+      description : ''
     },
     firebaseAuthErrorMsg : {
       "auth/wrong-password" : "비밀번호가 맞지 않습니다.",
@@ -113,6 +116,12 @@ export default createStore({
       state.surveyOption.institute = payload.institute,
       state.surveyOption.link = payload.link,
       state.surveyOption.notice = payload.notice
+      state.surveyOption.description = payload.description
+    },
+
+    saveSurveyPriceOption(state, payload) {
+      state.surveyOption.coupon = payload.coupon,
+      state.surveyOption.point = payload.point
     },
     saveAccountName (state, payload){
       state.surveyOption.accountName = payload.accountName

@@ -37,9 +37,7 @@ import store from '@/store'
 export default {
   data() {
     return{
-      orderPrice : store.state.surveyOption.price,
-      discount : 0,
-      totalPrice : store.state.surveyOption.price,
+      totalPrice : store.state.surveyOption.price - (store.state.surveyOption.coupon + store.state.surveyOption.point),
       accountName : store.state.surveyOption.accountName
     }
   },
@@ -83,5 +81,23 @@ export default {
   text-align: center !important;
   margin-top: 20px;
 }
+.pay-btn{
+  margin-top: 10%;
+  width: 60%;
+  padding: 10px 12px;
+  color:#0AAB00;
+  background-color: #ffffff;
+  border: 1px solid #0AAB00;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  text-decoration: none;
+}
 
+.pay-btn:hover{
+  color: white;
+  background: #0AAB00;
+}
 </style>

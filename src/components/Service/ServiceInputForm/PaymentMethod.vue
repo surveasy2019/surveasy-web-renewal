@@ -4,16 +4,20 @@
     <div class="option-border"></div>
     <div class="pay-block">
       <div class="pay-title" :style="{ flex: 1 }">주문 금액</div>
-      <div class="pay-content" :style="{ flex: 2 }">{{ this.orderPrice }} 원</div>
+      <div class="pay-content" :style="{ flex: 2 }">{{ this.setPrice1 }} 원</div>
+    </div>
+    <div class="pay-block">
+      <div class="pay-title" :style="{ flex: 1 }">할인 금액</div>
+      <div class="pay-content" :style="{ flex: 2 }">{{ this.discountedPrice }} 원</div>
     </div>
     <div class="pay-block">
       <div class="pay-title" :style="{ flex: 1 }">쿠폰/적립금 할인</div>
-      <div class="pay-content" :style="{ flex: 2 }">{{ this.discount }} 원</div>
+      <div class="pay-content" :style="{ flex: 2 }">{{ this.setPrice2 }} 원</div>
     </div>
     <div class="option-border"></div>
     <div class="pay-block">
       <div class="pay-title" :style="{ flex: 1 }">총 결제금액</div>
-      <div class="pay-content-bold" :style="{ flex: 2 }">{{ this.totalPrice }} 원</div>
+      <div class="pay-content-bold" :style="{ flex: 2 }">{{ this.setPrice3 }} 원</div>
     </div>
 
   </div>
@@ -23,9 +27,18 @@ import store from '@/store';
 export default {
   data() {
     return{
-      orderPrice : store.state.surveyOption.price,
-      discount : 0,
-      totalPrice : store.state.surveyOption.price
+      discountedPrice: store.state.surveyOption.priceDiscounted
+    }
+  },
+  computed : {
+    setPrice1(){
+      return store.state.surveyOption.price + store.state.surveyOption.priceDiscounted
+    },
+    setPrice2(){
+      return store.state.surveyOption.coupon + store.state.surveyOption.point
+    },
+    setPrice3(){
+      return store.state.surveyOption.price - (store.state.surveyOption.coupon + store.state.surveyOption.point)
     }
   },
   method : {

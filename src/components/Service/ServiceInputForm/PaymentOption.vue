@@ -8,6 +8,7 @@
                 <input class="pay-option-input" v-model="this.coupon" type="text" placeholder="보유하신 쿠폰 번호를 입력해주세요.">
                 <div><button @click="checkCoupon" class="pay-option-btn">쿠폰 적용하기</button></div>
             </div>
+            <div class="pay-option-warn" id="warn" v-if="errorMsg">*유효하지 않은 쿠폰입니다.</div>
             <div class="pay-option-title">적립금</div>
             <div class="pay-option-row">
                 <input class="pay-option-input" v-model="this.payPoint" type="text" placeholder="사용하려는 적립금 액수를 입력해주세요.">
@@ -23,17 +24,47 @@
 </template>
 
 <script>
+import axios from 'axios'
+import store from '@/store'
 export default {
   data(){
     return{
       coupon : '',
-      payPoint : 0
+      payPoint : 0,
+      percent : 0,
+      errorMsg : false
     }
   },
 
+  mounted(){
+    this.reset()
+  },
+
   methods : {
-    checkCoupon(){
-      console.log(this.coupon, "유효한 쿠폰인지 확인하기")
+    async checkCoupon(){
+      try {
+        const response = await axios.get(`https://gosurveasy.co.kr/coupon/${this.coupon}`)
+        this.percent = response.data.discountPercent
+        this.errorMsg = false
+        store.commit('saveSurveyPriceOption', {
+          coupon : store.state.surveyOption.price * this.percent * 0.01,
+          point : this.payPoint
+        })
+      }catch(error){
+        this.errorMsg = true
+        store.commit('saveSurveyPriceOption', {
+          coupon : 0,
+          point : this.payPoint
+        })
+      }
+      
+    },
+
+    reset(){
+      store.commit('saveSurveyPriceOption', {
+          coupon : 0,
+          point : 0
+        })
     },
 
     usePayPoint(){
@@ -111,5 +142,8 @@ export default {
 .pay-option-btn:hover{
   color: white;
   background: #0AAB00;
+}
+#warn{
+  color: rgb(206, 103, 103);
 }
 </style>

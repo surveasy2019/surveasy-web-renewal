@@ -2,7 +2,7 @@
   <div>
     <OptionInfoVue />
     <SurveyInfoVue />
-    <!-- <PaymentOption /> -->
+    <PaymentOption />
     <PaymentMethodVue />
     <PaymentInfo />
 
