@@ -23,6 +23,11 @@
       <LinkCheckModal :showLinkIframe="showLinkIframe" @closeIframe="showLinkModal" />
     </div>
     <div class="info-block">
+      <div class="info-title">설문 설명</div>
+      <input class="info-input" @change="setSurveyOptions()" type="text" v-model="this.description" placeholder="예) 해당 설문은 000 서비스의 사용성 개선을 목적으로 진행되는 설문입니다." required>
+      <div class="info-warn">*설문에 대한 설명을 작성해주세요. 작성된 내용은 설문에 참여할 패널에게 표시됩니다.</div>
+    </div>
+    <div class="info-block">
       <div class="info-title">설문 참여 시 유의사항 (선택)</div>
       <input class="info-input" @change="setSurveyOptions()" type="text" v-model="this.notice" placeholder="예) PC 참여 권장, 외부 링크 이동 필요 등">
     </div>
@@ -40,6 +45,7 @@ export default {
       institute: '',
       link: '',
       notice: '',
+      description: ''
     }
   },
 
@@ -50,7 +56,8 @@ export default {
         tarInput : this.target,
         institute : this.institute,
         link : this.link,
-        notice : this.notice
+        notice : this.notice,
+        description: this.description
       })
     }
   }

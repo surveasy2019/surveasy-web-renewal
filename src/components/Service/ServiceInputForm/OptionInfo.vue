@@ -70,7 +70,7 @@ export default {
       const info = store.state.surveyOption
       const table = store.state.tables
       for(let i in info.targetAge){
-        age += table.targetingTable[2][store.state.maps.targetAgeMap[info.targetAge[i]]] + " "
+        age += table.targetingTable[2][store.state.maps.targetAgeMap[info.targetAge[i]]+1] + " "
       }
       
 
