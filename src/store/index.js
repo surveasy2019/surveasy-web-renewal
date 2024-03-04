@@ -105,7 +105,7 @@ export default createStore({
       state.surveyOption.targetGender = payload.targetGender,
       state.surveyOption.targetAge = payload.targetAge,
       state.surveyOption.targetEng = payload.targetEng,
-      state.surveyOption.language = (payload.targetEng == 1) ? "KOR" : "ENG"
+      state.surveyOption.language = (payload.targetEng == 1) ? "ENG" : "KOR"
       state.surveyOption.identity = payload.identity,
       state.surveyOption.price = payload.price,
       state.surveyOption.priceDiscounted = payload.priceDiscounted
