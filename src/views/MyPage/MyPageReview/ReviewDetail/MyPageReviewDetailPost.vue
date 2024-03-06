@@ -11,6 +11,9 @@ export default {
   name: 'MyPageReviewPost',
   components: {
     MyPageReviewDetailInputVue
+  },
+  mounted() {
+    window.scrollTo(0,0)
   }
 }
 </script>

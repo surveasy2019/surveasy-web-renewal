@@ -11,6 +11,9 @@ export default {
   name: 'MyPageReviewPostDone',
   components: {
     MyPageReviewDoneNoticeVue
+  },
+  mounted() {
+    window.scrollTo(0,0)
   }
 }
 </script>

@@ -11,6 +11,9 @@ export default {
   name: 'Join',
   components: {
     JoinInputVue
+  },
+  mounted() {
+    window.scrollTo(0,0)
   }
 }
 </script>

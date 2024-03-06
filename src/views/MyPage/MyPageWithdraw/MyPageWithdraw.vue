@@ -12,6 +12,9 @@ export default {
   name: 'MyPageWithdraw',
   components: {
     MyPageWithdrawInputVue
+  },
+  mounted() {
+    window.scrollTo(0,0)
   }
 }
 </script>

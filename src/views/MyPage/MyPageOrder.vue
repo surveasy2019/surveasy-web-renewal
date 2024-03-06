@@ -15,6 +15,9 @@ export default {
   components: {
     MyPageOrderVue,
     MyPageNavigatorVue
+  },
+  mounted() {
+    window.scrollTo(0,0)
   }
 }
 </script>
