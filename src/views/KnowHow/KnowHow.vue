@@ -11,6 +11,9 @@ export default {
   name: 'KnowHowContainer',
   components: {
     KnowhowList
+  },
+  mounted() {
+    window.scrollTo(0,0)
   }
 }
 </script>

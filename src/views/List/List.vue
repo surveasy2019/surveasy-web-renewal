@@ -11,6 +11,9 @@ export default {
   name: 'SurveyList',
   components: {
     ListListVue
+  },
+  mounted() {
+    window.scrollTo(0,0)
   }
 }
 </script>

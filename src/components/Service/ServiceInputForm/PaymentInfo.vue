@@ -10,7 +10,7 @@
           <img src="@/assets/service/question.png" width="20" class="item-img">
         </div>
         <div v-if="isInfoVisible" class="info-box">
-          카드 결제와 관련된 문의는 입금자명에 본인 성함 작성하여'결제하기' 버튼 클릭 후 문의 채널로 문의 주세요!
+          카드 결제와 관련된 문의는 입금자명에 본인 성함 작성하여 '결제하기' 버튼 클릭 후 문의 채널로 문의 주세요!
         </div>
       </div>
         <div><button class="pay-btn" @click="uploadSurvey">결제하기</button></div>

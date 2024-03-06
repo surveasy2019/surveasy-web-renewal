@@ -103,12 +103,12 @@
           </div>
           <div class="join-input-terms-item">
             <input class="form-check-input" type="checkbox" v-model="dataSet.check1">
-            <label class="form-check-label"><router-link to="/" target="_blank">서베이지 이용약관 (필수)</router-link>
+            <label class="form-check-label"><a href="https://surveasy.oopy.io/terms-of-use" target="_blank">서베이지 이용약관 (필수)</a>
             </label>
           </div>
           <div class="join-input-terms-item">
             <input class="form-check-input" type="checkbox" v-model="dataSet.check2">
-            <label class="form-check-label"><router-link to="/" target="_blank">서베이지 개인정보 보호 방침 (필수)</router-link>
+            <label class="form-check-label"><a href="https://surveasy.oopy.io/privacy-policy" target="_blank">서베이지 개인정보 보호 방침 (필수)</a>
             </label>
           </div>
           <div class="join-input-terms-item">
@@ -384,7 +384,7 @@ export default {
   margin: auto;
 }
 .join-input-terms-item a {
-  text-decoration: none;
+  color: #6e6e6e;
 }
 .join-input-button-container {
   display: flex;

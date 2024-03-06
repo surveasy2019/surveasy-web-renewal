@@ -24,6 +24,9 @@ export default {
     SurveyInfoVue,
     PaymentOption,
     PaymentInfo
+  },
+  mounted() {
+    window.scrollTo(0,0)
   }
 }
 </script>

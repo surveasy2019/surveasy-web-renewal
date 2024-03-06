@@ -45,6 +45,9 @@ export default {
       this.open = false
       this.$router.push("/service/inputform")
     }
+  },
+  mounted() {
+    window.scrollTo(0,0)
   }
 
 }

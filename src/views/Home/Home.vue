@@ -23,6 +23,9 @@ export default {
     HomeServiceVue,
     HomeStaticsVue,
     HomeReviewVue
+  },
+  mounted() {
+    window.scrollTo(0,0)
   }
 }
 </script>

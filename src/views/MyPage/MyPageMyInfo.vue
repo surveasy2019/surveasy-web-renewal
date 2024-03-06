@@ -21,6 +21,9 @@ export default {
     MyPageMyInfoMarketingVue,
     MyPageNavigatorVue,
     MyPagePointVue
+  },
+  mounted() {
+    window.scrollTo(0,0)
   }
 }
 </script>

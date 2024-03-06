@@ -11,6 +11,9 @@ export default {
   name: 'Login',
   components: {
     LoginInputVue
+  },
+  mounted() {
+    window.scrollTo(0,0)
   }
 }
 </script>

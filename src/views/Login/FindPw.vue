@@ -11,6 +11,9 @@ export default {
   name: 'FindPw',
   components: {
     FindPwInputVue
+  },
+  mounted() {
+    window.scrollTo(0,0)
   }
 }
 </script>
