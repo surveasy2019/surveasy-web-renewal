@@ -18,8 +18,6 @@ import MyPagePoint from '../views/MyPage/MyPagePoint'
 import MyPageReview from '../views/MyPage/MyPageReview/MyPageReview'
 import MyPageReviewPost from '../views/MyPage/MyPageReview/Review/MyPageReviewPost'
 import MyPageReviewPostDone from '../views/MyPage/MyPageReview/Review/MyPageReviewPostDone'
-import MyPageReviewDetailPost from '../views/MyPage/MyPageReview/ReviewDetail/MyPageReviewDetailPost'
-import MyPageReviewDetailPostDone from '../views/MyPage/MyPageReview/ReviewDetail/MyPageReviewDetailPostDone'
 import MyPageMyInfo from '../views/MyPage/MyPageMyInfo'
 import MyPageWithdraw from '../views/MyPage/MyPageWithdraw/MyPageWithdraw'
 
@@ -110,7 +108,7 @@ const routes = [
     component: MyPageReview
   },
   {
-    path: '/mypage/review/post',
+    path: '/mypage/review/post/:id/:title',
     name: 'MyPageReviewPost',
     component: MyPageReviewPost
   },
@@ -118,16 +116,6 @@ const routes = [
     path: '/mypage/review/post/done',
     name: 'MyPageReviewPostDone',
     component: MyPageReviewPostDone
-  },
-  {
-    path: '/mypage/review/detail/post',
-    name: 'MyPageReviewDetailPost',
-    component: MyPageReviewDetailPost
-  },
-  {
-    path: '/mypage/review/detail/post/done',
-    name: 'MyPageReviewDetailPostDone',
-    component: MyPageReviewDetailPostDone
   },
   {
     path: '/mypage/myinfo',

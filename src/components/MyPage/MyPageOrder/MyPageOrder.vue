@@ -52,7 +52,7 @@
             <a @click="deleteSurvey(item.id)"><img id="mypage-img-btn" width=22 src="@/assets/mypage/icon_delete.png"></a>
           </div>
           <div class="mypage-order-bottom-container-item" v-else-if="item.status=='DONE'">
-            <router-link class="mypage-order-btn-review" to="/mypage/review">후기 작성하기 〉</router-link>
+            <router-link class="mypage-order-btn-review" :to="`/mypage/review/post/${item.id}/${item.title}`">후기 작성하기 〉</router-link>
           </div>
           
         </div>    

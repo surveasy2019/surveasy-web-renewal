@@ -3,7 +3,7 @@
     <h2>공개 리뷰 작성하기</h2>
 
     <div class="mypage-review-input-title-container">
-      <div id="title">소비자의 온라인 금융서비스 경험 조사</div>
+      <div id="title">{{ title }}</div>
       <div>설문 의뢰는 어땠나요?</div>
     </div>
 
@@ -25,15 +25,18 @@
       </div>
 
     <div class="mypage-review-input-button-container">
-      <router-link to="/mypage/review/done"><button id="btn-mypage-review">작성 완료하기</button></router-link>
+      <button id="btn-mypage-review" @click="createReview">작성 완료하기</button>
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
+      id : this.$route.params.id,
+      title : this.$route.params.title,
       reviewData: {
         score: 0,
         reviewText: ""
@@ -46,6 +49,22 @@ export default {
     },
     plusScore(num){
       this.reviewData.score = num
+    },
+    async createReview(){
+      try{
+        await axios.post(
+          `https://gosurveasy.co.kr/review/${this.id}`,
+            {
+              grade: this.reviewData.score,
+              content: this.reviewData.reviewText,
+              email: this.$store.state.currentUser.email,
+              username: this.$store.state.currentUser.name
+            }
+        )
+        this.$router.push("/mypage/review/post/done")
+      }catch(error){
+        console.log(error)
+      }
     }
   },
 }
