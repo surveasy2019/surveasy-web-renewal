@@ -157,7 +157,15 @@ export default {
   
   margin-right: 50px;
   margin-top: 55px;
+}
+
+@media (max-width: 1000px) {
+  .content-container{
+    font-family: 'Noto Sans KR', sans-serif;
+    text-align: center;
+    margin-top: 20px;
   }
+}
 
 .table-container{
   margin-right: 0;
