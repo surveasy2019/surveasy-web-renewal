@@ -1,8 +1,12 @@
 <template>
   <div class="mypage-order-container">
-    <div class="mypage-order-title-container">
+    <div class="mypage-order-title-container" v-if="this.orderList.length != 0">
       <div>주문 내역</div>
       <div>입금 계좌: 카카오뱅크 3333-11-5235460 (송*예)</div>
+    </div>
+
+    <div class="mypage-order-none-msg" v-if="this.orderList.length == 0">
+      주문 내역이 없습니다.
     </div>
 
     <div class="mypage-order-item-container">
@@ -141,6 +145,7 @@ export default {
           email : this.$store.state.currentUser.email
         })
         this.orderList = response.data.surveyMyPageOrderList
+        console.log(this.orderList.length)
       } catch (error) {
         console.log(error)
       }
@@ -225,8 +230,7 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: auto;
-  padding: 17px 50px 20px 50px;
+  padding: 20px 50px 20px 50px;
   justify-content: space-between
 }
 .mypage-order-item {
@@ -283,6 +287,11 @@ export default {
   text-align: left;
   color: #757272;
   font-size: 12px;
+}
+.mypage-order-none-msg{
+  font-family: 'Noto Sans KR', sans-serif;
+  padding: 30px;
+  color: #494949;
 }
 .mypage-order-bottom-container {
   display: flex;
