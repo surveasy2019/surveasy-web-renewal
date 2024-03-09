@@ -65,29 +65,9 @@ export default {
                             accountName: obj.accountName,
                             price: obj.price - (obj.point + obj.coupon),
                             priceDiscounted: obj.priceDiscounted,
-                            pointAdd: 100,
+                            pointAdd: Math.floor((obj.price - (obj.point + obj.coupon))*0.03),
                             email: this.$store.state.currentUser.email,
                             username: this.$store.state.currentUser.name
-                            /*
-                            english: obj.english,
-                            accountName: obj.accountName,
-                            dueDate: new Date(store.state.surveyOption.endDate + "T" + store.state.surveyOption.endTime),
-                            institute: obj.institute,
-                            link: obj.link,
-                            notice: obj.notice,
-                            pointAdd: 100,
-                            price: obj.price,
-                            priceDiscounted: obj.priceDiscounted,
-                            priceIdentity: obj.priceIdentity,
-                            headCount: obj.headCount,
-                            spendTime: obj.spendTime,
-                            tarInput: obj.tarInput,
-                            tarAge: obj.tarAge,
-                            tarGender: obj.tarGender,
-                            title: obj.title,
-                            email: this.$store.state.currentUser.email,
-                            username: this.$store.state.currentUser.name
-                            */
                         }
                     )
                     this.$router.push("/service/paydone")

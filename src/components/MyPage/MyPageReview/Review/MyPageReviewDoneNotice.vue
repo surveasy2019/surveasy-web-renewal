@@ -4,12 +4,12 @@
     <h2>공개 리뷰 작성이<br>완료되었습니다</h2>
 
     <div class="mypage-review-input-notice-container">
-      자세한 후기(비공개)를 추가로 작성해주시면, <br>적립금 500원을 드립니다.
+      소중한 후기를 남겨주셔서 감사합니다. <br> 적립금은 마이페이지에서 확인하실 수 있습니다.
     </div>
 
+
     <div class="mypage-review-input-button-container">
-      <router-link to="/"><button id="btn-no">괜찮아요</button></router-link>
-      <router-link to="/mypage/review/detail"><button id="btn-yes">적립금 500원 받기</button></router-link>
+      <router-link to="/"><button id="btn-yes">메인으로 돌아가기</button></router-link>
     </div>
   </div>
 </template>

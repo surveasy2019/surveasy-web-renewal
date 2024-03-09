@@ -56,12 +56,13 @@ export default {
 <style>
 .bottom-sheet {
   position: fixed;
-  bottom: -100%; /* 시작 위치 */
   left: 0;
   padding-top: 10px;
+  padding-bottom: 20px;
   width: 100%;
   min-width: 100%;
-  height: 600px;
+  max-height: 90%;
+  overflow-y: auto;
   background-color: #f0f0f0;
   transition: bottom 0.3s ease-in-out;
   z-index: 999;
@@ -83,6 +84,12 @@ export default {
 }
 .sheet-container{
   display: flex;
+}
+@media (max-width: 1000px) {
+  .sheet-container {
+    display: flex;
+    flex-direction: column;
+  }
 }
 .bottom-sheet.open {
   bottom: 0; /* 열렸을 때의 위치 */
