@@ -13,7 +13,7 @@
     <div class="home-review-item-container">
       <div class="home-review-slider">
         <carousel :items-to-show="2" :snap-align="center" :wrap-around="true" :autoplay="2000">
-          <slide v-for="review in reviewList" :key="review.title">
+          <slide v-for="review in reviewList" :key="review.id">
             <div class="home-review-carousel-item">
               <figure class="home-review-carousel-item-figure">
                 <div class="home-review-carousel-item-grade">
@@ -29,10 +29,10 @@
                   <img v-if="review.grade>=5" src="@/assets/home/review/refullstar.png" width="20" />
                 </div>
 
-                <div class="home-review-carousel-item-contents">{{review.contents}}</div>
-                <div class="home-review-carousel-item-title">"{{review.title}}" 설문을 의뢰한</div>
-                <div class="home-review-carousel-item-name">{{review.name}}님</div>
-                <div class="home-review-carousel-item-date">{{review.date}}</div>
+                <div class="home-review-carousel-item-contents">{{review.content}}</div>
+                <div class="home-review-carousel-item-title">"{{review.surveyTitle}}" 설문을 의뢰한</div>
+                <div class="home-review-carousel-item-name">{{review.username.substring(0, review.username.length - 1) + "*"}}님</div>
+                <div class="home-review-carousel-item-date">{{review.createdAt}}</div>
               </figure>
             </div>
           </slide>
@@ -50,6 +50,7 @@
 <script>
 import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide, Pagination, Navigation } from 'vue3-carousel'
+import axios from 'axios'
 
 export default {
   components: {
@@ -61,28 +62,21 @@ export default {
 
   data() {
     return {
-      reviewList: [
-        { grade: 5, 
-          contents: "서베이지 왕왕 감사합니다 진짜 사랑해요♥️ 연구보고서 제출 기한이 얼마 남지 않아서 촉박하게 설문을 돌려야했는데 이렇게 빨리, 또 이렇게 저렴하게 설문 응답을 왕창 받을 수 있다니!!! 이건 대학생, 대학원생을 위한 혁신이에요!!!",
-          title: "OOO설문제목OOOOOO설문제목OOO",
-          name: "정O경",
-          date: "2023.06.23"
-        },
-        { grade: 4, 
-          contents: "서베이지 덕분에 표본을 빠르게 모을 수 있었습니다. 다음에도 또 이용하게 될 것 같아요. ^.^",
-          title: "OOO설문 제목OOO",
-          name: "OOO",
-          date: "2023.06.23"
-        },
-        { grade: 3, 
-          contents: "의뢰 드린지 하루도 못돼서 완료해주셨어요 감사합니다! 처음 이용해봤는데 화력 너무 좋아요~",
-          title: "OOO설문 제목OOO",
-          name: "OOO",
-          date: "2023.06.23"
-        },
-      ]
+      reviewList: []
     }
-    
+  },
+  mounted() {
+    this.listReview()
+  },  
+  methods: {
+    async listReview() {
+      try {
+        const response = await axios.get("https://gosurveasy.co.kr/review/home")
+        this.reviewList = response.data.homeReviewList
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 }
 </script>
