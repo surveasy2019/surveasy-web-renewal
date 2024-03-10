@@ -7,17 +7,17 @@
     <div class="mypage-point-main-container">
       <div class="mypage-point-main-row">
         <div class="mypage-point-option">현재 적립금</div>
-        <div class="mypage-point-value">31,745원</div>
+        <div class="mypage-point-value">{{ this.nowReward }}원</div>
       </div>
       <div class="mypage-point-main-line-container"><div class="mypage-point-main-line"></div></div>
       <div class="mypage-point-main-row">
         <div class="mypage-point-option">사용한 적립금</div>
-        <div class="mypage-point-value">31,745원</div>
+        <div class="mypage-point-value">{{ this.useReward }}원</div>
       </div>
       <div class="mypage-point-main-line-container"><div class="mypage-point-main-line"></div></div>
       <div class="mypage-point-main-row">
         <div class="mypage-point-option">누적 적립금</div>
-        <div class="mypage-point-value">31,745원</div>
+        <div class="mypage-point-value">{{ this.totalReward }}원</div>
       </div>
     </div>
 
@@ -30,7 +30,34 @@
 </template>
 
 <script>
+import { getDoc, doc, getFirestore } from 'firebase/firestore';
+
 export default {
+  data(){
+    return{
+      nowReward: 0,
+      useReward: 0,
+      totalReward: 0,
+    }
+  },
+  mounted() {
+    this.fetchUserData_point()
+  },
+  methods : {
+    async fetchUserData_point(){
+      const db = getFirestore()
+      const email = this.$store.state.currentUser.email
+      const docSnap = await getDoc(doc(db, "userData", email.toString()))
+      if(docSnap.exists()){
+        const data = docSnap.data()
+        this.nowReward = data.point_current
+        this.useReward = data.point_total - data.point_current
+        this.totalReward = data.point_total
+      }else{
+        console.log("no")
+      }
+    },
+  }
 }
 </script>
 
