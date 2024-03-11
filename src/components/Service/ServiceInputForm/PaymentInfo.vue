@@ -20,6 +20,8 @@
 <script>
 import axios from 'axios'
 import store from '@/store'
+import { updateDoc, getDoc, doc, getFirestore } from 'firebase/firestore';
+
 export default {
     data(){
         return{
@@ -45,8 +47,9 @@ export default {
                 store.commit('saveAccountName', {
                     accountName: this.accountName
                 })
+                const pointAdd = Math.floor((obj.price - (obj.point + obj.coupon))*0.03)
                 try {
-                    const response = await axios.post(
+                    await axios.post(
                         'https://gosurveasy.co.kr/survey',
                         {
                             headCount: obj.headCount,
@@ -65,13 +68,25 @@ export default {
                             accountName: obj.accountName,
                             price: obj.price - (obj.point + obj.coupon),
                             priceDiscounted: obj.priceDiscounted,
-                            pointAdd: Math.floor((obj.price - (obj.point + obj.coupon))*0.03),
+                            pointAdd: pointAdd,
                             email: this.$store.state.currentUser.email,
                             username: this.$store.state.currentUser.name
                         }
                     )
                     this.$router.push("/service/paydone")
-                    console.log(response.data)
+
+                    const db = getFirestore()
+                    const userEmail = this.$store.state.currentUser.email
+                    const docSnap = await getDoc(doc(db, "userData", userEmail.toString()))
+                    if(docSnap.exists()){
+                        const data = docSnap.data()
+                        const now = data.point_current
+                        const docref = doc(db, "userData", userEmail.toString())
+                        await updateDoc(docref, { 
+                            point_current: (now - obj.point) + pointAdd
+                        })
+                    }
+
                 } catch (error) {
                     console.log(error)
                 }

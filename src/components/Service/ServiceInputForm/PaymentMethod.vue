@@ -35,7 +35,8 @@ export default {
       return store.state.surveyOption.price + store.state.surveyOption.priceDiscounted
     },
     setPrice2(){
-      return store.state.surveyOption.coupon + store.state.surveyOption.point
+      console.log(store.state.surveyOption.coupon, store.state.surveyOption.point)
+      return (store.state.surveyOption.coupon + store.state.surveyOption.point)
     },
     setPrice3(){
       return store.state.surveyOption.price - (store.state.surveyOption.coupon + store.state.surveyOption.point)
