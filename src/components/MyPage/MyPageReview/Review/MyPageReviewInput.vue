@@ -32,6 +32,8 @@
 
 <script>
 import axios from 'axios';
+import { updateDoc, getDoc, doc, getFirestore } from 'firebase/firestore';
+
 export default {
   data() {
     return {
@@ -62,6 +64,17 @@ export default {
             }
         )
         this.$router.push("/mypage/review/post/done")
+        const db = getFirestore()
+        const userEmail = this.$store.state.currentUser.email
+        const docSnap = await getDoc(doc(db, "userData", userEmail.toString()))
+        if(docSnap.exists()){
+            const data = docSnap.data()
+            const now = data.point_current
+            const docref = doc(db, "userData", userEmail.toString())
+            await updateDoc(docref, { 
+                point_current: now+500
+            })
+        }
       }catch(error){
         console.log(error)
       }

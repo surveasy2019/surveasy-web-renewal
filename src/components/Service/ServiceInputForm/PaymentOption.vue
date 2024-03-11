@@ -11,11 +11,11 @@
             <div class="pay-option-warn" id="warn" v-if="errorMsg">*유효하지 않은 쿠폰입니다.</div>
             <div class="pay-option-title">적립금</div>
             <div class="pay-option-row">
-                <input class="pay-option-input" v-model="this.payPoint" type="text" placeholder="사용하려는 적립금 액수를 입력해주세요.">
+                <input class="pay-option-input" v-model="this.payPoint" type="number" placeholder="사용하려는 적립금 액수를 입력해주세요.">
                 <div><button @click="usePayPoint" class="pay-option-btn">적립금 적용하기</button></div>
             </div>
-            <div class="pay-option-warn">보유 적립금 000원</div>
-            <div class="pay-option-warn">*적립금은 주문 금액의 최대 10%까지 사용 가능합니다.</div>
+            <div class="pay-option-warn">보유 적립금 {{ this.point }}원</div>
+            <div class="pay-option-warn">*적립금은 결제 금액이 10,000원 이상일 때만 사용 가능하며, 주문 금액의 최대 10%까지 사용 가능합니다.</div>
       
         </div>
     
@@ -26,18 +26,22 @@
 <script>
 import axios from 'axios'
 import store from '@/store'
+import { getDoc, doc, getFirestore } from 'firebase/firestore';
+
 export default {
   data(){
     return{
       coupon : '',
       payPoint : 0,
       percent : 0,
-      errorMsg : false
+      errorMsg : false,
+      point : 0,
     }
   },
 
   mounted(){
     this.reset()
+    this.fetchUserData_point()
   },
 
   methods : {
@@ -60,6 +64,18 @@ export default {
       
     },
 
+    async fetchUserData_point(){
+      const db = getFirestore()
+      const email = this.$store.state.currentUser.email
+      const docSnap = await getDoc(doc(db, "userData", email.toString()))
+      if(docSnap.exists()){
+        const data = docSnap.data()
+        this.point = data.point_current
+      }else{
+        console.log("no")
+      }
+    },
+
     reset(){
       store.commit('saveSurveyPriceOption', {
           coupon : 0,
@@ -68,7 +84,16 @@ export default {
     },
 
     usePayPoint(){
-      console.log(this.payPoint, "적립금 적용하고 보유 적립금 지우기")
+      const price = store.state.surveyOption.price
+      if(this.payPoint > price * 0.1 || price < 10000){
+        alert("적립금은 결제 금액이 10,000원 이상일 때만 사용 가능하며, 결제 금액의 최대 10%까지 사용 가능합니다.")
+      }else{
+        store.commit('saveSurveyPriceOption', {
+          coupon : store.state.surveyOption.coupon,
+          point : this.payPoint
+        })
+      }
+      
     }
   }
 
