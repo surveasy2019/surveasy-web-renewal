@@ -54,7 +54,7 @@ export default {
                         {
                             headCount: obj.headCount,
                             spendTime: obj.spendTime,
-                            dueDate: new Date(store.state.surveyOption.endDate + "T" + store.state.surveyOption.endTime),
+                            dueDate: new Date(store.state.surveyOption.endDate + "T" + store.state.surveyOption.endTime + "Z"),
                             targetGender: obj.targetGender,
                             targetAgeList: obj.targetAge,
                             language: obj.language,

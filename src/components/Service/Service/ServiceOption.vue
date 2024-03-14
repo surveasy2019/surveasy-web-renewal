@@ -44,9 +44,26 @@
           <option :value="String('TIME_16_20')">16-20분</option>
         </select>
         <p class="option-title" id="none1">a</p>
-        <div class="timedate-option-select">
-          <input type="time" class="input-time" v-model="this.endTime" required> 
-        </div>
+        <select class="option-select" v-model="this.endTime">
+          <option :value="String('00:00')" selected disabled hidden>마감 시간</option>
+          <option :value="String('08:00')">08 : 00</option>
+          <option :value="String('09:00')">09 : 00</option>
+          <option :value="String('10:00')">10 : 00</option>
+          <option :value="String('11:00')">11 : 00</option>
+          <option :value="String('12:00')">12 : 00</option>
+          <option :value="String('13:00')">13 : 00</option>
+          <option :value="String('14:00')">14 : 00</option>
+          <option :value="String('15:00')">15 : 00</option>
+          <option :value="String('16:00')">16 : 00</option>
+          <option :value="String('17:00')">17 : 00</option>
+          <option :value="String('18:00')">18 : 00</option>
+          <option :value="String('19:00')">19 : 00</option>
+          <option :value="String('20:00')">20 : 00</option>
+          <option :value="String('21:00')">21 : 00</option>
+          <option :value="String('22:00')">22 : 00</option>
+          <option :value="String('23:00')">23 : 00</option>
+          <option :value="String('23:59')">23 : 59</option>
+        </select>
         <p class="option-title" id="none2">a</p>
         <select class="option-select" id="target_age" v-model="this.targetAge">
           <option :value="String('AGE')" selected disabled hidden>대상 연령</option>
@@ -138,7 +155,7 @@ export default {
       headCount : "HEAD",
       spendTime : "TIME",
       endDate : '12:00:00',
-      endTime : '',
+      endTime : '00:00',
       endStamp : this.endDate+' '+this.endTime,
       nowDate : new Date(),
 
@@ -287,7 +304,7 @@ export default {
   },
   methods : {
     nextPage() {
-      if (this.id == 0 || this.spendTime == "TIME" || this.headCount == "HEAD" || this.timeOptionCal == 0 || this.targetAge == "AGE" || this.targetGender == "GENDER" || this.identity == "IDENTITY"){
+      if (this.id == 0 || this.endTime == '00:00' || this.spendTime == "TIME" || this.headCount == "HEAD" || this.timeOptionCal == 0 || this.targetAge == "AGE" || this.targetGender == "GENDER" || this.identity == "IDENTITY"){
         alert("모든 옵션을 입력해주세요.")
       } else if(this.timeOptionCal == 6) {
         alert("마감 기한은 최소 18시간 이상부터 선택 가능합니다.")

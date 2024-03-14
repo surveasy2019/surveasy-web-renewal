@@ -3,7 +3,7 @@
     <ServiceDetailVue v-if="this.pageChange == 0"/>
     <button type="button" @click="sheet" class="order-btn" v-if="this.pageChange == 0">주문하기</button>
     <div class="bottom-sheet" :class="{ 'open': open }">
-      <div class="close-btn"><button @click="sheet">내리기</button></div>
+      <div class="close-btn"><button class="down-btn" @click="sheet">X</button></div>
       <div class="sheet-container"> 
         <div class="item" :style="{ flex: item1Width }"><ServiceActivePanelVue /></div>
         <div class="item" :style="{ flex: item2Width }"><ServiceOptionVue /></div>
@@ -112,5 +112,9 @@ export default {
 .close-btn{
   text-align: right;
   margin-right: 7%;
+}
+.down-btn{
+  color: white;
+  background-color: rgb(146, 146, 146);
 }
 </style>

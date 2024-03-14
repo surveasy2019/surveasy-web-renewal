@@ -25,7 +25,8 @@
               <span class="mypage-order-middle-item-option">진행 단계</span>
               <span v-if="item.status=='CREATED' || item.status=='WAITING'">검수중</span>
               <span v-else-if="item.status=='IN_PROGRESS'">설문 진행중</span>
-              <span v-else>패널 응답 완료</span>
+              <span v-else-if="item.status=='DONE' && item.reviewId == null">패널 응답 완료</span>
+              <span v-else-if="item.status=='DONE' && item.reviewId != null">후기 작성 완료</span>
             </div>
             <div class="mypage-order-middle-item">
               <span class="mypage-order-middle-item-option">답변 수</span>
@@ -51,7 +52,7 @@
             <a @click="openModal(item)"><img id="mypage-img-btn" width=22 src="@/assets/mypage/icon_edit.png"></a>
             <a @click="deleteSurvey(item.id)"><img id="mypage-img-btn" width=22 src="@/assets/mypage/icon_delete.png"></a>
           </div>
-          <div class="mypage-order-bottom-container-item" v-else-if="item.status=='DONE'">
+          <div class="mypage-order-bottom-container-item" v-else-if="item.status=='DONE' && item.reviewId == null">
             <router-link class="mypage-order-btn-review" :to="`/mypage/review/post/${item.id}/${item.title}`">후기 작성하기 〉</router-link>
           </div>
           
