@@ -1,49 +1,32 @@
 <template>
   <div class="mypage-review-list-container">
-    <div class="mypage-review-list-title-container">
+    <div class="mypage-review-list-title-container" v-if="this.reviewList.length != 0">
       <div>리뷰 작성</div>
     </div>
 
+    <div class="mypage-order-none-msg" v-if="this.reviewList.length == 0">
+      리뷰 작성 가능한 설문이 없습니다.
+    </div>
+
     <div class="mypage-review-list-item-container">
-      <div class="mypage-review-list-item" v-for="item in surveyList" :key="item.id">
+      <div class="mypage-review-list-item" v-for="item in this.reviewList" :key="item.id">
         <div class="mypage-review-list-item-title">{{item.title}}</div>
-
-        <!-- <div class="mypage-review-list-top-container">
-          <span class="mypage-review-list-item-top">{{item.price}}원</span>  
-        </div> -->
-
         <div class="mypage-review-list-line"></div>
 
         <div class="mypage-review-list-middle-container">
-          <div class="mypage-review-list-middle-container-col">
-            <div class="mypage-review-list-middle-item">
-              <span class="mypage-review-list-middle-item-option">진행 단계</span>
-              <span v-if="item.progress<2">검수중</span>
-              <span v-else-if="item.progress==2">설문 진행중</span>
-              <span v-else>패널 응답 완료</span>
-            </div>
-            <div class="mypage-review-list-middle-item">
-              <span class="mypage-review-list-middle-item-option">답변 수</span>
-              <span v-if="item.progress==2">n / {{item.requiredHeadCount}}명</span>
-              <span v-else>{{item.requiredHeadCount}}명</span>
-            </div>
-          </div>
-
-          <div class="mypage-review-list-middle-container-col">
-            <div class="mypage-review-list-middle-item">
+          <div class="mypage-review-list-middle-item">
               <span class="mypage-review-list-middle-item-option">주문 날짜</span>
-              <span>{{item.date}}</span>
+              <span>{{item.uploadedAt}}</span>
             </div>
             <div class="mypage-review-list-middle-item">
               <span class="mypage-review-list-middle-item-option">설문 기한</span>
               <span>{{item.dueDate}}</span>
             </div>
-          </div>
         </div>    
 
         <div class="mypage-review-list-bottom-container">
           <div class="mypage-review-list-bottom-container-item">
-            <router-link class="mypage-review-list-btn-review" to="/mypage/review">후기 작성하기 〉</router-link>
+            <router-link class="mypage-review-list-btn-review" :to="`/mypage/review/post/${item.id}/${item.title}`">후기 작성하기 〉</router-link>
           </div>
           
         </div>    
@@ -53,18 +36,38 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
-      surveyList: [ {id: 100, progress: 2, price: 20000, title: '메타버스에 대학생 인식 조사', date: '2022-11-10', dueDate: '2022-12-10', requiredHeadCount: 200},
-                  {id: 101, progress: 1, price: 30000, title: '소비자의 온라인 금융서비스 경험 조사', date: '2022-11-10', dueDate: '2022-12-10', requiredHeadCount: 100, user: '강설문'},
-                  {id: 102, progress: 3, price: 12000, title: '대화 내용에 대한 감정평가 설문 대화 내용에 대한 감정평가 설문 대화 내용에 대한 감정평가 설문', date: '2022-11-10', dueDate: '2022-12-10', requiredHeadCount: 50},
-                  {id: 103, progress: 4, price: 7000, title: '메타버스에 대학생 인식 조사', target: '대학생', dueDate: '2022-12-10', requiredHeadCount: 200},
-                  {id: 104, progress: 2, price: 199000, title: '소비자의 온라인 금융서비스 경험 조사', date: '2022-11-10', dueDate: '2022-12-10', requiredHeadCount: 100},
-                  {id: 105, progress: 3, price: 26000, title: '대화 내용에 대한 감정평가 설문 설문', date: '2022-11-10', dueDate: '2022-12-10', requiredHeadCount: 50} 
-                ]
+      reviewList: []
     }
-    
+  },
+
+  mounted(){
+    this.listOrders()
+  },
+
+  methods : {
+    async listOrders() {
+      try {
+        const response = await axios.post("https://gosurveasy.co.kr/survey/mypage/list",
+        {
+          email : this.$store.state.currentUser.email
+        })
+        const list = response.data.surveyMyPageOrderList
+      
+        for(let review in list){
+          if(list[review].reviewId == null && list[review].isDone){
+            this.reviewList.push(list[review])
+          }
+        }
+        console.log(this.reviewList)
+        
+      } catch (error) {
+        console.log(error)
+      }
+    },
   }
 }
 </script>
@@ -116,6 +119,7 @@ export default {
   font-size: 18px;
   font-weight: bold;
   text-align: left;
+  margin-bottom: 20px;
 }
 .mypage-review-list-line {
   width: 100%;
@@ -126,7 +130,7 @@ export default {
 .mypage-review-list-middle-container {
   display: flex;
   flex-direction: row;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 .mypage-review-list-middle-container-col {
   width: 50%;

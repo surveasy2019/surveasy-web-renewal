@@ -23,7 +23,7 @@
 
     <div class="mypage-point-notice-container">
       <div class="mypage-point-notice">• 적립금은 서비스 이용 금액의 3%가 적립됩니다.</div>
-      <div class="mypage-point-notice">• 자세한 구매 후기 작성 시 적립금 500원이 추가 지급됩니다.</div>
+      <div class="mypage-point-notice">• 후기 작성 시 적립금 500원이 추가 지급됩니다.</div>
       <div class="mypage-point-notice">• 적립금은 결제 금액이 10,000원 이상일 때만 사용 가능하며, 서비스 금액의 10%까지만 사용할 수 있습니다.</div>
     </div>
   </div>
