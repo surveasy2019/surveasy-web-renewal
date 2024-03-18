@@ -61,7 +61,7 @@
       <div class="content-container">
         <p class="p-black-content">설문 대상의 연령과 성별에 따라 수집 가능한 최대 응답 수 입니다.</p>
         <p class="p-black-content">예를 들어, 20대 성별 무관 선택 시, 
-        최대 000명의 응답을 받으실 수 있어요!</p>
+        최대 {{ this.activePanel.totalList[1] }}명의 응답을 받으실 수 있어요!</p>
       </div>
     
       </div> 

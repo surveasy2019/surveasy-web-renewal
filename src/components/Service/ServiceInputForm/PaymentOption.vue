@@ -87,6 +87,8 @@ export default {
       const price = store.state.surveyOption.price
       if(this.payPoint > price * 0.1 || price < 10000){
         alert("적립금은 결제 금액이 10,000원 이상일 때만 사용 가능하며, 결제 금액의 최대 10%까지 사용 가능합니다.")
+      }else if(this.point < this.payPoint){
+        alert("보유하신 적립금을 초과하여 입력하셨습니다.")
       }else{
         store.commit('saveSurveyPriceOption', {
           coupon : store.state.surveyOption.coupon,

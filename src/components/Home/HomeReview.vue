@@ -30,7 +30,8 @@
                 </div>
 
                 <div class="home-review-carousel-item-contents">{{review.content}}</div>
-                <div class="home-review-carousel-item-title">"{{review.surveyTitle}}" 설문을 의뢰한</div>
+                <div class="home-review-carousel-item-title" v-if="review.surveyTitle.length > 14">"{{review.surveyTitle.substring(0,15)}}..." 설문을 의뢰한</div>
+                <div class="home-review-carousel-item-title" v-else>"{{review.surveyTitle}}" 설문을 의뢰한</div>
                 <div class="home-review-carousel-item-name">{{review.username.substring(0, review.username.length - 1) + "*"}}님</div>
                 <div class="home-review-carousel-item-date">{{review.createdAt}}</div>
               </figure>
