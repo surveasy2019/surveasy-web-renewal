@@ -70,9 +70,11 @@ export default {
         if(docSnap.exists()){
             const data = docSnap.data()
             const now = data.point_current
+            const total = data.point_total
             const docref = doc(db, "userData", userEmail.toString())
             await updateDoc(docref, { 
-                point_current: now+500
+                point_current: now+500,
+                point_total: total+500
             })
         }
       }catch(error){
