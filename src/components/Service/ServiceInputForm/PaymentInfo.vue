@@ -78,12 +78,15 @@ export default {
                     const db = getFirestore()
                     const userEmail = this.$store.state.currentUser.email
                     const docSnap = await getDoc(doc(db, "userData", userEmail.toString()))
+                    console.log(pointAdd)
                     if(docSnap.exists()){
                         const data = docSnap.data()
                         const now = data.point_current
+                        const total = data.point_total
                         const docref = doc(db, "userData", userEmail.toString())
                         await updateDoc(docref, { 
-                            point_current: (now - obj.point) + pointAdd
+                            point_current: (now - obj.point) + pointAdd,
+                            point_total: total + pointAdd
                         })
                     }
 
