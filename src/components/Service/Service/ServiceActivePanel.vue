@@ -24,34 +24,52 @@
             <td>{{ this.activePanel.femaleList[0] }}명</td>
           </tr>
           <tr>
-            <td class="table-leftline">20대</td>
+            <td class="table-leftline">20세 이상 24세 이하</td>
             <td>{{ this.activePanel.totalList[1] }}명</td>
             <td>{{ this.activePanel.maleList[1] }}명</td>
             <td>{{ this.activePanel.femaleList[1] }}명</td>
           </tr>
           <tr>
-            <td class="table-leftline">20세 이상 24세 이하</td>
+            <td class="table-leftline">25세 이상 29세 이하</td>
             <td>{{ this.activePanel.totalList[2] }}명</td>
             <td>{{ this.activePanel.maleList[2] }}명</td>
             <td>{{ this.activePanel.femaleList[2] }}명</td>
           </tr>
           <tr>
-            <td class="table-leftline">25세 이상 29세 이하</td>
+            <td class="table-leftline">30세 이상 34세 이하</td>
             <td>{{ this.activePanel.totalList[3] }}명</td>
             <td>{{ this.activePanel.maleList[3] }}명</td>
             <td>{{ this.activePanel.femaleList[3] }}명</td>
           </tr>
           <tr>
-            <td class="table-leftline">20세 이상 39세 이하</td>
+            <td class="table-leftline">35세 이상 39세 이하</td>
             <td>{{ this.activePanel.totalList[4] }}명</td>
             <td>{{ this.activePanel.maleList[4] }}명</td>
             <td>{{ this.activePanel.femaleList[4] }}명</td>
           </tr>
           <tr>
-            <td class="table-leftline">20세 이상 49세 이하</td>
+            <td class="table-leftline">40세 이상 44세 이하</td>
             <td>{{ this.activePanel.totalList[5] }}명</td>
             <td>{{ this.activePanel.maleList[5] }}명</td>
             <td>{{ this.activePanel.femaleList[5] }}명</td>
+          </tr>
+          <tr>
+            <td class="table-leftline">45세 이상 49세 이하</td>
+            <td>{{ this.activePanel.totalList[6] }}명</td>
+            <td>{{ this.activePanel.maleList[6] }}명</td>
+            <td>{{ this.activePanel.femaleList[6] }}명</td>
+          </tr>
+          <tr>
+            <td class="table-leftline">50대</td>
+            <td>{{ this.activePanel.totalList[7] }}명</td>
+            <td>{{ this.activePanel.maleList[7] }}명</td>
+            <td>{{ this.activePanel.femaleList[7] }}명</td>
+          </tr>
+          <tr>
+            <td class="table-leftline">60대</td>
+            <td>{{ this.activePanel.totalList[8] }}명</td>
+            <td>{{ this.activePanel.maleList[8] }}명</td>
+            <td>{{ this.activePanel.femaleList[8] }}명</td>
           </tr>
         
         </table>
@@ -60,7 +78,7 @@
     
       <div class="content-container">
         <p class="p-black-content">설문 대상의 연령과 성별에 따라 수집 가능한 최대 응답 수 입니다.</p>
-        <p class="p-black-content">예를 들어, 20대 성별 무관 선택 시, 
+        <p class="p-black-content">예를 들어, 20세 이상 24세 이하 성별 무관 선택 시, 
         최대 {{ this.activePanel.totalList[1] }}명의 응답을 받으실 수 있어요!</p>
       </div>
     
@@ -95,6 +113,7 @@ export default {
         const response = await axios.get("https://gosurveasy.co.kr/activepanel")
         this.loading = false
         this.activePanel = response.data
+        console.log(response.data)
       } catch (error) {
         console.log(error)
       }
