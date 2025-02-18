@@ -6,7 +6,7 @@
         <div class="content-gray">턴업컴퍼니 사업자 정보</div>
         <div class="content-gray">대표자: 송다예 | 사업자 등록번호:  369-16-01796</div>
         <div class="content-gray">통신판매업신고번호 제 2024-서울성동-1276호</div>
-        <div class="content-gray">주소: 서울특별시 광나루로 190 B동 611호</div>
+        <div class="content-gray">주소: 서울특별시 광나루로 190</div>
         <div class="content-gray">이메일 : official@gosurveasy.com</div>
         <div class="content-gray">고객센터: 0507-0178-8541</div>
       </div>

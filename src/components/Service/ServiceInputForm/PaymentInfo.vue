@@ -3,7 +3,7 @@
       <div class="input-title">결제 방법</div>
         <div class="option-border"></div>
         <div class="pay-info-title">입금 계좌<br>
-            카카오뱅크 3333-11-5235460 (송다예)</div>
+            토스뱅크 1001-7620-3024 (송*예)</div>
         <input class="info-input" v-model="this.accountName" type="text" placeholder="입금자명" required>
         <div class="icon-container">
         <div class="icon" @mouseover="showInfo" @mouseleave="hideInfo">
