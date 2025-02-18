@@ -19,7 +19,7 @@
     <div class="option-border-f"></div>
     <div class="done-block-f">
       <div class="done-bold-f" :style="{ flex: 1 }">계좌번호</div>
-      <div class="done-bold-f" :style="{ flex: 1.5 }">카카오뱅크 3333-11-5235460<br>
+      <div class="done-bold-f" :style="{ flex: 1.5 }">토스뱅크 1001-7620-3024<br>
       (송다예)</div>
     </div>
     <div class="option-border-f"></div>

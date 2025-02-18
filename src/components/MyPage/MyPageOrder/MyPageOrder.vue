@@ -3,7 +3,8 @@
     <!-- <div class="alert">주문 내역 수정 및 후기 작성 서비스는 9월 내 업데이트 예정입니다. <br>관련 문의는 하단 채널톡을 이용해주시기 바랍니다.</div> -->
     <div class="mypage-order-title-container" v-if="this.orderList.length != 0">
       <div>주문 내역</div>
-      <div>입금 계좌: 카카오뱅크 3333-11-5235460 (송*예)</div>
+      <div>입금 계좌: 토스뱅크 1001-7620-3024 (송*예)</div>
+
     </div>
 
 
